@@ -1,0 +1,21 @@
+Iut\DossiersBundle\Entity\Vacataire:
+    type: entity
+    table: null
+    repositoryClass: Iut\DossiersBundle\Repository\VacataireRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: '50'
+        prenom:
+            type: string
+            length: '50'
+        mail:
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }
