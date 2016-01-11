@@ -1,0 +1,9 @@
+homepage:
+    path: /dossiers
+    defaults: { _controller: IutDossiersBundle:Default:index }
+
+pageNotFound:
+    path:  /{path}
+    defaults: { _controller: IutDossiersBundle:PageNotFound:pageNotFound, path: '' }
+    requirements:
+        path: .*

@@ -7,14 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Iut\DossiersBundle\Entity\Vacataire;
 
 
-/**
- * @Route("/dossiers")
- */
 class DefaultController extends Controller {
 
-    /**
-     * @Route("/", name="homepage")
-     */
     public function indexAction() {
         $vacataires = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:Vacataire');
 
