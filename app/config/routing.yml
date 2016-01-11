@@ -1,3 +1,8 @@
+iut_dossiers:
+    resource: "@IutDossiersBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
