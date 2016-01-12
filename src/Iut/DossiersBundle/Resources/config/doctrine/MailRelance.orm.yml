@@ -1,0 +1,19 @@
+Iut\DossiersBundle\Entity\MailRelance:
+    type: entity
+    table: null
+    repositoryClass: Iut\DossiersBundle\Repository\MailRelanceRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        titre:
+            type: string
+            length: '255'
+        message:
+            type: text
+        date:
+            type: datetime
+    lifecycleCallbacks: {  }

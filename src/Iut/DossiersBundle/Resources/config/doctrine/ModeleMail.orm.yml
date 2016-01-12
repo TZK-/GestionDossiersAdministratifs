@@ -1,0 +1,17 @@
+Iut\DossiersBundle\Entity\ModeleMail:
+    type: entity
+    table: null
+    repositoryClass: Iut\DossiersBundle\Repository\ModeleMailRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        titre:
+            type: string
+            length: '255'
+        message:
+            type: text
+    lifecycleCallbacks: {  }
