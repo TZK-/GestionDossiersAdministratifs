@@ -1,0 +1,15 @@
+Iut\DossiersBundle\Entity\Formation:
+    type: entity
+    table: null
+    repositoryClass: Iut\DossiersBundle\Repository\FormationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        libelle:
+            type: string
+            length: '50'
+    lifecycleCallbacks: {  }
