@@ -6,4 +6,8 @@ pageNotFound:
     path:  /{path}
     defaults: { _controller: IutDossiersBundle:PageNotFound:pageNotFound, path: '' }
     requirements:
-        path: .*
+        path: .*        
+        
+ajouterVacataire: 
+    path: /dossiers/vacataire/ajouter
+    defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire }
