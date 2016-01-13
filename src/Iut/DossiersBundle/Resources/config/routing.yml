@@ -23,3 +23,9 @@ supprimerVacataire:
     defaults: { _controller: IutDossiersBundle:Default:supprimerVacataire }
     requirements:
         id: \d+
+
+envoyerMailRelance:
+    path: /relancer/dossier/{dossierId}
+    defaults: { _controller: IutDossiersBundle:Mail:envoyerMail }
+    requirements:
+        dossierId: \d+
