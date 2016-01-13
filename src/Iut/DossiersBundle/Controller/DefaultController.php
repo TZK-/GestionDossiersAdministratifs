@@ -16,7 +16,7 @@ class DefaultController extends Controller {
         );
     }
 
-    public function ajouterVacataireAction(Request $request) {
+    public function ajouterVacataireAction(Request $request, $id) {
 
         $vacataire = new Vacataire();
 
