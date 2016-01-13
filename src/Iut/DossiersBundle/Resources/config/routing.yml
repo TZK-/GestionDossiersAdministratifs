@@ -10,8 +10,14 @@ homepage:
         
 ajouterVacataire: 
     path: /dossiers/vacataire/ajouter
+    defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire, id: -1 }
+
+modifierVacataire:
+    path: /dossiers/vacataire/modifier/{id}
     defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire }
-    
+    requirements:
+        id: \d+
+
 supprimerVacataire: 
     path: /dossiers/vacataire/supprimer/{$id}
     defaults: { _controller: IutDossiersBundle:Default:supprimerVacataire }
