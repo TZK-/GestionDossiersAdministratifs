@@ -1,9 +1,7 @@
 {% extends 'IutDossiersBundle::base.html.twig' %}
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
-{% block title %}
-    {{ title }}
-{% endblock %}
+{% block title %} {{ title | capitalize }} {% endblock %}
 
 {% block body %}
     

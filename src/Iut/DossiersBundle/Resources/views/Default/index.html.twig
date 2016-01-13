@@ -1,26 +1,17 @@
 {% extends 'IutDossiersBundle::base.html.twig' %}
 
+{% block title %} {{ title | capitalize }} {% endblock %}
+
 {% block body %}
 
-    
-
     <div class="row">
-        
-        <h1>Etats des dossiers administratifs</h1>
-
         <div class="col-md-8 col-md-offset-2">
-
+            <h1>Etats des dossiers administratifs</h1>
             <table class="table table-bordered">
                 <tr>
-                    <th>
-                        Nom
-                    </th>
-                    <th>
-                        Prenom
-                    </th>
-                    <th>
-                        E-mail
-                    </th>
+                    <th> Nom</th>
+                    <th>Prenom</th>
+                    <th>E-mail</th>
                 </tr>
                 <tr class="success">
                     <td>Tyler</td>
@@ -38,9 +29,7 @@
                     <td>@</td>
                 </tr>
             </table>
-
         </div>
-        
     </div>
 
 {% endblock %}

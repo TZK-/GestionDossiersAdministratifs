@@ -1,3 +1,4 @@
+
 <?php
 
 namespace Iut\DossiersBundle\Controller;
@@ -18,21 +19,21 @@ class DefaultController extends Controller {
         );
     }
 
-    public function ajouterVacataireAction(Request $request) {
+    public function ajouterVacataireAction(Request $request, $id) {
 
         $vacataire = new Vacataire();
 
         $form = $this->createForm(VacataireType::class, $vacataire);
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             $entytymanager = $this->getDoctrine()->getManagerForClass(Vacataire::class);
             $entytymanager->persist($vacataire);
             $entytymanager->flush();
             $this->addFlash('success', 'Le vacataire a bien été ajouté');
             return $this->redirectToRoute('homepage');
-                    
+            
         }
-          
+
         return $this->render('IutDossiersBundle:Default:ajouterVacataire.html.twig', [
                     'title' => "Ajouter un vacataire",
                     'form' => $form->createView()
@@ -70,3 +71,4 @@ class DefaultController extends Controller {
     }
 
 }
+

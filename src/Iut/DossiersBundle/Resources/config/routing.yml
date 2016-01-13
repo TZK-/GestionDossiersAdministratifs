@@ -12,9 +12,22 @@ ajouterVacataire:
     path: /dossiers/vacataire/ajouter
     defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire }
 
+modifierVacataire:
+    path: /dossiers/vacataire/modifier/{id}
+    defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire }
+    requirements:
+        id: \d+
+
+supprimerVacataire:
+    path: /dossiers/vacataire/supprimer/{$id}
+    defaults: { _controller: IutDossiersBundle:Default:supprimerVacataire }
+    requirements:
+        id: \d+
+
 ajouterModeleMail:
     path: /dossiers/modeles_mails/ajouter
     defaults: { _controller: IutDossiersBundle:Default:ajouterModeleMail }
+
 
 consulterModeleMail:
     path: /dossiers/modeles_mails/consulter
@@ -23,3 +36,5 @@ consulterModeleMail:
 modifierModeleMail:
     path: /dossiers/modeles_mails/modifier
     defaults: { _controller: IutDossiersBundle:Default:modifierModeleMail }
+
+
