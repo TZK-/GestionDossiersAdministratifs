@@ -11,3 +11,15 @@ homepage:
 ajouterVacataire: 
     path: /dossiers/vacataire/ajouter
     defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire }
+
+ajouterModeleMail:
+    path: /dossiers/modeles_mails/ajouter
+    defaults: { _controller: IutDossiersBundle:Default:ajouterModeleMail }
+
+consulterModeleMail:
+    path: /dossiers/modeles_mails/consulter
+    defaults: { _controller: IutDossiersBundle:Default:consulterModeleMail }
+
+modifierModeleMail:
+    path: /dossiers/modeles_mails/modifier
+    defaults: { _controller: IutDossiersBundle:Default:modifierModeleMail }
