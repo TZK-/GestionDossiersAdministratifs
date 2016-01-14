@@ -36,36 +36,3 @@ consulterModeleMail:
 modifierModeleMail:
     path: /dossiers/modeles_mails/modifier
     defaults: { _controller: IutDossiersBundle:Default:modifierModeleMail }
-
-
-homepage:
-    path: /dossiers
-    defaults: { _controller: IutDossiersBundle:Default:index }
-
-#pageNotFound:
-#    path:  /{path}
-#    defaults: { _controller: IutDossiersBundle:PageNotFound:pageNotFound, path: '' }
-#    requirements:
-#        path: .*
-        
-ajouterVacataire: 
-    path: /dossiers/vacataire/ajouter
-    defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire, id: -1 }
-
-modifierVacataire:
-    path: /dossiers/vacataire/modifier/{id}
-    defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire }
-    requirements:
-        id: \d+
-
-supprimerVacataire: 
-    path: /dossiers/vacataire/supprimer/{$id}
-    defaults: { _controller: IutDossiersBundle:Default:supprimerVacataire }
-    requirements:
-        id: \d+
-
-relancerDossier:
-    path: /dossiers/relancer/{dossierId}
-    defaults: { _controller: IutDossiersBundle:Mail:envoyerMail, dossierId: -1}
-    requirements:
-        dossierId: \d+
