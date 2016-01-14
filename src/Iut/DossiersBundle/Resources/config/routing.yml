@@ -1,6 +1,6 @@
 homepage:
     path: /dossiers
-    defaults: { _controller: IutDossiersBundle:Default:index }
+    defaults: { _controller: IutDossiersBundle:Vacataire:index }
 
 #pageNotFound:
 #    path:  /{path}
@@ -10,17 +10,17 @@ homepage:
         
 ajouterVacataire: 
     path: /dossiers/vacataire/ajouter
-    defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire, id:-1 }
+    defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire, id:-1 }
 
 modifierVacataire:
     path: /dossiers/vacataire/modifier/{id}
-    defaults: { _controller: IutDossiersBundle:Default:ajouterVacataire }
+    defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire }
     requirements:
         id: \d+
 
 supprimerVacataire:
     path: /dossiers/vacataire/supprimer/{id}
-    defaults: { _controller: IutDossiersBundle:Default:supprimerVacataire }
+    defaults: { _controller: IutDossiersBundle:Vacataire:supprimerVacataire }
     requirements:
         id: \d+
 

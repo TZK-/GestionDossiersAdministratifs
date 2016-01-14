@@ -9,10 +9,10 @@ use Iut\DossiersBundle\Entity\ModeleMail;
 use Iut\DossiersBundle\Form\ModeleMailType;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller {
+class VacataireController extends Controller {
 
     public function indexAction() {
-        $vacataires = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:Vacataire');
+        $vacataires = $this->getDoctrine()->getManager()->getRepository(Vacataire::class);
 
         return $this->render('IutDossiersBundle:Default:index.html.twig', [
                     'vacataires' => $vacataires->findAll(),
@@ -24,8 +24,7 @@ class DefaultController extends Controller {
 
         if ($id == -1) {
             $vacataire = new Vacataire();
-        }
-        else {
+        } else {
             $entityManager = $this->getDoctrine()->getManager();
             $vacataire = $entityManager->getRepository(Vacataire::class)->find($id);
 
@@ -56,9 +55,7 @@ class DefaultController extends Controller {
 
     public function supprimerVacataireAction($id) {
         $entityManager = $this->getDoctrine()->getManager();
-        $vacataire = $entityManager->getRepository(Vacataire::class);
-
-        $vacataire = $vacataire->find($id);
+        $vacataire = $entityManager->getRepository(Vacataire::class)->find($id);
 
         if (!$vacataire) {
             $this->addFlash('danger', "Le Vacataire numéro " . $id . " n'existe pas !");
