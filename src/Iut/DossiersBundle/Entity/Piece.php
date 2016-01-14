@@ -52,4 +52,3 @@ class Piece
         return $this->nom;
     }
 }
-

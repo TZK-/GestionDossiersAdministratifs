@@ -113,4 +113,3 @@ class MailRelance
         return $this->date;
     }
 }
-

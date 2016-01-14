@@ -1,0 +1,16 @@
+Iut\DossiersBundle\Entity\ListePiecesDossier:
+    type: entity
+    table: null
+    repositoryClass: Iut\DossiersBundle\Repository\ListePiecesDossierRepository
+    id:
+        dossierId:
+            type: integer
+            id: true
+            generator:
+                strategy: NONE
+        formationId:
+            type: integer
+            id: true
+            generator:
+                strategy: NONE
+    lifecycleCallbacks: {  }
