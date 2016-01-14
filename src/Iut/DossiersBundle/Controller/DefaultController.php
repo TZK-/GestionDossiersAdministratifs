@@ -72,7 +72,7 @@ class DefaultController extends Controller {
             $entytymanager->persist($mail);
             $entytymanager->flush();
             $this->addFlash('success', 'Le modèle de mail a bien été ajouté');
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('consulterModeleMail');
 
         }
 
@@ -83,12 +83,45 @@ class DefaultController extends Controller {
     }
     
     public function consulterModeleMailAction() {
-        $mail = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:ModeleMail');
+        $mails = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:ModeleMail');
 
         return $this->render('IutDossiersBundle:Default:consulterModeleMail.html.twig', [
-            'title' => "Ajouter un modèle de mail",
-            'modeleMail' => $mail->findAll()]
+            'mails' => $mails->findBy([], ['id' => 'ASC'])]
         );
+    }
+
+    public function afficherModeleMailAction($id){
+        $entityManager = $this->getDoctrine()->getManager();
+        $mails = $entityManager->getRepository(ModeleMail::class);
+
+        $mail = $mails->find($id);
+
+        if (!$mail) {
+            $this->addFlash('danger', "Le mail n'existe pas !");
+            return $this->redirectToRoute('consulterModeleMail');
+        }
+
+        return $this->render('IutDossiersBundle:Default:afficherModeleMail.html.twig', [
+            'mail' => $mail
+        ]);
+    }
+
+
+    public function supprimerModeleMailAction($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $mails = $entityManager->getRepository(ModeleMail::class);
+
+        $mail = $mails->find($id);
+
+        if (!$mail) {
+            $this->addFlash('danger', "Le mail n'existe pas !");
+        }else{
+            $entityManager->remove($mail);
+            $entityManager->flush();
+            $this->addFlash('success', "Le mail a bien été supprimé !");
+        }
+
+        return $this->redirectToRoute('consulterModeleMail');
     }
 
 }

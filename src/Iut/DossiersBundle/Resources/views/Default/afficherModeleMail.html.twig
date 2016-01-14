@@ -1,0 +1,33 @@
+{% extends 'IutDossiersBundle::base.html.twig' %}
+
+{% block body %}
+
+    
+
+    <div class="row">
+        
+        
+
+        <div class="col-md-8 col-md-offset-2">
+            
+            <h1>{{ mail.titre | capitalize }}</h1>
+
+            <p>{{ mail.message }}</p>
+
+            <a class="btn btn-default" href="#" role="modifier">Modifier</a>
+            <a class="btn btn-default" onclick="deleteModele()" role="supprimer">Supprimer</a>
+            
+
+        </div>
+        
+    </div>
+
+<script>
+function deleteModele() {
+    if (confirm("Voulez vous supprimer ce modèle ?") === true) {
+        document.location.href="{{ path('supprimerModeleMail', {'id': mail.id}) }}";
+    }
+}
+</script>
+
+{% endblock %}

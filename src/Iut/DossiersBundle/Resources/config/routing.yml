@@ -30,11 +30,21 @@ ajouterModeleMail:
 
 
 consulterModeleMail:
-    path: /dossiers/modeles_mails/consulter
+    path: /dossiers/modeles_mails
     defaults: { _controller: IutDossiersBundle:Default:consulterModeleMail }
 
 modifierModeleMail:
     path: /dossiers/modeles_mails/modifier
     defaults: { _controller: IutDossiersBundle:Default:modifierModeleMail }
 
+afficherModeleMail:
+    path: /dossiers/modeles_mails/afficher/{id}
+    defaults: { _controller: IutDossiersBundle:Default:afficherModeleMail }
+    requirements:
+        id: \d+
 
+supprimerModeleMail:
+    path: /dossiers/modeles_mails/supprimer/{id}
+    defaults: { _controller: IutDossiersBundle:Default:supprimerModeleMail }
+    requirements:
+        id: \d+
