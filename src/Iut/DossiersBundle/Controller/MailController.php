@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use \Symfony\Component\HttpFoundation\Request;
 use Iut\DossiersBundle\Entity\MailRelance;
 use Iut\DossiersBundle\Form\MailRelanceType;
+use Iut\DossiersBundle\Entity\ModeleMail;
+use \Iut\DossiersBundle\Form\ModeleMailType;
 
 class MailController extends Controller {
 
@@ -17,24 +19,21 @@ class MailController extends Controller {
          * Envoyer le mail
          */
 
-        $mail = new MailRelance();
+        $entityManager = $this->getDoctrine()->getManager()->getRepository(MailRelance::class);
+        $dossier = $entityManager->find($dossierId);
 
-        $form = $this->createForm(MailRelanceType::class, $mail);
+//        if(!$dossier){
+//            $this->addFlash('warning', "Le dossier numéro $dossierId n'existe pas !");
+//            return $this->redirectToRoute('homepage');
+//        }
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject($mail->getTitre())
-            ->setFrom('send@example.com')
-            ->setTo('recipient@example.com')
-            ->setBody(
-                $this->renderView("Mail/relance.html.twig", [
-                    'mail' => $mail,
-                    'dossier' => $dossier
-                ]),
-                'text/html'
-            )
-        ;
+        $modelesMail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class);
+        $formModeles = $this->createForm(ModeleMailType::class);
 
-        $this->get('mailer')->send($message);
+        return $this->render("IutDossiersBundle:Mail:envoyerMailRelance.html.twig", [
+            'title' => "Relancer le dossier",
+            'form' => $formModeles->createView(),
+        ]);
     }
 
 }
