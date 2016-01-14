@@ -110,4 +110,3 @@ class Vacataire
         return $this->mail;
     }
 }
-

@@ -52,4 +52,3 @@ class Formation
         return $this->libelle;
     }
 }
-

@@ -81,4 +81,3 @@ class ModeleMail
         return $this->message;
     }
 }
-

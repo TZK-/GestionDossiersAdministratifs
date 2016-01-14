@@ -5,10 +5,9 @@ namespace Iut\DossiersBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Iut\DossiersBundle\Entity\ModeleMail;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ModeleMailType extends AbstractType
+class MailRelanceType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,15 +16,11 @@ class ModeleMailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', EntityType::class, [
-                'class' => ModeleMail::class,
-                'choice_label' => "titre",
-                'multiple' => false
-            ])
+            ->add('titre')
             ->add('message')
-            ->add('Valider', SubmitType::class, [
-                    'attr' => ['class' => "btn btn-primary"]
-                ])
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => "btn btn-primary"]
+            ]);
         ;
     }
     
@@ -35,7 +30,7 @@ class ModeleMailType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Iut\DossiersBundle\Entity\ModeleMail'
+            'data_class' => 'Iut\DossiersBundle\Entity\MailRelance'
         ));
     }
 }
