@@ -19,7 +19,7 @@ modifierVacataire:
         id: \d+
 
 supprimerVacataire:
-    path: /dossiers/vacataire/supprimer/{$id}
+    path: /dossiers/vacataire/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Default:supprimerVacataire }
     requirements:
         id: \d+

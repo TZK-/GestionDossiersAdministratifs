@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Iut\DossiersBundle\Controller;
@@ -15,11 +14,14 @@ class DefaultController extends Controller {
     public function indexAction() {
         $vacataires = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:Vacataire');
 
-        return $this->render('IutDossiersBundle:Default:index.html.twig', ['vacataires' => $vacataires->findAll()]
+        return $this->render('IutDossiersBundle:Default:index.html.twig', [
+            'vacataires' => $vacataires->findAll(),
+            'title' => "Accueil"
+            ]
         );
     }
 
-    public function ajouterVacataireAction(Request $request, $id) {
+    public function ajouterVacataireAction(Request $request) {
 
         $vacataire = new Vacataire();
 
@@ -39,7 +41,26 @@ class DefaultController extends Controller {
                     'form' => $form->createView()
         ]);
     }
+    
+     public function supprimerVacataireAction($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $vacataire = $entityManager->getRepository(Vacataire::class);
 
+        $vacataire = $vacataire->find($id);
+        
+        if (!$vacataire) {
+            $this->addFlash('danger', "Le Vacataire numéro " . $id . " n'existe pas !");
+        }else{
+            $entityManager->remove($vacataire);
+            $entityManager->flush();
+            $this->addFlash('success', "Le vacataire numéro " . $id . " a bien été supprimé !");
+        }
+        
+        return $this->redirectToRoute('homepage');
+     }
+    
+    
+    
     public function ajouterModeleMailAction(Request $request) {
 
         $mail = new ModeleMail();
