@@ -26,26 +26,26 @@ supprimerVacataire:
 
 ajouterModeleMail:
     path: /dossiers/modeles_mails/ajouter
-    defaults: { _controller: IutDossiersBundle:Default:ajouterModeleMail }
+    defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail }
 
 
-consulterModeleMail:
+afficherListeModelesMail:
     path: /dossiers/modeles_mails
-    defaults: { _controller: IutDossiersBundle:Default:consulterModeleMail }
+    defaults: { _controller: IutDossiersBundle:Mail:listeModelesMail }
 
 modifierModeleMail:
     path: /dossiers/modeles_mails/modifier
-    defaults: { _controller: IutDossiersBundle:Default:modifierModeleMail }
+    defaults: { _controller: IutDossiersBundle:Mail:modifierModeleMail }
 
 afficherModeleMail:
     path: /dossiers/modeles_mails/afficher/{id}
-    defaults: { _controller: IutDossiersBundle:Default:afficherModeleMail }
+    defaults: { _controller: IutDossiersBundle:Mail:afficherModeleMail }
     requirements:
         id: \d+
 
 supprimerModeleMail:
     path: /dossiers/modeles_mails/supprimer/{id}
-    defaults: { _controller: IutDossiersBundle:Default:supprimerModeleMail }
+    defaults: { _controller: IutDossiersBundle:Mail:supprimerModeleMail }
     requirements:
         id: \d+
 relancerDossier:

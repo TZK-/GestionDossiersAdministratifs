@@ -17,21 +17,18 @@ class DefaultController extends Controller {
         return $this->render('IutDossiersBundle:Default:index.html.twig', [
                     'vacataires' => $vacataires->findAll(),
                     'title' => "Accueil"
-                        ]
-        );
+        ]);
     }
 
     public function ajouterVacataireAction(Request $request, $id) {
-        $entityManager = $this->getDoctrine()->getManager();
-
 
         if ($id == -1) {
             $vacataire = new Vacataire();
         }
-        if ($id >= 0) {
-            $vacataire = $entityManager->getRepository(Vacataire::class);
+        else {
+            $entityManager = $this->getDoctrine()->getManager();
+            $vacataire = $entityManager->getRepository(Vacataire::class)->find($id);
 
-            $vacataire = $vacataire->find($id);
             if (!$vacataire) {
                 $this->addFlash('warning', "Le vacataire numero $id n'existe pas.");
                 return $this->redirectToRoute('homepage');
@@ -72,69 +69,6 @@ class DefaultController extends Controller {
         }
 
         return $this->redirectToRoute('homepage');
-    }
-
-    public function ajouterModeleMailAction(Request $request) {
-
-        $mail = new ModeleMail();
-
-        $form = $this->createForm(ModeleMailType::class, $mail);
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            $entytymanager = $this->getDoctrine()->getManagerForClass(ModeleMail::class);
-            $entytymanager->persist($mail);
-            $entytymanager->flush();
-            $this->addFlash('success', 'Le modèle de mail a bien été ajouté');
-            return $this->redirectToRoute('consulterModeleMail');
-
-        }
-
-        return $this->render('IutDossiersBundle:Default:ajouterModeleMail.html.twig', [
-                    'title' => "Ajouter un modèle de mail",
-                    'form' => $form->createView()
-        ]);
-    }
-
-    public function consulterModeleMailAction() {
-        $mails = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:ModeleMail');
-
-        return $this->render('IutDossiersBundle:Default:consulterModeleMail.html.twig', [
-            'mails' => $mails->findBy([], ['id' => 'ASC'])]
-        );
-    }
-
-    public function afficherModeleMailAction($id){
-        $entityManager = $this->getDoctrine()->getManager();
-        $mails = $entityManager->getRepository(ModeleMail::class);
-
-        $mail = $mails->find($id);
-
-        if (!$mail) {
-            $this->addFlash('danger', "Le mail n'existe pas !");
-            return $this->redirectToRoute('consulterModeleMail');
-        }
-
-        return $this->render('IutDossiersBundle:Default:afficherModeleMail.html.twig', [
-            'mail' => $mail
-        ]);
-    }
-
-
-    public function supprimerModeleMailAction($id) {
-        $entityManager = $this->getDoctrine()->getManager();
-        $mails = $entityManager->getRepository(ModeleMail::class);
-
-        $mail = $mails->find($id);
-
-        if (!$mail) {
-            $this->addFlash('danger', "Le mail n'existe pas !");
-        }else{
-            $entityManager->remove($mail);
-            $entityManager->flush();
-            $this->addFlash('success', "Le mail a bien été supprimé !");
-        }
-
-        return $this->redirectToRoute('consulterModeleMail');
     }
 
 }

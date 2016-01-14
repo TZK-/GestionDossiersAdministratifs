@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Iut\DossiersBundle\Entity\ModeleMail;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ModeleMailType extends AbstractType
 {
@@ -17,11 +18,7 @@ class ModeleMailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', EntityType::class, [
-                'class' => ModeleMail::class,
-                'choice_label' => "titre",
-                'multiple' => false
-            ])
+            ->add('titre')
             ->add('message')
             ->add('Valider', SubmitType::class, [
                     'attr' => ['class' => "btn btn-primary"]
