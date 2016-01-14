@@ -36,3 +36,9 @@ consulterModeleMail:
 modifierModeleMail:
     path: /dossiers/modeles_mails/modifier
     defaults: { _controller: IutDossiersBundle:Default:modifierModeleMail }
+
+relancerDossier:
+    path: /dossiers/relancer/{dossierId}
+    defaults: { _controller: IutDossiersBundle:Mail:envoyerMail, dossierId: -1 }
+    requirements:
+        dossierId: \d+
