@@ -73,13 +73,13 @@ class MailController extends Controller {
     public function ajouterModeleMailAction(Request $request, $id) {
 
         if ($id == -1) {
-            $mail = new Vacataire();
+            $mail = new ModeleMail();
         } else {
             $entityManager = $this->getDoctrine()->getManager();
             $mail = $entityManager->getRepository(ModeleMail::class)->find($id);
 
             if (!$mail) {
-                $this->addFlash('warning', "Le vacataire numero $id n'existe pas.");
+                $this->addFlash('warning', "Le modèle de mail n'existe pas.");
                 return $this->redirectToRoute('afficherListeModelesMail');
             }
         }
@@ -88,7 +88,6 @@ class MailController extends Controller {
         $form->handleRequest($request);
 
         if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
             $entytymanager = $this->getDoctrine()->getManagerForClass(ModeleMail::class);
             $entytymanager->persist($mail);
             $entytymanager->flush();
@@ -128,9 +127,7 @@ class MailController extends Controller {
 
     public function supprimerModeleMailAction($id) {
         $entityManager = $this->getDoctrine()->getManager();
-        $mails = $entityManager->getRepository(ModeleMail::class);
-
-        $mail = $mails->find($id);
+        $mail = $entityManager->getRepository(ModeleMail::class)->find($id);
 
         if (!$mail) {
             $this->addFlash('warning', "Le modèle de mail n'existe pas !");
