@@ -2,35 +2,21 @@
 
 {% block body %}
 
-    
-
     <div class="row">
-        
-        
-
         <div class="col-md-8 col-md-offset-2">
-            
             <h1>Modèles de mails</h1>
 
-            
-
             <table class="table table-responsive">
-                <tr>
-                    <h4>
-                        Titre
-                    </h4>
-                </tr>
+                <tr><h4>Titre</h4></tr>
                 {% for mail in mails %}
-                <tr>
-                    <td><a href="{{ path('afficherModeleMail', {'id': mail.id}) }}">{{ mail.titre | capitalize }}</td>
-                </tr>
+                    <tr>
+                        <td><a href="{{ path('afficherModeleMail', {'id': mail.id}) }}">{{ mail.titre | capitalize }}</td>
+                    </tr>
                 {% endfor %}
             </table>
 
-            <a class="btn btn-default" href="{{path('ajouterModeleMail')}}" role="ajouter">Ajouter un modèle</a>
-            
+            <a class="btn btn-default" href="{{ path('ajouterModeleMail') }}" role="ajouter">Ajouter un modèle</a>
         </div>
-        
     </div>
 
 {% endblock %}

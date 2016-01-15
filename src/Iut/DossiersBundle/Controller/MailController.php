@@ -105,8 +105,8 @@ class MailController extends Controller {
         $mail = $mails->find($id);
 
         if (!$mail) {
-            $this->addFlash('danger', "Le mail n'existe pas !");
-            return $this->redirectToRoute('consulterModeleMail');
+            $this->addFlash('warning', "Le modèle de mail n'existe pas !");
+            return $this->redirectToRoute('afficherListeModelesMail');
         }
 
         return $this->render('IutDossiersBundle:Mail:afficherModeleMail.html.twig', [
@@ -121,14 +121,14 @@ class MailController extends Controller {
         $mail = $mails->find($id);
 
         if (!$mail) {
-            $this->addFlash('danger', "Le mail n'existe pas !");
+            $this->addFlash('warning', "Le modèle de mail n'existe pas !");
         } else {
             $entityManager->remove($mail);
             $entityManager->flush();
-            $this->addFlash('success', "Le mail a bien été supprimé !");
+            $this->addFlash('info', "Le modèle de mail a bien été supprimé !");
         }
 
-        return $this->redirectToRoute('consulterModeleMail');
+        return $this->redirectToRoute('afficherListeModelesMail');
     }
 
 }

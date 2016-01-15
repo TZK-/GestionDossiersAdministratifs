@@ -28,7 +28,6 @@ ajouterModeleMail:
     path: /dossiers/modeles_mails/ajouter
     defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail }
 
-
 afficherListeModelesMail:
     path: /dossiers/modeles_mails
     defaults: { _controller: IutDossiersBundle:Mail:listeModelesMail }
@@ -48,6 +47,7 @@ supprimerModeleMail:
     defaults: { _controller: IutDossiersBundle:Mail:supprimerModeleMail }
     requirements:
         id: \d+
+        
 relancerDossier:
     path: /dossiers/relancer/{dossierId}
     defaults: { _controller: IutDossiersBundle:Mail:envoyerMail, dossierId: -1 }
