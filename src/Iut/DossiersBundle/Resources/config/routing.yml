@@ -24,6 +24,16 @@ supprimerVacataire:
     requirements:
         id: \d+
 
+ajouterPiece:
+    path: /dossiers/piece/ajouter
+    defaults: { _controller: IutDossiersBundle:Piece:ajouterPiece}
+    
+supprimerPiece:
+    path: /dossiers/piece/supprimer/{id}
+    defaults: { _controller: IutDossiersBundle:Piece:supprimerPiece }
+    requirements:
+        id: \d+
+
 ajouterModeleMail:
     path: /dossiers/modeles_mails/ajouter
     defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail }
