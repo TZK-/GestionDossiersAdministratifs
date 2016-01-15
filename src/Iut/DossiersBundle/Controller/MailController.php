@@ -53,12 +53,12 @@ class MailController extends Controller {
                     ->setFrom('sender@mail.com')
                     ->setTo('receiver@mail.com')
                     ->setBody(
-                        $this->renderView(
+                    $this->renderView(
                             'IutDossiersBundle:Mail/Envoi:relance.html.twig', ['message' => $mailRelance->getMessage()]
-                        ), 'text/html'
+                    ), 'text/html'
                     )
             ;
-            
+
             $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('homepage');
@@ -70,11 +70,23 @@ class MailController extends Controller {
         ]);
     }
 
-    public function ajouterModeleMailAction(Request $request) {
+    public function ajouterModeleMailAction(Request $request, $id) {
 
-        $mail = new ModeleMail();
+        if ($id == -1) {
+            $mail = new Vacataire();
+        } else {
+            $entityManager = $this->getDoctrine()->getManager();
+            $mail = $entityManager->getRepository(ModeleMail::class)->find($id);
+
+            if (!$mail) {
+                $this->addFlash('warning', "Le vacataire numero $id n'existe pas.");
+                return $this->redirectToRoute('afficherListeModelesMail');
+            }
+        }
 
         $form = $this->createForm(ModeleMailType::class, $mail);
+        $form->handleRequest($request);
+
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             $entytymanager = $this->getDoctrine()->getManagerForClass(ModeleMail::class);
