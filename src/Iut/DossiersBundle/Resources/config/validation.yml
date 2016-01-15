@@ -1,0 +1,25 @@
+Iut\DossiersBundle\Entity\Vacataire:
+    properties:
+        nom:
+            - Type:
+                type: alpha
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 50
+                minMessage: Le nom doit être formé d'au moins {{ limit }} caractères
+                maxMessage: Le nom ne peut pas dépasser {{ limit }} caractères
+        prenom:
+            - Type:
+                type: alpha
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 50
+                minMessage: Le prénom doit être formé d'au moins {{ limit }} caractères
+                maxMessage: Le prénom ne peut pas dépasser {{ limit }} caractères
+        mail:
+            - Email:
+                message: L'adresse "{{ value }}" n'est pas valide.
+                checkMX: true
+            - NotBlank: ~

@@ -14,7 +14,7 @@ class VacataireController extends Controller {
     public function indexAction() {
         $vacataires = $this->getDoctrine()->getManager()->getRepository(Vacataire::class);
 
-        return $this->render('IutDossiersBundle:Default:index.html.twig', [
+        return $this->render('IutDossiersBundle:Vacataire:index.html.twig', [
                     'vacataires' => $vacataires->findAll(),
                     'title' => "Accueil"
         ]);
@@ -35,8 +35,9 @@ class VacataireController extends Controller {
         }
 
         $form = $this->createForm(VacataireType::class, $vacataire);
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $entytymanager = $this->getDoctrine()->getManagerForClass(Vacataire::class);
             $entytymanager->persist($vacataire);
             $entytymanager->flush();
@@ -47,7 +48,7 @@ class VacataireController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('IutDossiersBundle:Default:ajouterVacataire.html.twig', [
+        return $this->render('IutDossiersBundle:Vacataire:ajouterVacataire.html.twig', [
                     'title' => "Ajouter un vacataire",
                     'form' => $form->createView()
         ]);

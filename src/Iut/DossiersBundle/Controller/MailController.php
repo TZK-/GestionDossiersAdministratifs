@@ -50,8 +50,8 @@ class MailController extends Controller {
             /* Envoi du mail */
             $message = \Swift_Message::newInstance()
                     ->setSubject($mailRelance->getTitre())
-                    ->setFrom('thib-17@orange.fr')
-                    ->setTo('thibault.granada@gmail.com')
+                    ->setFrom('sender@mail.com')
+                    ->setTo('receiver@mail.com')
                     ->setBody(
                         $this->renderView(
                             'IutDossiersBundle:Mail/Envoi:relance.html.twig', ['message' => $mailRelance->getMessage()]
