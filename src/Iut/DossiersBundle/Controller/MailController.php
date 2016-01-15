@@ -3,36 +3,70 @@
 namespace Iut\DossiersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use \Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
+use Iut\DossiersBundle\Entity\ModeleMail;
+use Iut\DossiersBundle\Form\ModeleMailType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Iut\DossiersBundle\Entity\MailRelance;
 use Iut\DossiersBundle\Form\MailRelanceType;
-use Iut\DossiersBundle\Entity\ModeleMail;
-use \Iut\DossiersBundle\Form\ModeleMailType;
 
 class MailController extends Controller {
 
     public function envoyerMailAction(Request $request, $dossierId) {
 
-        /* @TODO
-         * Récupérer le dossier dans la BDD
-         * Charger le mail suivant les infos du dossier
-         * Envoyer le mail
-         */
+        $modeleMail = new ModeleMail();
+        $mailRelance = new MailRelance();
 
-        $entityManager = $this->getDoctrine()->getManager()->getRepository(MailRelance::class);
-        $dossier = $entityManager->find($dossierId);
+        $formModeleMail = $this->createFormBuilder($modeleMail)
+                ->add('titre', EntityType::class, [
+                    'class' => ModeleMail::class,
+                    'choice_label' => "titre",
+                    'multiple' => false])
+                ->add('submit', SubmitType::class)
+                ->getForm()
+        ;
 
-        // if(!$dossier){
-        //    $this->addFlash('warning', "Le dossier numéro $dossierId n'existe pas !");
-        //    return $this->redirectToRoute('homepage');
-        // }
+        $formMailRelance = $this->createForm(MailRelanceType::class, $mailRelance);
 
-        $modelesMail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class);
-        $formModeles = $this->createForm(ModeleMailType::class);
+        $formModeleMail->handleRequest($request);
+        $formMailRelance->handleRequest($request);
+
+        if ($formModeleMail->isSubmitted() && $formModeleMail->isValid()) {
+
+            $mailRelance->setTitre($modeleMail->getTitre()->getTitre());
+            $mailRelance->setMessage($modeleMail->getTitre()->getMessage());
+
+            $formMailRelance = $this->createForm(MailRelanceType::class, $mailRelance);
+
+            return $this->render("IutDossiersBundle:Mail:envoyerMailRelance.html.twig", [
+                        'title' => "Relancer le dossier",
+                        'form' => $formMailRelance->createView(),
+            ]);
+        }
+
+        if ($formMailRelance->isSubmitted() && $formMailRelance->isValid()) {
+
+            /* Envoi du mail */
+            $message = \Swift_Message::newInstance()
+                    ->setSubject($mailRelance->getTitre())
+                    ->setFrom('thib-17@orange.fr')
+                    ->setTo('thibault.granada@gmail.com')
+                    ->setBody(
+                        $this->renderView(
+                            'IutDossiersBundle:Mail/Envoi:relance.html.twig', ['message' => $mailRelance->getMessage()]
+                        ), 'text/html'
+                    )
+            ;
+            
+            $this->get('mailer')->send($message);
+
+            return $this->redirectToRoute('homepage');
+        }
 
         return $this->render("IutDossiersBundle:Mail:envoyerMailRelance.html.twig", [
                     'title' => "Relancer le dossier",
-                    'form' => $formModeles->createView(),
+                    'form' => $formModeleMail->createView(),
         ]);
     }
 
