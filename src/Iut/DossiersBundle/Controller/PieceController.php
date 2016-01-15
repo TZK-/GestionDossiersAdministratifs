@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Iut\DossiersBundle\Entity\Piece;
 use Iut\DossiersBundle\Form\PieceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PieceController extends Controller {
 
@@ -15,9 +13,8 @@ class PieceController extends Controller {
         $piece = new Piece();
 
         $form = $this->createForm(PieceType::class, $piece);
-        if ($request->isMethod('POST')) {
-            $form->submit($request);
-
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManagerForClass(Piece::class);
             $entityManager->persist($piece);
             $entityManager->flush();
@@ -26,7 +23,7 @@ class PieceController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('IutDossiersBundle:Default:ajouterPiece.html.twig', [
+        return $this->render('IutDossiersBundle:Piece:ajouterPiece.html.twig', [
                     'title' => "Ajouter une pièce",
                     'form' => $form->createView()
         ]);
@@ -34,12 +31,10 @@ class PieceController extends Controller {
 
     public function supprimerPieceAction($id) {
         $entityManager = $this->getDoctrine()->getManager();
-        $piece = $entityManager->getRepository(Piece::class);
-
-        $piece = $piece->find($id);
+        $piece = $entityManager->getRepository(Piece::class)->find($id);
 
         if (!$piece) {
-            $this->addFlash('danger', "La pièce numéro " . $id . " n'existe pas !");
+            $this->addFlash('warning', "La pièce numéro " . $id . " n'existe pas !");
         } else {
             $entityManager->remove($piece);
             $entityManager->flush();
