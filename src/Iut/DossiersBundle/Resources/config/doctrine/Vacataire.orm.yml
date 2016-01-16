@@ -31,5 +31,9 @@ Iut\DossiersBundle\Entity\Vacataire:
                         referencedColumnName: id
             cascade:
                 - persist
+    oneToMany:
+        dossiers:
+            targetEntity: Dossier
+            mappedBy: dossier
 
     lifecycleCallbacks: {  }

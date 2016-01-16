@@ -155,4 +155,43 @@ class Vacataire
     {
         return $this->formations;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $dossiers;
+
+
+    /**
+     * Add dossier
+     *
+     * @param \Iut\DossiersBundle\Entity\Dossier $dossier
+     *
+     * @return Vacataire
+     */
+    public function addDossier(\Iut\DossiersBundle\Entity\Dossier $dossier)
+    {
+        $this->dossiers[] = $dossier;
+
+        return $this;
+    }
+
+    /**
+     * Remove dossier
+     *
+     * @param \Iut\DossiersBundle\Entity\Dossier $dossier
+     */
+    public function removeDossier(\Iut\DossiersBundle\Entity\Dossier $dossier)
+    {
+        $this->dossiers->removeElement($dossier);
+    }
+
+    /**
+     * Get dossiers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDossiers()
+    {
+        return $this->dossiers;
+    }
 }

@@ -1,0 +1,20 @@
+Iut\DossiersBundle\Entity\Etat:
+    type: entity
+    table: null
+    repositoryClass: Iut\DossiersBundle\Repository\EtatRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        libelle:
+            type: string
+            length: '20'
+            unique: true
+    oneToMany:
+        dossiers:
+            targetEntity: Dossier
+            mappedBy: etat
+    lifecycleCallbacks: {  }

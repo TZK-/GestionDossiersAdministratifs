@@ -1,0 +1,37 @@
+Iut\DossiersBundle\Entity\Dossier:
+    type: entity
+    table: null
+    repositoryClass: Iut\DossiersBundle\Repository\DossierRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        etat:
+            targetEntity: Etat
+            inversedBy: dossiers
+            joinColumn:
+                name: etat_id
+                referencedColumnName: id
+        vacataire:
+            targetEntity: Vacataire
+            inversedBy: dossiers
+            joinColumn:
+                name: vacataire_id
+                referencedColumnName: id
+    manyToMany:
+        pieces:
+            targetEntity: Piece
+            joinTable:
+                name: dossiers_pieces
+                joinColumns:
+                    dossier_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    piece_id:
+                        referencedColumnName: id
+            cascade:
+                - persist
+    lifecycleCallbacks: {  }
