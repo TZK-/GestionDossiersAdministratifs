@@ -1,0 +1,31 @@
+{% extends 'IutDossiersBundle::base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Etats des dossiers administratifs</h1>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>E-mail</th>
+                    <th>Formations</th>
+                </tr>
+                {% for vacataire in vacataires %}
+                    <tr class="success">
+                        <td>{{ vacataire.nom }}</td>
+                        <td>{{ vacataire.prenom }}</td>
+                        <td>{{ vacataire.mail }}</td>
+                        <td>
+                            {% for formation in vacataire.formations %}
+                                {{ formation.libelle }} 
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

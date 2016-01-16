@@ -18,4 +18,18 @@ Iut\DossiersBundle\Entity\Vacataire:
         mail:
             type: string
             length: '255'
+    manyToMany:
+        formations:
+            targetEntity: Formation
+            joinTable:
+                name: vacataires_formations
+                joinColumns:
+                    vacataire_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    formation_id:
+                        referencedColumnName: id
+            cascade:
+                - persist
+
     lifecycleCallbacks: {  }

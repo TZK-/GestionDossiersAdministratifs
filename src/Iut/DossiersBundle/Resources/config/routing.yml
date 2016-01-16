@@ -24,6 +24,10 @@ supprimerVacataire:
     requirements:
         id: \d+
 
+afficherListeVacataires:
+    path: /dossiers/vacataire/
+    defaults: { _controller: IutDossiersBundle:Vacataire:afficherListeVacataires }
+
 ajouterPiece:
     path: /dossiers/piece/ajouter
     defaults: { _controller: IutDossiersBundle:Piece:ajouterPiece}

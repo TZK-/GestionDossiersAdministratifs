@@ -109,4 +109,50 @@ class Vacataire
     {
         return $this->mail;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $formations;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add formation
+     *
+     * @param \Iut\DossiersBundle\Entity\Formation $formation
+     *
+     * @return Vacataire
+     */
+    public function addFormation(\Iut\DossiersBundle\Entity\Formation $formation)
+    {
+        $this->formations[] = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Remove formation
+     *
+     * @param \Iut\DossiersBundle\Entity\Formation $formation
+     */
+    public function removeFormation(\Iut\DossiersBundle\Entity\Formation $formation)
+    {
+        $this->formations->removeElement($formation);
+    }
+
+    /**
+     * Get formations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFormations()
+    {
+        return $this->formations;
+    }
 }

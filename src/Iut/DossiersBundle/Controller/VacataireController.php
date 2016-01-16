@@ -5,8 +5,6 @@ namespace Iut\DossiersBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Iut\DossiersBundle\Entity\Vacataire;
 use Iut\DossiersBundle\Form\VacataireType;
-use Iut\DossiersBundle\Entity\ModeleMail;
-use Iut\DossiersBundle\Form\ModeleMailType;
 use Symfony\Component\HttpFoundation\Request;
 
 class VacataireController extends Controller {
@@ -17,6 +15,38 @@ class VacataireController extends Controller {
         return $this->render('IutDossiersBundle:Vacataire:index.html.twig', [
                     'vacataires' => $vacataires->findAll(),
                     'title' => "Accueil"
+        ]);
+    }
+
+    /* TESTS */
+
+    private function addVacTest(){
+        $vacataire = new Vacataire();
+        $vacataire->setNom("Albert");
+        $vacataire->setPrenom("Jean");
+        $vacataire->setMail("jean.albert@gmail.com");
+
+        $formations = new \Iut\DossiersBundle\Entity\Formation;
+        $formations->setLibelle("Informatique");
+
+        $vacataire->addFormation($formations);
+
+        $formations = new \Iut\DossiersBundle\Entity\Formation;
+        $formations->setLibelle("GEA");
+
+        $vacataire->addFormation($formations);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($vacataire);
+        $entityManager->flush();
+    }
+
+    /* END TESTS */
+
+    public function afficherListeVacatairesAction(){
+        $entityManager = $this->getDoctrine()->getManager();
+        return $this->render("IutDossiersBundle:Vacataire:listeVacataires.html.twig", [
+            'vacataires' => $entityManager->getRepository(Vacataire::class)->findAll()
         ]);
     }
 
