@@ -69,3 +69,6 @@ relancerDossier:
     defaults: { _controller: IutDossiersBundle:Mail:envoyerMail, dossierId: -1 }
     requirements:
         dossierId: \d+
+creerDossier:
+    path: /dossiers/ajouter
+    defaults: { _controller: IutDossiersBundle:Dossier:creerDossier }
