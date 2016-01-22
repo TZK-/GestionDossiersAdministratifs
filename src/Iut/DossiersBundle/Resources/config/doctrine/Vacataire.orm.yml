@@ -34,6 +34,6 @@ Iut\DossiersBundle\Entity\Vacataire:
     oneToMany:
         dossiers:
             targetEntity: Dossier
-            mappedBy: dossier
+            mappedBy: vacataire
 
     lifecycleCallbacks: {  }

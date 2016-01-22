@@ -15,7 +15,7 @@ class Piece
     /**
      * @var string
      */
-    private $nom;
+    private $libelle;
 
 
     /**
@@ -29,26 +29,26 @@ class Piece
     }
 
     /**
-     * Set nom
+     * Set libelle
      *
-     * @param string $nom
+     * @param string $libelle
      *
      * @return Piece
      */
-    public function setNom($nom)
+    public function setLibelle($libelle)
     {
-        $this->nom = $nom;
+        $this->libelle = $libelle;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get libelle
      *
      * @return string
      */
-    public function getNom()
+    public function getLibelle()
     {
-        return $this->nom;
+        return $this->libelle;
     }
 }

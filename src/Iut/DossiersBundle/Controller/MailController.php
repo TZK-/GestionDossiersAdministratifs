@@ -6,10 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Iut\DossiersBundle\Entity\ModeleMail;
 use Iut\DossiersBundle\Form\ModeleMailType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Iut\DossiersBundle\Entity\MailRelance;
 use Iut\DossiersBundle\Form\MailRelanceType;
+use Iut\DossiersBundle\Form\ModeleMailListeType;
+use Iut\DossiersBundle\Entity\Dossier;
 
 class MailController extends Controller {
 
@@ -18,14 +18,7 @@ class MailController extends Controller {
         $modeleMail = new ModeleMail();
         $mailRelance = new MailRelance();
 
-        $formModeleMail = $this->createFormBuilder($modeleMail)
-                ->add('titre', EntityType::class, [
-                    'class' => ModeleMail::class,
-                    'choice_label' => "titre",
-                    'multiple' => false])
-                ->add('submit', SubmitType::class)
-                ->getForm()
-        ;
+        $formModeleMail = $this->createForm(ModeleMailListeType::class, $modeleMail);
 
         $formMailRelance = $this->createForm(MailRelanceType::class, $mailRelance);
 
@@ -70,13 +63,25 @@ class MailController extends Controller {
         ]);
     }
 
+    /**
+     * Parse le mail de relance afin d'ajouter les elements dynamiques tel que le Nom/Prénom et les pièces manquantes
+     * @param MailRelance $mail
+     * @param type $dossierId
+     */
+    private function parseMailRelance(MailRelance $mail, $dossierId) {
+        $dossier = $this->getDoctrine()->getManager()->getRepository(Dossier::class)->find($dossierId);
+        $args = [
+            'pieces' => $dossier->getPieces()->toArray(),
+            'vacataire' => $dossier->getVacataire()
+        ];
+    }
+
     public function ajouterModeleMailAction(Request $request, $id) {
 
         if ($id == -1) {
             $mail = new ModeleMail();
         } else {
-            $entityManager = $this->getDoctrine()->getManager();
-            $mail = $entityManager->getRepository(ModeleMail::class)->find($id);
+            $mail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class)->find($id);
 
             if (!$mail) {
                 $this->addFlash('warning', "Le modèle de mail n'existe pas.");
@@ -88,9 +93,8 @@ class MailController extends Controller {
         $form->handleRequest($request);
 
         if ($request->isMethod('POST')) {
-            $entytymanager = $this->getDoctrine()->getManagerForClass(ModeleMail::class);
-            $entytymanager->persist($mail);
-            $entytymanager->flush();
+            $this->getDoctrine()->getManager()->persist($mail);
+            $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Le modèle de mail a bien été ajouté');
             return $this->redirectToRoute('afficherListeModelesMail');
         }
@@ -110,10 +114,7 @@ class MailController extends Controller {
     }
 
     public function afficherModeleMailAction($id) {
-        $entityManager = $this->getDoctrine()->getManager();
-        $mails = $entityManager->getRepository(ModeleMail::class);
-
-        $mail = $mails->find($id);
+        $mail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class)->find($id);
 
         if (!$mail) {
             $this->addFlash('warning', "Le modèle de mail n'existe pas !");
@@ -126,14 +127,13 @@ class MailController extends Controller {
     }
 
     public function supprimerModeleMailAction($id) {
-        $entityManager = $this->getDoctrine()->getManager();
-        $mail = $entityManager->getRepository(ModeleMail::class)->find($id);
+        $mail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class)->find($id);
 
         if (!$mail) {
             $this->addFlash('warning', "Le modèle de mail n'existe pas !");
         } else {
-            $entityManager->remove($mail);
-            $entityManager->flush();
+            $this->getDoctrine()->getManager()->remove($mail);
+            $this->getDoctrine()->getManager()->flush();
             $this->addFlash('info', "Le modèle de mail a bien été supprimé !");
         }
 

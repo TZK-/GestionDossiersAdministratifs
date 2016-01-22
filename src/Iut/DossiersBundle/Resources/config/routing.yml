@@ -7,7 +7,15 @@ homepage:
 #    defaults: { _controller: IutDossiersBundle:PageNotFound:pageNotFound, path: '' }
 #    requirements:
 #        path: .*
-        
+
+ ###################
+ # VacataireController
+ ###################
+
+afficherListeVacataires:
+    path: /dossiers/vacataire/
+    defaults: { _controller: IutDossiersBundle:Vacataire:afficherListeVacataires }
+
 ajouterVacataire: 
     path: /dossiers/vacataire/ajouter
     defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire, id:-1 }
@@ -24,9 +32,9 @@ supprimerVacataire:
     requirements:
         id: \d+
 
-afficherListeVacataires:
-    path: /dossiers/vacataire/
-    defaults: { _controller: IutDossiersBundle:Vacataire:afficherListeVacataires }
+ ###################
+ # PieceController
+ ###################
 
 ajouterPiece:
     path: /dossiers/piece/ajouter
@@ -38,23 +46,27 @@ supprimerPiece:
     requirements:
         id: \d+
 
-ajouterModeleMail:
-    path: /dossiers/modeles_mails/ajouter/{id}
-    defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail, id: -1 }
+ ###################
+ # MailController
+ ###################
 
 afficherListeModelesMail:
     path: /dossiers/modeles_mails
     defaults: { _controller: IutDossiersBundle:Mail:listeModelesMail }
 
-modifierModeleMail:
-    path: /dossiers/modeles_mails/modifier/{id}
-    defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail }
-    requirements:
-        id: \d+
-
 afficherModeleMail:
     path: /dossiers/modeles_mails/afficher/{id}
     defaults: { _controller: IutDossiersBundle:Mail:afficherModeleMail }
+    requirements:
+        id: \d+
+
+ajouterModeleMail:
+    path: /dossiers/modeles_mails/ajouter/{id}
+    defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail, id: -1 }
+
+modifierModeleMail:
+    path: /dossiers/modeles_mails/modifier/{id}
+    defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail }
     requirements:
         id: \d+
 
@@ -63,12 +75,17 @@ supprimerModeleMail:
     defaults: { _controller: IutDossiersBundle:Mail:supprimerModeleMail }
     requirements:
         id: \d+
-        
+
+ ###################
+ # DossierController
+ ###################
+
 relancerDossier:
     path: /dossiers/relancer/{dossierId}
     defaults: { _controller: IutDossiersBundle:Mail:envoyerMail, dossierId: -1 }
     requirements:
         dossierId: \d+
+        
 creerDossier:
-    path: /dossiers/ajouter
+    path: /dossiers/creer
     defaults: { _controller: IutDossiersBundle:Dossier:creerDossier }

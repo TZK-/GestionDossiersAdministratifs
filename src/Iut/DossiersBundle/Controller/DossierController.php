@@ -25,7 +25,7 @@ class DossierController extends Controller {
         }
 
         return $this->render('IutDossiersBundle:Dossier:creerDossier.html.twig', [
-                'form' => $form->createView(),
+                    'form' => $form->createView(),
                     'title' => "Créer un dossier"
         ]);
     }

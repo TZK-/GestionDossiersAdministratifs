@@ -9,7 +9,7 @@ Iut\DossiersBundle\Entity\Piece:
             generator:
                 strategy: AUTO
     fields:
-        nom:
+        libelle:
             type: string
             length: '50'
     lifecycleCallbacks: {  }
