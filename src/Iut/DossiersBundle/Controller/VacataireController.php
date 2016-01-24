@@ -4,17 +4,20 @@ namespace Iut\DossiersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Iut\DossiersBundle\Entity\Vacataire;
+
+use Iut\DossiersBundle\Entity\Formation;
+use Iut\DossiersBundle\Entity\Etat;
 use Iut\DossiersBundle\Form\VacataireType;
 use Symfony\Component\HttpFoundation\Request;
 
 class VacataireController extends Controller {
 
     public function indexAction() {
-        $vacataires = $this->getDoctrine()->getManager()->getRepository(Vacataire::class);
-
-        return $this->render('IutDossiersBundle:Vacataire:index.html.twig', [
-                    'vacataires' => $vacataires->findAll(),
-                    'title' => "Accueil"
+        $entityManager = $this->getDoctrine()->getManager();
+        return $this->render("IutDossiersBundle:Vacataire:listeVacataires.html.twig", [
+            'vacataires' => $entityManager->getRepository(Vacataire::class)->findAll(),
+            'formations' => $entityManager->getRepository(Formation::class)->findAll(),
+            'etats' => $entityManager->getRepository(Etat::class)->findAll()
         ]);
     }
 
