@@ -27,28 +27,40 @@ class VacataireController extends Controller {
 
     public function addVacTestAction() {
         $vacataire1 = new Vacataire();
-        $vacataire1->setNom("Albert");
+        $vacataire1->setNom("Dupont");
         $vacataire1->setPrenom("Jean");
-        $vacataire1->setMail("jean.albert@gmail.com");
+        $vacataire1->setMail("jean_dupont@gmail.com");
         
         $vacataire2 = new Vacataire();
-        $vacataire2->setNom("Hugue");
-        $vacataire2->setPrenom("Edward");
-        $vacataire2->setMail("edward.hugue@hotmail.fr");
+        $vacataire2->setNom("André");
+        $vacataire2->setPrenom("Manu");
+        $vacataire2->setMail("manu.andre@hotmail.fr");
 
+        $vacataire3 = new Vacataire();
+        $vacataire3->setNom("Bernard");
+        $vacataire3->setPrenom("Marc");
+        $vacataire3->setMail("marc.bernard@hotmail.fr");
+        
         $formations1 = new Formation;
         $formations1->setLibelle("Informatique");
-        $vacataire1->addFormation($formations1);
-
+        
         $formations2 = new Formation;
         $formations2->setLibelle("TC");
+        
+        $formations3 = new Formation;
+        $formations3->setLibelle("GEA");  
+       
+        $formations4 = new Formation;
+        $formations4->setLibelle("RT");
+        
+        $vacataire1->addFormation($formations3);
+        $vacataire1->addFormation($formations1);
+       
+        $vacataire2->addFormation($formations3);
         $vacataire2->addFormation($formations2);
-
-        $formations = new Formation;
-        $formations->setLibelle("GEA");  
-        $vacataire2->addFormation($formations);
-        $vacataire1->addFormation($formations);
-
+       
+        $vacataire3->addFormation($formations4);
+       
         $etat1 = new Etat();
         $etat1->setLibelle("Incomplet");
         $etat2 = new Etat();
@@ -64,16 +76,20 @@ class VacataireController extends Controller {
         $dossier2->setEtat($etat2);
         $dossier2->setVacataire($vacataire2);
         
-
+        $dossier3 = new Dossier();
+        $dossier3->setEtat($etat3);
+        $dossier3->setVacataire($vacataire3);
         
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($vacataire1);
         $entityManager->persist($vacataire2);
+        $entityManager->persist($vacataire3);
         $entityManager->persist($etat1);
         $entityManager->persist($etat2);
         $entityManager->persist($etat3);
         $entityManager->persist($dossier1);
         $entityManager->persist($dossier2);
+        $entityManager->persist($dossier3);
         $entityManager->flush();
         return $this->redirectToRoute('homepage');
     }

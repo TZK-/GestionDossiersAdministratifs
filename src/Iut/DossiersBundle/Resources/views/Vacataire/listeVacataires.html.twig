@@ -49,13 +49,21 @@
                     <th>Formations</th>
                     
                 </tr>
-                {% for vacataire in vacataires %}
-                    <tr class="success">
-                        <td>{{ vacataire.nom }}</td>
-                        <td>{{ vacataire.prenom }}</td>
-                        <td>{{ vacataire.mail }}</td>
+                {% for dossier in dossiers %}
+                        {%if dossier.etat.libelle == "Complet" %} 
+                            <tr class="success">
+                        {%endif%}
+                        {%if dossier.etat.libelle == "Incomplet"%}
+                             <tr class="warning">
+                        {%endif%}
+                        {%if dossier.etat.libelle == "Inexistant"%}
+                            <tr class="danger">
+                        {%endif%}
+                        <td>{{ dossier.vacataire.nom }}</td>
+                        <td>{{ dossier.vacataire.prenom }}</td>
+                        <td>{{ dossier.vacataire.mail }}</td>
                         <td>
-                            {% for formation in vacataire.formations %}
+                            {% for formation in dossier.vacataire.formations %}
                                 {{ formation.libelle }} 
                             {% endfor %}
                          </td>
