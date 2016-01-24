@@ -18,6 +18,7 @@ Iut\DossiersBundle\Entity\Vacataire:
         mail:
             type: string
             length: '255'
+            unique: true
     manyToMany:
         formations:
             targetEntity: Formation

@@ -12,4 +12,5 @@ Iut\DossiersBundle\Entity\Formation:
         libelle:
             type: string
             length: '50'
+            unique: true
     lifecycleCallbacks: {  }

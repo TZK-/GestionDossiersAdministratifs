@@ -12,6 +12,12 @@ homepage:
  # VacataireController
  ###################
 
+####TEST pour remplir la base de données
+ajouterVacataireTest: 
+    path: /dossiers/vacataire/ajoutertest
+    defaults: { _controller: IutDossiersBundle:Vacataire:addVacTest }
+###fin test
+
 afficherListeVacataires:
     path: /dossiers/vacataire/
     defaults: { _controller: IutDossiersBundle:Vacataire:afficherListeVacataires }

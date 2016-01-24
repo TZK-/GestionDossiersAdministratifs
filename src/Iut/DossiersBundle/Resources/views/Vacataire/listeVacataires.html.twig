@@ -4,13 +4,50 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>Etats des dossiers administratifs</h1>
+            <h1>Etats des dossiers administratifs</h1>    
+            Trier par :
+            <select>
+              <option value="nom">Nom</option>
+              <option value="prenom">Prénom</option>
+              <option value="formation">Formation</option>
+              <option value="etat">État</option>
+            </select>
+            <br/>
+            Afficher les résultats pour : 
+           
+            Formation :
+             <select> 
+                <option value="formations">Toutes les formations</option>
+                {% for formation in formations %}
+                    <option value="{{formation.libelle}}">{{formation.libelle}}</option>
+                {% endfor %}
+            </select>
+          
+            État : 
+             <select> 
+                <option value="etats">Tous les états</option>
+                {% for etat in etats %}
+                    <option value="{{etat.libelle}}">{{etat.libelle}}</option>
+                {% endfor %}
+            </select>
+            
+               Dossiers : 
+             <select> 
+                <option value="dossiers"></option>
+                    {% for dossier in dossiers %}
+                        <option value="{{dossier.vacataire.nom}}">{{dossier.vacataire.nom}}</option>
+                    {% endfor %}
+            </select>
+
+                 
+            <br/>
             <table class="table table-bordered">
                 <tr>
                     <th>Nom</th>
                     <th>Prenom</th>
                     <th>E-mail</th>
                     <th>Formations</th>
+                    
                 </tr>
                 {% for vacataire in vacataires %}
                     <tr class="success">
@@ -21,10 +58,9 @@
                             {% for formation in vacataire.formations %}
                                 {{ formation.libelle }} 
                             {% endfor %}
-                        </td>
+                         </td>
                     </tr>
                 {% endfor %}
-            </table>
         </div>
     </div>
 
