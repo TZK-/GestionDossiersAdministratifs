@@ -1,0 +1,11 @@
+<ul class="sidebar-menu">
+    {% for item in menu %}
+        {% if parentRoute == path(item.route) %}
+            <li class="active">
+        {% else %}
+            <li>
+        {% endif %}
+        <a href="{{ path(item.route) }}"><i class="{{ item.icon }}"></i> <span>{{ item.label }}</span></a>
+        </li>
+    {% endfor %}
+</ul>
