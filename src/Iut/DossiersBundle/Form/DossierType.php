@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Iut\DossiersBundle\Entity\Etat;
 use Iut\DossiersBundle\Entity\Vacataire;
 use Iut\DossiersBundle\Entity\Piece;
+use Iut\DossiersBundle\Entity\Formation;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DossierType extends AbstractType {
@@ -31,6 +32,10 @@ class DossierType extends AbstractType {
                     'class' => Piece::class,
                     'choice_label' => "libelle",
                     'multiple' => true])
+                ->add('formation', EntityType::class, [
+                    'class' => Formation::class,
+                    'choice_label' => "libelle",
+                    'multiple' => false])
                 ->add('submit', SubmitType::class, [
                     'attr' => ['class' => "btn btn-primary"]
                 ])
