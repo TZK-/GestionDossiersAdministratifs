@@ -9,25 +9,29 @@
                 </div>
 
                 <div class="box-body">
-                    <table class="table table-bordered table-hover">
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>E-mail</th>
-                            <th>Formations</th>
-                        </tr>
-                        {% for vacataire in vacataires %}
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
                             <tr>
-                                <td>{{ vacataire.nom }}</td>
-                                <td>{{ vacataire.prenom }}</td>
-                                <td>{{ vacataire.mail }}</td>
-                                <td>
-                                    {% for formation in vacataire.formations %}
-                                        {{ formation.libelle }}
-                                    {% endfor %}
-                                </td>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>E-mail</th>
+                                <th>Formations</th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for vacataire in vacataires %}
+                                <tr>
+                                    <td>{{ vacataire.nom }}</td>
+                                    <td>{{ vacataire.prenom }}</td>
+                                    <td>{{ vacataire.mail }}</td>
+                                    <td>
+                                        {% for formation in vacataire.formations %}
+                                            {{ formation.libelle }} -
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
             </div>

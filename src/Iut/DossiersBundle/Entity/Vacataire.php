@@ -131,8 +131,8 @@ class Vacataire
      */
     public function addFormation(\Iut\DossiersBundle\Entity\Formation $formation)
     {
-        $this->formations[] = $formation;
-
+        if(!$this->formations->contains($formation))
+            $this->formations[] = $formation;
         return $this;
     }
 
