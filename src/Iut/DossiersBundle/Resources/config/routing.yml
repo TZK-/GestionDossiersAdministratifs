@@ -95,3 +95,17 @@ relancerDossier:
 creerDossier:
     path: /dossiers/creer
     defaults: { _controller: IutDossiersBundle:Dossier:creerDossier }
+    
+    
+ #####################
+ # FormationController
+ #####################
+ajouterFormation:
+    path: /dossiers/formation/ajouter
+    defaults: { _controller: IutDossiersBundle:Formation:ajouterFormation}
+    
+supprimerFormation:
+    path: /dossiers/formation/supprimer/{id}
+    defaults: { _controller: IutDossiersBundle:Formation:supprimerFormation }
+    requirements:
+        id: \d+
