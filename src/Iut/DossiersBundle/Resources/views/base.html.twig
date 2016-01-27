@@ -5,14 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-        <title>AdminLTE 2 | {% block title %}{% endblock %}</title>
+        <title>GDA | {% block title %}{% endblock %}</title>
 
         <link rel="stylesheet" href="{{ asset('dossiers/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="{{ asset('dossiers/dist/css/AdminLTE.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/skins/skin-green.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/skins/skin-purple.min.css') }}">
         <link rel="stylesheet" href="{{ asset('dossiers/dist/css/dataTables.bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/style.css') }}">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -21,12 +22,12 @@
         <![endif]-->
     </head>
 
-    <body class="hold-transition skin-green sidebar-mini">
+    <body class="hold-transition skin-purple sidebar-mini">
         <div class="wrapper">
             <header class="main-header">
                 <a href="{{ path('homepage') }}" class="logo">
-                    <span class="logo-mini"><b>A</b>LT</span>
-                    <span class="logo-lg"><b>Admin</b>LTE</span>
+                    <span class="logo-mini"><b>G</b>DA</span>
+                    <span class="logo-lg"><b>Gestion</b>DA</span>
                 </a>
 
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -54,6 +55,23 @@
             </aside>
 
             <div class="content-wrapper">
+                <section class="flashbag">
+                    {% if app.session.started %}
+                        {% for type, flashes in app.session.flashbag.all %}
+                            {% for message in flashes %}
+                                {% if type in ['info', 'warning', 'success', 'danger']%}
+                                    <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                        </button>
+                                        {{ message }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                </section>
+                
                 <section class="content-header">
                     <h1>Page Header <small>Optional description</small></h1>
                     <ol class="breadcrumb">

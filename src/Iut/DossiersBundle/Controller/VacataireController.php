@@ -15,6 +15,7 @@ class VacataireController extends Controller {
 
     public function indexAction() {
         $entityManager = $this->getDoctrine()->getManager();
+
         return $this->render("IutDossiersBundle:Vacataire:listeVacataires.html.twig", [
             'vacataires' => $entityManager->getRepository(Vacataire::class)->findAll(),
             'formations' => $entityManager->getRepository(Formation::class)->findAll(),
