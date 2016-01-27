@@ -126,4 +126,31 @@ class Dossier
     {
         return $this->pieces;
     }
+    
+   private $formation;
+
+
+    /**
+     * Set formation
+     *
+     * @param \Iut\DossiersBundle\Entity\Formation $formation
+     *
+     * @return Dossier
+     */
+    public function setFormation(\Iut\DossiersBundle\Entity\Formation $formation = null)
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \Iut\DossiersBundle\Entity\Formation
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
 }
