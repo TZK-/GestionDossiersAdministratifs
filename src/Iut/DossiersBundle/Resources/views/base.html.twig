@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-        <title>GDA | {% block title %}{% endblock %}</title>
+        <title>{% block title %}{% endblock %} | GDA</title>
 
         <link rel="stylesheet" href="{{ asset('dossiers/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -27,7 +27,7 @@
             <header class="main-header">
                 <a href="{{ path('homepage') }}" class="logo">
                     <span class="logo-mini"><b>G</b>DA</span>
-                    <span class="logo-lg"><b>Gestion</b>DA</span>
+                    <span class="logo-lg"><b>Gestion</b>DossiersAdmin</span>
                 </a>
 
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -41,7 +41,7 @@
                 <section class="sidebar">
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <input type="text" name="q" class="form-control" placeholder="Rechercher...">
                             <span class="input-group-btn">
                                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
                             </span>
@@ -93,6 +93,6 @@
 
         <script src="{{ asset('dossiers/dist/js/app.js') }}"></script>
 
-    {% block javascripts %}{% endblock %}
-</body>
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>

@@ -8,28 +8,24 @@ class MenuController extends Controller {
 
     public function genererMenuAction($parentPath) {
         $menu = [
-            ['label' => "Accueil", 'route' => 'homepage', 'icon' => "fa fa-link"],
-            ['label' => "Créer dossier", 'route' => 'creerDossier', 'icon' => "fa fa-link"],
-            ['label' => "Vacataires", 'icon' => "fa fa-link", 'children' => [
+            ['label' => "Accueil", 'route' => 'homepage', 'icon' => "fa fa-home"],
+            ['label' => "Créer dossier", 'route' => 'creerDossier', 'icon' => "fa fa-folder"],
+            ['label' => "Vacataires", 'icon' => "fa fa-users", 'children' => [
                     ['label' => "Afficher vacataires", 'route' => 'afficherListeVacataires'],
                     ['label' => "Ajouter", 'route' => 'ajouterVacataire']
                 ]
             ],
-            ['label' => "Pièces", 'icon' => "fa fa-link", 'children' => [
+            ['label' => "Pièces", 'icon' => "fa fa-paperclip", 'children' => [
                     ['label' => "Afficher pièces", 'route' => 'ajouterPiece'], // TODO Update
                     ['label' => "Ajouter", 'route' => 'ajouterPiece']
                 ]
             ],
-            ['label' => "Modèles mail", 'icon' => "fa fa-link", 'children' => [
-                    ['label' => "Ajouter", 'route' => 'ajouterModeleMail']
-                ]
-            ],
-            ['label' => "Formations", 'icon' => "fa fa-link", 'children' => [
+            ['label' => "Formations", 'icon' => "fa fa-graduation-cap", 'children' => [
                     [ 'label' => "Liste formations", 'route' => 'ajouterFormation'], // TODO Update
                     [ 'label' => "Ajouter", 'route' => 'ajouterFormation']
                 ]
             ],
-            ['label' => "Modèles mail", 'icon' => "fa fa-link", 'children' => [
+            ['label' => "Modèles mail", 'icon' => "fa fa-envelope", 'children' => [
                     [ 'label' => "Liste modèles", 'route' => 'afficherListeModelesMail'], // TODO Update
                     [ 'label' => "Ajouter", 'route' => 'ajouterModeleMail']
                 ]
