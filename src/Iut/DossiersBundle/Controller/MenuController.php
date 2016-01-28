@@ -8,28 +8,32 @@ class MenuController extends Controller {
 
     public function genererMenuAction($parentPath) {
         $menu = [
-            ['route' => 'homepage', 'icon' => "fa fa-link", 'label' => "Accueil"],
-            ['route' => 'afficherListeVacataires', 'icon' => "fa fa-link", 'label' => "Vacataires",
-                'children' => [
-                    ['route' => 'ajouterVacataire', 'label' => "Ajouter"]
+            ['label' => "Accueil", 'route' => 'homepage', 'icon' => "fa fa-link"],
+            ['label' => "Créer dossier", 'route' => 'creerDossier', 'icon' => "fa fa-link"],
+            ['label' => "Vacataires", 'icon' => "fa fa-link", 'children' => [
+                    ['label' => "Afficher vacataires", 'route' => 'afficherListeVacataires'],
+                    ['label' => "Ajouter", 'route' => 'ajouterVacataire']
                 ]
             ],
-            ['route' => 'homepage', 'icon' => "fa fa-link", 'label' => "Pièces",
-                'children' => [
-                    ['route' => 'ajouterPiece', 'label' => "Ajouter"]
+            ['label' => "Pièces", 'icon' => "fa fa-link", 'children' => [
+                    ['label' => "Afficher pièces", 'route' => 'ajouterPiece'], // TODO Update
+                    ['label' => "Ajouter", 'route' => 'ajouterPiece']
                 ]
             ],
-            ['route' => 'afficherListeModelesMail', 'icon' => "fa fa-link", 'label' => "Modèles mail",
-                'children' => [
-                    ['route' => 'ajouterModeleMail', 'label' => "Ajouter"]
+            ['label' => "Modèles mail", 'icon' => "fa fa-link", 'children' => [
+                    ['label' => "Ajouter", 'route' => 'ajouterModeleMail']
                 ]
             ],
-            ['route' => 'homepage', 'icon' => "fa fa-link", 'label' => "Formations",
-                'children' => [
-                    ['route' => 'ajouterFormation', 'label' => "Ajouter"]
+            ['label' => "Formations", 'icon' => "fa fa-link", 'children' => [
+                    [ 'label' => "Liste formations", 'route' => 'ajouterFormation'], // TODO Update
+                    [ 'label' => "Ajouter", 'route' => 'ajouterFormation']
                 ]
             ],
-            ['route' => 'creerDossier', 'icon' => "fa fa-link", 'label' => "Créer dossier"],
+            ['label' => "Modèles mail", 'icon' => "fa fa-link", 'children' => [
+                    [ 'label' => "Liste modèles", 'route' => 'afficherListeModelesMail'], // TODO Update
+                    [ 'label' => "Ajouter", 'route' => 'ajouterModeleMail']
+                ]
+            ]
         ];
 
         return $this->render('IutDossiersBundle:Menu:menu.html.twig', [

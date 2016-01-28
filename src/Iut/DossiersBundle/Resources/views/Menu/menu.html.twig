@@ -2,7 +2,7 @@
     {% for link in menu %}
         {% if link.children is defined %}
             <li class="treeview">
-                <a href="{{ path(link.route) }}">
+                <a href="#">
                     <i class="{{ link.icon }}"></i>
                     <span> {{ link.label }}</span>
                     <i class="fa fa-angle-left pull-right"></i>
