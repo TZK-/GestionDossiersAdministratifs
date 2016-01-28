@@ -8,5 +8,6 @@
 /app/phpunit.xml
 /build/
 /bin/
+/vendor/
 /composer.phar
 /nbproject/private/

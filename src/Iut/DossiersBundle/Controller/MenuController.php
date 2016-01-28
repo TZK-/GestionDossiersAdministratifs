@@ -6,20 +6,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MenuController extends Controller {
 
-    public function genererMenuAction($route) {
+    public function genererMenuAction($parentPath) {
         $menu = [
             ['route' => 'homepage', 'icon' => "fa fa-link", 'label' => "Accueil"],
-            ['route' => 'afficherListeVacataires', 'icon' => "fa fa-link", 'label' => "Liste vacataires"],
-            ['route' => 'ajouterVacataire', 'icon' => "fa fa-link", 'label' => "Ajouter vacataires"],
-            ['route' => 'ajouterPiece', 'icon' => "fa fa-link", 'label' => "Ajouter Pièce"],
-            ['route' => 'afficherListeModelesMail', 'icon' => "fa fa-link", 'label' => "Afficher les modèles"],
-            ['route' => 'ajouterModeleMail', 'icon' => "fa fa-link", 'label' => "Ajouter un modèle"],
-            ['route' => 'creerDossier', 'icon' => "fa fa-link", 'label' => "Creer dossier"],
+            ['route' => 'afficherListeVacataires', 'icon' => "fa fa-link", 'label' => "Vacataires",
+                'children' => [
+                    ['route' => 'ajouterVacataire', 'label' => "Ajouter"]
+                ]
+            ],
+            ['route' => 'homepage', 'icon' => "fa fa-link", 'label' => "Pièces",
+                'children' => [
+                    ['route' => 'ajouterPiece', 'label' => "Ajouter"]
+                ]
+            ],
+            ['route' => 'afficherListeModelesMail', 'icon' => "fa fa-link", 'label' => "Modèles mail",
+                'children' => [
+                    ['route' => 'ajouterModeleMail', 'label' => "Ajouter"]
+                ]
+            ],
+            ['route' => 'homepage', 'icon' => "fa fa-link", 'label' => "Formations",
+                'children' => [
+                    ['route' => 'ajouterFormation', 'label' => "Ajouter"]
+                ]
+            ],
+            ['route' => 'creerDossier', 'icon' => "fa fa-link", 'label' => "Créer dossier"],
         ];
 
-        return $this->render('IutDossiersBundle:Menu:base.menu.html.twig', [
+        return $this->render('IutDossiersBundle:Menu:menu.html.twig', [
                     'menu' => $menu,
-                    'parentRoute' => $route
+                    'parentPath' => $parentPath
         ]);
     }
 
