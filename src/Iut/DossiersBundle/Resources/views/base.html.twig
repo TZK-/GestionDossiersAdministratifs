@@ -4,16 +4,20 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
+        <link rel="shortcut icon" href="{{ asset("dossiers/favicon.ico") }}" type="image/x-icon" />
         <title>{% block title %}{% endblock %} | GDA</title>
 
-        <link rel="stylesheet" href="{{ asset('dossiers/bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/AdminLTE.css') }}">
-        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/skins/skin-blue.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/dataTables.bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/style.css') }}">
+        {% block stylesheets %}
+            {% stylesheets
+                'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
+                '@IutDossiersBundle/Resources/public/bootstrap/css/*'
+                '@IutDossiersBundle/Resources/public/dist/css/*'
+                '@IutDossiersBundle/Resources/public/dist/css/skins/skin-blue.min.css'
+                filter='cssrewrite'
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -72,10 +76,6 @@
 
                 <section class="content-header">
                     <h1>Page Header <small>Optional description</small></h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                        <li class="active">Here</li>
-                    </ol>
                 </section>
 
                 <!-- Main content -->
@@ -85,24 +85,30 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('dossiers/dist/js/app.min.js') }}"></script>
-        <script>
-            // Set the link which match with the current route to "active"
-            var path = "{{path(app.request.attributes.get('_route'))}}";
-            var link = $('a[href="' + path + '"]');
-            link.closest('li').addClass('active');
+        {% block javascripts %}
+            {% javascripts
+                'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
+                '@IutDossiersBundle/Resources/public/bootstrap/js/*'
+                '@IutDossiersBundle/Resources/public/dist/js/*'
+            %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
 
-            // Set treeview active if it contains an active link
-            $("li .active").each(function () {
-                var _parent = $(this).parent();
-                if (_parent.hasClass("treeview-menu")) {
-                    _parent.parent().addClass('active');
-                }
-            });
-        </script>
+            <script>
+                // Set the link which match with the current route to "active"
+                var path = "{{path(app.request.attributes.get('_route'))}}";
+                var link = $('a[href="' + path + '"]');
+                link.closest('li').addClass('active');
 
-        {% block javascripts %}{% endblock %}
+                // Set treeview active if it contains an active link
+                $("li .active").each(function () {
+                    var _parent = $(this).parent();
+                    if (_parent.hasClass("treeview-menu")) {
+                        _parent.parent().addClass('active');
+                    }
+                });
+            </script>
+
+        {% endblock %}
     </body>
 </html>
