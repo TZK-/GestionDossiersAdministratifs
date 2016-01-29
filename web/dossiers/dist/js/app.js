@@ -16,14 +16,6 @@ if (typeof jQuery === "undefined") {
     throw new Error("AdminLTE requires jQuery");
 }
 
-/* Override */
-$("li .active").each(function () {
-    var parent = $(this).parent();
-    if (parent.hasClass("treeview-menu")) {
-        parent.parent().addClass('active');
-    }
-});
-
 /* AdminLTE
  *
  * @type Object

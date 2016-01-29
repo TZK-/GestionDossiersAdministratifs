@@ -1,50 +1,36 @@
 <ul class="sidebar-menu">
-    {% for link in menu %}
-        {% if link.children is defined %}
-            <li class="treeview">
-                <a href="#">
-                    <i class="{{ link.icon }}"></i>
-                    <span> {{ link.label }}</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    {% for child in link.children %}
-                        <li {% if parentPath == path(child.route) %}class="active"{% endif %}>
-                            <a href="{{ path(child.route) }}">
-                                <i class="fa fa-circle-o"></i> {{ child.label }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% else %}
-            <li {% if parentPath == path(link.route) %} class="active" {% endif %}>
-                <a href="{{ path(link.route) }}">
-                    <i class="{{ link.icon }}"></i>
-                    <span> {{ link.label }}</span>
-                </a>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
-    
-{#
     <li>
-        <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
-        </a>
+        <a href="{{ path('homepage') }}"><i class="fa fa-home"></i> <span>Accueil</span>
+    </a>
+    <li>
+        <a href="{{ path('creerDossier') }}"><i class="fa fa-folder"></i> <span>Créer dossier</span></a>
     </li>
     <li class="treeview">
-        <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-            <i class="fa fa-angle-left pull-right"></i>
-        </a>
+        <a href="#"><i class="fa fa-pie-chart"></i><span>Vacataires</span><i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+            <li><a href="{{ path('afficherListeVacataires') }}"><i class="fa fa-circle-o"></i> Afficher vacataires</a></li>
+            <li><a href="{{ path('ajouterVacataire') }}"><i class="fa fa-circle-o"></i> Ajouter</a></li>
         </ul>
     </li>
-#}
+    <li class="treeview">
+        <a href="#"><i class="fa fa-paperclip"></i><span>Pièces</span><i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li><a href="{{ path('afficherListeVacataires') }}"><i class="fa fa-circle-o"></i> Afficher pièces</a></li>
+            <li><a href="{{ path('ajouterPiece') }}"><i class="fa fa-circle-o"></i> Ajouter</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#"><i class="fa fa-graduation-cap"></i><span>Formations</span><i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li><a href="{{ path('afficherListeVacataires') }}"><i class="fa fa-circle-o"></i> Liste formations</a></li>
+            <li><a href="{{ path('ajouterFormation') }}"><i class="fa fa-circle-o"></i> Ajouter</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#"><i class="fa fa-envelope"></i><span>Modèles mail</span><i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li><a href="{{ path('afficherListeModelesMail') }}"><i class="fa fa-circle-o"></i> Liste modèles</a></li>
+            <li><a href="{{ path('ajouterModeleMail') }}"><i class="fa fa-circle-o"></i> Ajouter</a></li>
+        </ul>
+    </li>
+</ul>

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="{{ asset('dossiers/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/AdminLTE.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('dossiers/dist/css/AdminLTE.css') }}">
         <link rel="stylesheet" href="{{ asset('dossiers/dist/css/skins/skin-blue.min.css') }}">
         <link rel="stylesheet" href="{{ asset('dossiers/dist/css/dataTables.bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('dossiers/dist/css/style.css') }}">
@@ -48,9 +48,7 @@
                         </div>
                     </form>
 
-                    {% block menu %}
-                        {{ render (controller("IutDossiersBundle:Menu:genererMenu", { 'parentPath': app.request.requesturi })) }}
-                    {% endblock menu %}
+                    {% block menu %}{{ include('IutDossiersBundle:Menu:menu.html.twig') }}{% endblock menu %}
                 </section>
             </aside>
 
@@ -88,10 +86,22 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
         <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('dossiers/dist/js/app.min.js') }}"></script>
+        <script>
+            // Set the link which match with the current route to "active"
+            var path = "{{path(app.request.attributes.get('_route'))}}";
+            var link = $('a[href="' + path + '"]');
+            link.closest('li').addClass('active');
 
-        <script src="{{ asset('dossiers/dist/js/app.js') }}"></script>
+            // Set treeview active if it contains an active link
+            $("li .active").each(function () {
+                var _parent = $(this).parent();
+                if (_parent.hasClass("treeview-menu")) {
+                    _parent.parent().addClass('active');
+                }
+            });
+        </script>
 
         {% block javascripts %}{% endblock %}
     </body>
