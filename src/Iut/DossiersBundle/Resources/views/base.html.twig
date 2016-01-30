@@ -75,7 +75,12 @@
                 </section>
 
                 <section class="content-header">
-                    <h1>Page Header <small>Optional description</small></h1>
+                    <h1>
+                        {% if title is defined %}
+                            {{title}}
+                        {% endif %}
+                        <small>Optional description</small>
+                    </h1>
                 </section>
 
                 <!-- Main content -->
@@ -96,17 +101,17 @@
 
             <script>
                 // Set the link which match with the current route to "active"
-                var path = "{{path(app.request.attributes.get('_route'))}}";
+               var path = "{{path(app.request.attributes.get('_route'))}}";
                 var link = $('a[href="' + path + '"]');
                 link.closest('li').addClass('active');
 
                 // Set treeview active if it contains an active link
-                $("li .active").each(function () {
+             $("li .active").each(function () {
                     var _parent = $(this).parent();
                     if (_parent.hasClass("treeview-menu")) {
                         _parent.parent().addClass('active');
                     }
-                });
+               });
             </script>
 
         {% endblock %}

@@ -4,10 +4,9 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>Modèles de mails</h1>
 
             <table class="table table-responsive">
-                <tr><h4>Titre</h4></tr>
+                <tr><h2>Titre</h2></tr>
                 {% for mail in mails %}
                     <tr>
                         <td><a href="{{ path('modele-mail_afficher', {'id': mail.id}) }}">{{ mail.titre | capitalize }}</td>
