@@ -10,12 +10,12 @@
                 <tr><h4>Titre</h4></tr>
                 {% for mail in mails %}
                     <tr>
-                        <td><a href="{{ path('afficherModeleMail', {'id': mail.id}) }}">{{ mail.titre | capitalize }}</td>
+                        <td><a href="{{ path('modele-mail_afficher', {'id': mail.id}) }}">{{ mail.titre | capitalize }}</td>
                     </tr>
                 {% endfor %}
             </table>
 
-            <a class="btn btn-default" href="{{ path('ajouterModeleMail') }}" role="ajouter">Ajouter un modèle</a>
+            <a class="btn btn-default" href="{{ path('modele-mail_ajouter') }}" role="ajouter">Ajouter un modèle</a>
         </div>
     </div>
 

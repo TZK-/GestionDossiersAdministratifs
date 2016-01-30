@@ -23,7 +23,7 @@ class FormationController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('IutDossiersBundle:Formation:ajouterFormation.html.twig', [
+        return $this->render('IutDossiersBundle:Formation:formation_ajouter.html.twig', [
                     'title' => "Ajouter une formation",
                     'form' => $form->createView()
         ]);

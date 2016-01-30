@@ -9,7 +9,7 @@ use Iut\DossiersBundle\Entity\Dossier;
 
 class DossierController extends Controller {
 
-    public function creerDossierAction(Request $request) {
+    public function ajouterDossierAction(Request $request) {
         $dossier = new Dossier();
         $form = $this->createForm(DossierType::class, $dossier);
 
@@ -24,7 +24,7 @@ class DossierController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('IutDossiersBundle:Dossier:creerDossier.html.twig', [
+        return $this->render('IutDossiersBundle:Dossier:dossier_ajouter.html.twig', [
                     'form' => $form->createView(),
                     'title' => "Créer un dossier"
         ]);

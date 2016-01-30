@@ -23,7 +23,7 @@ class PieceController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('IutDossiersBundle:Piece:ajouterPiece.html.twig', [
+        return $this->render('IutDossiersBundle:Piece:piece_ajouter.html.twig', [
                     'title' => "Ajouter une pièce",
                     'form' => $form->createView()
         ]);

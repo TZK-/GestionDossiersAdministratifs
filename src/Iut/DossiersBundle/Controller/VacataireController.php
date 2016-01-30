@@ -10,18 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class VacataireController extends Controller {
 
-    public function indexAction() {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        return $this->render("IutDossiersBundle:Vacataire:listeVacataires.html.twig", [
-            'vacataires' => $entityManager->getRepository(Vacataire::class)->findAllDossiersAndFormations(),
-        ]);
-    }
-
     public function afficherListeVacatairesAction(){
         $entityManager = $this->getDoctrine()->getManager();
-        return $this->render("IutDossiersBundle:Vacataire:listeVacataires.html.twig", [
-            'vacataires' => $entityManager->getRepository(Vacataire::class)->findAll()
+        return $this->render("IutDossiersBundle:Vacataire:vacataire_liste.html.twig", [
+            'vacataires' => $entityManager->getRepository(Vacataire::class)->findAllDossiersAndFormations()
         ]);
     }
 
@@ -53,7 +45,7 @@ class VacataireController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('IutDossiersBundle:Vacataire:ajouterVacataire.html.twig', [
+        return $this->render('IutDossiersBundle:Vacataire:vacataire_ajouter.html.twig', [
                     'title' => "Ajouter un vacataire",
                     'form' => $form->createView()
         ]);

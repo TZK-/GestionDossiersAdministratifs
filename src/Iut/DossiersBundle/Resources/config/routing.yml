@@ -1,104 +1,98 @@
 homepage:
     path: /dossiers
-    defaults: { _controller: IutDossiersBundle:Vacataire:index }
-
-#pageNotFound:
-#    path:  /{path}
-#    defaults: { _controller: IutDossiersBundle:PageNotFound:pageNotFound, path: '' }
-#    requirements:
-#        path: .*
+    defaults: { _controller: IutDossiersBundle:Vacataire:afficherListeVacataires }
 
  ###################
- # VacataireController
+ #    Vacataire    #
  ###################
 
-afficherListeVacataires:
+vacataire_liste:
     path: /dossiers/vacataire/
     defaults: { _controller: IutDossiersBundle:Vacataire:afficherListeVacataires }
 
-ajouterVacataire: 
+vacataire_ajouter:
     path: /dossiers/vacataire/ajouter
     defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire, id:-1 }
 
-modifierVacataire:
+vacataire_modifier:
     path: /dossiers/vacataire/modifier/{id}
     defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire }
     requirements:
         id: \d+
 
-supprimerVacataire:
+vacataire_supprimer:
     path: /dossiers/vacataire/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Vacataire:supprimerVacataire }
     requirements:
         id: \d+
 
  ###################
- # PieceController
+ # PieceController #
  ###################
 
-ajouterPiece:
+piece_ajouter:
     path: /dossiers/piece/ajouter
     defaults: { _controller: IutDossiersBundle:Piece:ajouterPiece}
     
-supprimerPiece:
+piece_supprimerPiece:
     path: /dossiers/piece/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Piece:supprimerPiece }
     requirements:
         id: \d+
 
  ###################
- # MailController
+ #  MailController #
  ###################
 
-afficherListeModelesMail:
-    path: /dossiers/modeles_mails
+modele-mail_liste:
+    path: /dossiers/modeles-mails
     defaults: { _controller: IutDossiersBundle:Mail:listeModelesMail }
 
-afficherModeleMail:
-    path: /dossiers/modeles_mails/afficher/{id}
+modele-mail_afficher:
+    path: /dossiers/modeles-mails/afficher/{id}
     defaults: { _controller: IutDossiersBundle:Mail:afficherModeleMail }
     requirements:
         id: \d+
 
-ajouterModeleMail:
-    path: /dossiers/modeles_mails/ajouter/{id}
+modele-mail_ajouter:
+    path: /dossiers/modeles-mails/ajouter/{id}
     defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail, id: -1 }
 
-modifierModeleMail:
-    path: /dossiers/modeles_mails/modifier/{id}
+modele-mail_modifier:
+    path: /dossiers/modeles-mails/modifier/{id}
     defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail }
     requirements:
         id: \d+
 
-supprimerModeleMail:
-    path: /dossiers/modeles_mails/supprimer/{id}
+modele-mail_supprimer:
+    path: /dossiers/modeles-mails/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Mail:supprimerModeleMail }
     requirements:
         id: \d+
-
- ###################
- # DossierController
- ###################
-
-relancerDossier:
+    
+dossier_relancer:
     path: /dossiers/relancer/{dossierId}
-    defaults: { _controller: IutDossiersBundle:Mail:envoyerMail, dossierId: -1 }
+    defaults: { _controller: IutDossiersBundle:Mail:envoyerRelance, dossierId: 1}
     requirements:
         dossierId: \d+
-        
-creerDossier:
-    path: /dossiers/creer
-    defaults: { _controller: IutDossiersBundle:Dossier:creerDossier }
+
+ #####################
+ # DossierController #
+ #####################
+
+dossier_ajouter:
+    path: /dossiers/ajouter
+    defaults: { _controller: IutDossiersBundle:Dossier:ajouterDossier }
     
     
- #####################
- # FormationController
- #####################
-ajouterFormation:
+ #######################
+ # FormationController #
+ #######################
+formation_ajouter:
     path: /dossiers/formation/ajouter
     defaults: { _controller: IutDossiersBundle:Formation:ajouterFormation}
     
-supprimerFormation:
+formation_supprimer:
     path: /dossiers/formation/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Formation:supprimerFormation }
     requirements:

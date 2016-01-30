@@ -13,7 +13,7 @@ use Iut\DossiersBundle\Entity\Dossier;
 
 class MailController extends Controller {
 
-    public function envoyerMailAction(Request $request, $dossierId) {
+    public function envoyerRelanceAction(Request $request, $dossierId) {
 
         $modeleMail = new ModeleMail();
         $mailRelance = new MailRelance();
@@ -32,7 +32,7 @@ class MailController extends Controller {
 
             $formMailRelance = $this->createForm(MailRelanceType::class, $mailRelance);
 
-            return $this->render("IutDossiersBundle:Mail:envoyerMailRelance.html.twig", [
+            return $this->render("IutDossiersBundle:Mail/Envoi:relance_envoyer.html.twig", [
                         'title' => "Relancer le dossier",
                         'form' => $formMailRelance->createView(),
             ]);
@@ -47,7 +47,7 @@ class MailController extends Controller {
                     ->setTo('receiver@mail.com')
                     ->setBody(
                     $this->renderView(
-                            'IutDossiersBundle:Mail/Envoi:relance.html.twig', ['message' => $mailRelance->getMessage()]
+                            'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $mailRelance->getMessage()]
                     ), 'text/html'
                     )
             ;
@@ -57,7 +57,7 @@ class MailController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render("IutDossiersBundle:Mail:envoyerMailRelance.html.twig", [
+        return $this->render("IutDossiersBundle:Mail/Envoi:relance_envoyer.html.twig", [
                     'title' => "Relancer le dossier",
                     'form' => $formModeleMail->createView(),
         ]);
@@ -85,7 +85,7 @@ class MailController extends Controller {
 
             if (!$mail) {
                 $this->addFlash('warning', "Le modèle de mail n'existe pas.");
-                return $this->redirectToRoute('afficherListeModelesMail');
+                return $this->redirectToRoute('modele-mail_liste');
             }
         }
 
@@ -96,10 +96,10 @@ class MailController extends Controller {
             $this->getDoctrine()->getManager()->persist($mail);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Le modèle de mail a bien été ajouté');
-            return $this->redirectToRoute('afficherListeModelesMail');
+            return $this->redirectToRoute('modele-mail_liste');
         }
 
-        return $this->render('IutDossiersBundle:Mail:ajouterModeleMail.html.twig', [
+        return $this->render('IutDossiersBundle:Mail/Modele:modele_ajouter.html.twig', [
                     'title' => "Ajouter un modèle de mail",
                     'form' => $form->createView()
         ]);
@@ -108,7 +108,7 @@ class MailController extends Controller {
     public function listeModelesMailAction() {
         $mails = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:ModeleMail');
 
-        return $this->render('IutDossiersBundle:Mail:listeModelesMail.html.twig', [
+        return $this->render('IutDossiersBundle:Mail/Modele:modele_liste.html.twig', [
                     'mails' => $mails->findBy([], ['id' => 'ASC'])]
         );
     }
@@ -118,10 +118,10 @@ class MailController extends Controller {
 
         if (!$mail) {
             $this->addFlash('warning', "Le modèle de mail n'existe pas !");
-            return $this->redirectToRoute('afficherListeModelesMail');
+            return $this->redirectToRoute('modele-mail_liste');
         }
 
-        return $this->render('IutDossiersBundle:Mail:afficherModeleMail.html.twig', [
+        return $this->render('IutDossiersBundle:Mail/Modele:modele_afficher.html.twig', [
                     'mail' => $mail
         ]);
     }
@@ -137,7 +137,7 @@ class MailController extends Controller {
             $this->addFlash('info', "Le modèle de mail a bien été supprimé !");
         }
 
-        return $this->redirectToRoute('afficherListeModelesMail');
+        return $this->redirectToRoute('modele-mail_liste');
     }
 
 }
