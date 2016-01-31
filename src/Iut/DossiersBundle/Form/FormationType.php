@@ -17,9 +17,7 @@ class FormationType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('Valider', SubmitType::class, [
-                    'attr' => ['class' => "btn btn-primary"]
-                ])
+            ->add('submit', SubmitType::class, ['label' => "Créer"])
         ;
     }
     

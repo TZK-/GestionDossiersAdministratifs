@@ -11,6 +11,9 @@ use Iut\DossiersBundle\Entity\Vacataire;
 use Iut\DossiersBundle\Entity\Piece;
 use Iut\DossiersBundle\Entity\Formation;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Iut\DossiersBundle\Repository\PieceRepository;
+use Iut\DossiersBundle\Repository\FormationRepository;
+use Iut\DossiersBundle\Repository\VacataireRepository;
 
 class DossierType extends AbstractType {
 
@@ -27,18 +30,28 @@ class DossierType extends AbstractType {
                 ->add('vacataire', EntityType::class, [
                     'class' => Vacataire::class,
                     'choice_label' => "nom",
-                    'multiple' => false])
+                    'multiple' => false,
+                    'query_builder' => function (VacataireRepository $r) {
+                        return $r->createQueryBuilder('v')
+                            ->orderBy('v.nom', 'ASC');
+                    }])
                 ->add('pieces', EntityType::class, [
                     'class' => Piece::class,
                     'choice_label' => "libelle",
-                    'multiple' => true])
+                    'multiple' => true,
+                    'query_builder' => function (PieceRepository $r) {
+                        return $r->createQueryBuilder('p')
+                            ->orderBy('p.libelle', 'ASC');
+                    }])
                 ->add('formation', EntityType::class, [
                     'class' => Formation::class,
                     'choice_label' => "libelle",
-                    'multiple' => false])
-                ->add('submit', SubmitType::class, [
-                    'attr' => ['class' => "btn btn-primary"]
-                ])
+                    'multiple' => false,
+                    'query_builder' => function (FormationRepository $r) {
+                        return $r->createQueryBuilder('f')
+                            ->orderBy('f.libelle', 'ASC');
+                    }])
+                ->add('submit', SubmitType::class, ['label' => 'Créer'])
         ;
     }
 

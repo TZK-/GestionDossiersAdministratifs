@@ -16,9 +16,7 @@ class PieceType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('libelle')
-                ->add('submit', SubmitType::class, [
-                    'attr' => ['class' => "btn btn-primary"]
-        ]);
+                ->add('submit', SubmitType::class, ['label' => "Créer"])
         ;
     }
 

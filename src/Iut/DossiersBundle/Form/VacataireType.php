@@ -18,9 +18,8 @@ class VacataireType extends AbstractType {
                 ->add('nom')
                 ->add('prenom')
                 ->add('mail')
-                ->add('submit', SubmitType::class, [
-                    'attr' => ['class' => "btn btn-primary"]
-                ]);
+                ->add('submit', SubmitType::class, ['label' => "Créer"])
+        ;
     }
 
     /**

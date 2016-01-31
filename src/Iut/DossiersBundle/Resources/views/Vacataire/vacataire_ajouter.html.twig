@@ -1,15 +1,23 @@
 {% extends 'IutDossiersBundle::base.html.twig' %}
-{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block title %} {{ title | capitalize }} {% endblock %}
 
 {% block body %}
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-                {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                {{ form_end(form) }}
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Hover Data Table</h3>
+                </div>
+
+                <div class="box-body">
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
         </div>
     </div>
 
