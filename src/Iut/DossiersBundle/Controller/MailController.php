@@ -106,12 +106,10 @@ class MailController extends Controller {
     }
 
     public function listeModelesMailAction() {
-        $mails = $this->getDoctrine()->getManager()->getRepository('IutDossiersBundle:ModeleMail');
+        $mails = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class);
 
         return $this->render('IutDossiersBundle:Mail/Modele:modele_liste.html.twig', [
-                    'title' => "Modèles de mail",
                     'mails' => $mails->findBy([], ['id' => 'ASC'])]
-                    
         );
     }
 

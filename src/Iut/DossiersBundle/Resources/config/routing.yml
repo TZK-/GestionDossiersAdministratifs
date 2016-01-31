@@ -49,17 +49,17 @@ piece_liste:
  ###################
 
 modele-mail_liste:
-    path: /dossiers/modeles-mails
+    path: /dossiers/modele-mail
     defaults: { _controller: IutDossiersBundle:Mail:listeModelesMail }
 
 modele-mail_afficher:
-    path: /dossiers/modeles-mails/afficher/{id}
-    defaults: { _controller: IutDossiersBundle:Mail:afficherModeleMail }
+    path: /dossiers/modele-mail/afficher/{id}
+    defaults: { _controller: IutDossiersBundle:Mail:afficherModeleMail, id: -1}
     requirements:
         id: \d+
 
 modele-mail_ajouter:
-    path: /dossiers/modeles-mails/ajouter/{id}
+    path: /dossiers/modele-mail/ajouter/{id}
     defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail, id: -1 }
 
 modele-mail_modifier:
@@ -69,7 +69,7 @@ modele-mail_modifier:
         id: \d+
 
 modele-mail_supprimer:
-    path: /dossiers/modeles-mails/supprimer/{id}
+    path: /dossiers/modele-mail/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Mail:supprimerModeleMail }
     requirements:
         id: \d+
