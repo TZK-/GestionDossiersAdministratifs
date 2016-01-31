@@ -11,20 +11,11 @@
                 <span class="fa fa-pencil" aria-hidden="true"></span>
             </a>
 
-            <a href="#" class="btn btn-danger" onclick="supprimerModele();">
+            <a href="{{ path('modele-mail_supprimer', {'id': mail.id}) }}" class="btn btn-danger" onclick="confirmDelete();">
                 <span class="fa fa-remove" aria-hidden="true"></span>
             </a>
         </div>
 
     </div>
 
-{% endblock %}
-
-{% block javascripts %}
-    <script>
-        function supprimerModele() {
-            if (confirm("Voulez vous supprimer ce modèle ?") === true)
-                document.location.href = "{{ path('modele-mail_supprimer', {'id': mail.id}) }}";
-        }
-    </script>
 {% endblock %}

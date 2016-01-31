@@ -34,11 +34,15 @@ piece_ajouter:
     path: /dossiers/piece/ajouter
     defaults: { _controller: IutDossiersBundle:Piece:ajouterPiece}
     
-piece_supprimerPiece:
+piece_supprimer:
     path: /dossiers/piece/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Piece:supprimerPiece }
     requirements:
         id: \d+
+
+piece_liste:
+    path: /dossiers/piece
+    defaults: { _controller: IutDossiersBundle:Piece:listePieces }
 
  ###################
  #  MailController #
@@ -97,3 +101,7 @@ formation_supprimer:
     defaults: { _controller: IutDossiersBundle:Formation:supprimerFormation }
     requirements:
         id: \d+
+
+formation_liste:
+    path: /dossiers/formation
+    defaults: { _controller: IutDossiersBundle:Formation:listeFormations }

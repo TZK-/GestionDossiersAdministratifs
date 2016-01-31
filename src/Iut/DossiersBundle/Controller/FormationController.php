@@ -29,6 +29,11 @@ class FormationController extends Controller {
         ]);
     }
 
+    /**
+     * Supprime une formation (ne doit normalement pas arriver, sinon violation de contrainte d'intérité)
+     * @param type $id
+     * @return type void
+     */
     public function supprimerFormationAction($id) {
         $entityManager = $this->getDoctrine()->getManager();
         $formation = $entityManager->getRepository(Formation::class)->find($id);
@@ -44,6 +49,11 @@ class FormationController extends Controller {
         return $this->redirectToRoute('homepage');
     }
 
-}
+    public function listeFormationsAction() {
+        $entityManager = $this->getDoctrine()->getManager();
+        return $this->render('IutDossiersBundle:Formation:formation_liste.html.twig', [
+                    'formations' => $entityManager->getRepository(Formation::class)->findAll()
+        ]);
+    }
 
-?>
+}
