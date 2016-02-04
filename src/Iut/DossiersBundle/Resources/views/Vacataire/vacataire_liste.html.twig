@@ -1,15 +1,17 @@
 {% extends 'IutDossiersBundle::base.html.twig' %}
 
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+{% endblock %}  
+{% set title = "Liste des vacataires" %}
+
 {% block body %}
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Hover Data Table</h3>
-                </div>
 
                 <div class="box-body">
-                    <table class="table table-bordered table-hover table-striped">
+                    <table  id="listeVacataire" class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>Nom</th>
@@ -26,16 +28,27 @@
                                     <td>{{ vacataire.mail }}</td>
                                     <td>
                                         {% for formation in vacataire.formations %}
-                                            {{ formation.libelle }} -
+                                            {{ formation.libelle }}
                                         {% endfor %}
                                     </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
+                    <script type="text/javascript" charset="utf8" src=" //code.jquery.com/jquery-1.12.0.min.js"></script>
+                    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+                    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script> 
+                    <script>
+                        $("#listeVacataire").dataTable({
+                            bJQueryUI: true,
+                            sPaginationType: "full_numbers"
+                        });
+                    </script> 
+
                 </div>
             </div>
         </div>
     </div>
+
 
 {% endblock %}

@@ -4,16 +4,15 @@ namespace Iut\DossiersBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Iut\DossiersBundle\Entity\Vacataire;
-
 use Iut\DossiersBundle\Form\VacataireType;
 use Symfony\Component\HttpFoundation\Request;
 
 class VacataireController extends Controller {
 
-    public function afficherListeVacatairesAction(){
+    public function afficherListeVacatairesAction() {
         $entityManager = $this->getDoctrine()->getManager();
         return $this->render("IutDossiersBundle:Vacataire:vacataire_liste.html.twig", [
-            'vacataires' => $entityManager->getRepository(Vacataire::class)->findAllDossiersAndFormations()
+                    'vacataires' => $entityManager->getRepository(Vacataire::class)->findAllDossiersAndFormations()
         ]);
     }
 
