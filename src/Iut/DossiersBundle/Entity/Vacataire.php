@@ -26,7 +26,22 @@ class Vacataire
      * @var string
      */
     private $mail;
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $formations;
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $dossiers;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -36,6 +51,16 @@ class Vacataire
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
     }
 
     /**
@@ -53,13 +78,13 @@ class Vacataire
     }
 
     /**
-     * Get nom
+     * Get prenom
      *
      * @return string
      */
-    public function getNom()
+    public function getPrenom()
     {
-        return $this->nom;
+        return $this->prenom;
     }
 
     /**
@@ -77,13 +102,13 @@ class Vacataire
     }
 
     /**
-     * Get prenom
+     * Get mail
      *
      * @return string
      */
-    public function getPrenom()
+    public function getMail()
     {
-        return $this->prenom;
+        return $this->mail;
     }
 
     /**
@@ -98,28 +123,6 @@ class Vacataire
         $this->mail = $mail;
 
         return $this;
-    }
-
-    /**
-     * Get mail
-     *
-     * @return string
-     */
-    public function getMail()
-    {
-        return $this->mail;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $formations;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -155,11 +158,6 @@ class Vacataire
     {
         return $this->formations;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $dossiers;
-
 
     /**
      * Add dossier
@@ -194,4 +192,9 @@ class Vacataire
     {
         return $this->dossiers;
     }
+
+    function __toString() {
+        return "$this->prenom $this->nom";
+    }
+
 }

@@ -2,18 +2,18 @@
 
 namespace Iut\DossiersBundle\Form;
 
+use Iut\DossiersBundle\Entity\Etat;
+use Iut\DossiersBundle\Entity\Formation;
+use Iut\DossiersBundle\Entity\Piece;
+use Iut\DossiersBundle\Entity\Vacataire;
+use Iut\DossiersBundle\Repository\FormationRepository;
+use Iut\DossiersBundle\Repository\PieceRepository;
+use Iut\DossiersBundle\Repository\VacataireRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Iut\DossiersBundle\Entity\Etat;
-use Iut\DossiersBundle\Entity\Vacataire;
-use Iut\DossiersBundle\Entity\Piece;
-use Iut\DossiersBundle\Entity\Formation;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Iut\DossiersBundle\Repository\PieceRepository;
-use Iut\DossiersBundle\Repository\FormationRepository;
-use Iut\DossiersBundle\Repository\VacataireRepository;
 
 class DossierType extends AbstractType {
 
@@ -28,9 +28,10 @@ class DossierType extends AbstractType {
                     'choice_label' => "libelle",
                     'multiple' => false])
                 ->add('vacataire', EntityType::class, [
-                    'class' => Vacataire::class,
-                    'choice_label' => "nom",
-                    'multiple' => false,
+                    'class'         => Vacataire::class, 'choice_label' => function ($vacataire) {
+                        return $vacataire;
+                    },
+                    'multiple'      => false,
                     'query_builder' => function (VacataireRepository $r) {
                         return $r->createQueryBuilder('v')
                             ->orderBy('v.nom', 'ASC');
