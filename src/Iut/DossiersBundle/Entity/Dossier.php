@@ -39,6 +39,11 @@ class Dossier {
     private $date;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $mails;
+
+    /**
      * Constructor
      */
     public function __construct() {
@@ -172,5 +177,36 @@ class Dossier {
         $this->date = $date;
 
         return $this;
+    }
+
+    /**
+     * Add mail
+     *
+     * @param \Iut\DossiersBundle\Entity\MailRelance $mail
+     *
+     * @return Dossier
+     */
+    public function addMail(\Iut\DossiersBundle\Entity\MailRelance $mail) {
+        $this->mails[] = $mail;
+
+        return $this;
+    }
+
+    /**
+     * Remove mail
+     *
+     * @param \Iut\DossiersBundle\Entity\MailRelance $mail
+     */
+    public function removeMail(\Iut\DossiersBundle\Entity\MailRelance $mail) {
+        $this->mails->removeElement($mail);
+    }
+
+    /**
+     * Get mails
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMails() {
+        return $this->mails;
     }
 }

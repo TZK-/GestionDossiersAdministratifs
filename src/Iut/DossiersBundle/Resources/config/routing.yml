@@ -86,8 +86,13 @@ dossier_relancer:
 
 dossier_ajouter:
     path: /dossiers/ajouter
-    defaults: { _controller: IutDossiersBundle:Dossier:ajouterDossier }
+    defaults: { _controller: IutDossiersBundle:Dossier:ajouterDossier, id: -1}
 
+dossier_modifier:
+    path: /dossiers/modifier/{id}
+    defaults: { _controller: IutDossiersBundle:Dossier:ajouterDossier, id: -1}
+    requirements:
+        id: \d+
     
  #######################
  # FormationController #

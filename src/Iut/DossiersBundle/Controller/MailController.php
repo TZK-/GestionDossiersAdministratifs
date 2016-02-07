@@ -2,14 +2,14 @@
 
 namespace Iut\DossiersBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Iut\DossiersBundle\Entity\ModeleMail;
-use Iut\DossiersBundle\Form\ModeleMailType;
+use Iut\DossiersBundle\Entity\Dossier;
 use Iut\DossiersBundle\Entity\MailRelance;
+use Iut\DossiersBundle\Entity\ModeleMail;
 use Iut\DossiersBundle\Form\MailRelanceType;
 use Iut\DossiersBundle\Form\ModeleMailListeType;
-use Iut\DossiersBundle\Entity\Dossier;
+use Iut\DossiersBundle\Form\ModeleMailType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends Controller {
 
@@ -33,8 +33,8 @@ class MailController extends Controller {
             $formMailRelance = $this->createForm(MailRelanceType::class, $mailRelance);
 
             return $this->render("IutDossiersBundle:Mail/Envoi:relance_envoyer.html.twig", [
-                        'title' => "Relancer le dossier",
-                        'form' => $formMailRelance->createView(),
+                'title' => "Relancer le dossier",
+                'form' => $formMailRelance->createView(),
             ]);
         }
 
@@ -42,15 +42,14 @@ class MailController extends Controller {
 
             /* Envoi du mail */
             $message = \Swift_Message::newInstance()
-                    ->setSubject($mailRelance->getTitre())
-                    ->setFrom('sender@mail.com')
-                    ->setTo('receiver@mail.com')
-                    ->setBody(
+                ->setSubject($mailRelance->getTitre())
+                ->setFrom('sender@mail.com')
+                ->setTo('receiver@mail.com')
+                ->setBody(
                     $this->renderView(
-                            'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $mailRelance->getMessage()]
+                        'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $mailRelance->getMessage()]
                     ), 'text/html'
-                    )
-            ;
+                );
 
             $this->get('mailer')->send($message);
 
@@ -58,22 +57,9 @@ class MailController extends Controller {
         }
 
         return $this->render("IutDossiersBundle:Mail/Envoi:relance_envoyer.html.twig", [
-                    'title' => "Relancer le dossier",
-                    'form' => $formModeleMail->createView(),
+            'title' => "Relancer le dossier",
+            'form' => $formModeleMail->createView(),
         ]);
-    }
-
-    /**
-     * Parse le mail de relance afin d'ajouter les elements dynamiques tel que le Nom/Prénom et les pièces manquantes
-     * @param MailRelance $mail
-     * @param type $dossierId
-     */
-    private function parseMailRelance(MailRelance $mail, $dossierId) {
-        $dossier = $this->getDoctrine()->getManager()->getRepository(Dossier::class)->find($dossierId);
-        $args = [
-            'pieces' => $dossier->getPieces()->toArray(),
-            'vacataire' => $dossier->getVacataire()
-        ];
     }
 
     public function ajouterModeleMailAction(Request $request, $id) {
@@ -100,8 +86,8 @@ class MailController extends Controller {
         }
 
         return $this->render('IutDossiersBundle:Mail/Modele:modele_ajouter.html.twig', [
-                    'title' => "Ajouter un modèle de mail",
-                    'form' => $form->createView()
+            'title' => "Ajouter un modèle de mail",
+            'form' => $form->createView()
         ]);
     }
 
@@ -109,7 +95,7 @@ class MailController extends Controller {
         $mails = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class);
 
         return $this->render('IutDossiersBundle:Mail/Modele:modele_liste.html.twig', [
-                    'mails' => $mails->findBy([], ['id' => 'ASC'])]
+                'mails' => $mails->findBy([], ['id' => 'ASC'])]
         );
     }
 
@@ -122,7 +108,7 @@ class MailController extends Controller {
         }
 
         return $this->render('IutDossiersBundle:Mail/Modele:modele_afficher.html.twig', [
-                    'mail' => $mail
+            'mail' => $mail
         ]);
     }
 
@@ -138,6 +124,19 @@ class MailController extends Controller {
         }
 
         return $this->redirectToRoute('modele-mail_liste');
+    }
+
+    /**
+     * Parse le mail de relance afin d'ajouter les elements dynamiques tel que le Nom/Prénom et les pièces manquantes
+     * @param MailRelance $mail
+     * @param type $dossierId
+     */
+    private function parseMailRelance(MailRelance $mail, $dossierId) {
+        $dossier = $this->getDoctrine()->getManager()->getRepository(Dossier::class)->find($dossierId);
+        $args = [
+            'pieces' => $dossier->getPieces()->toArray(),
+            'vacataire' => $dossier->getVacataire()
+        ];
     }
 
 }

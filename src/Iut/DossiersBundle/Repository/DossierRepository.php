@@ -22,4 +22,12 @@ class DossierRepository extends EntityRepository {
             ->getQuery()->getResult();
     }
 
+    public function getLastRelance() {
+        return $this->createQueryBuilder("d")
+            ->leftJoin("d.mail", "mails")
+            ->select("MAX(d.mail)")
+            ->getQuery()
+            ->getSingleResult();
+    }
+
 }

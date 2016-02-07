@@ -27,6 +27,11 @@ class MailRelance
      */
     private $date;
 
+    /**
+     * @var \Iut\DossiersBundle\Entity\Dossier
+     */
+    private $dossier;
+
     function __construct() {
         $this->date = new \DateTime();
     }
@@ -108,6 +113,28 @@ class MailRelance
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get dossier
+     *
+     * @return \Iut\DossiersBundle\Entity\Dossier
+     */
+    public function getDossier() {
+        return $this->dossier;
+    }
+
+    /**
+     * Set dossier
+     *
+     * @param \Iut\DossiersBundle\Entity\Dossier $dossier
+     *
+     * @return MailRelance
+     */
+    public function setDossier(\Iut\DossiersBundle\Entity\Dossier $dossier = null) {
+        $this->dossier = $dossier;
 
         return $this;
     }

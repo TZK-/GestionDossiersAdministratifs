@@ -14,6 +14,7 @@
                             <th>Date</th>
                             <th>Vacataire</th>
                             <th>Pièces manquantes</th>
+                            <th>Dernière relance</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -26,7 +27,11 @@
                                    warning
                                 {% endif %}
                             ">
-                                <td>{{ dossier.id }}</td>
+                                <td>
+                                    <a href="{{ path('dossier_modifier', {'id': dossier.id}) }}" class="rowlink">
+                                        {{ dossier.id }}
+                                    </a>
+                                </td>
                                 <td>{{ dossier.date | date("d-m-y") }}</td>
                                 <td>{{ dossier.vacataire.nom }} {{ dossier.vacataire.prenom }}</td>
                                 <td>
@@ -35,6 +40,7 @@
                                         {% if loop.index < loop.length %} - {% endif %}
                                     {% endfor %}
                                 </td>
+                                <td></td>
                             </tr>
                         {% endfor %}
                         </tbody>
