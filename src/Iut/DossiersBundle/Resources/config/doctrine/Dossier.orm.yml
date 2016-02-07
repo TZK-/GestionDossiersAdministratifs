@@ -37,4 +37,8 @@ Iut\DossiersBundle\Entity\Dossier:
                         referencedColumnName: id
             cascade:
                 - persist
+    oneToMany:
+        mails:
+           targetEntity: MailRelance
+           mappedBy: dossier
     lifecycleCallbacks: {  }

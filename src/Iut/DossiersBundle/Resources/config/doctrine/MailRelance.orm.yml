@@ -16,4 +16,12 @@ Iut\DossiersBundle\Entity\MailRelance:
             type: text
         date:
             type: datetime
+
+    manyToOne:
+        dossier:
+            targetEntity: Dossier
+            inversedBy: mails
+            joinColumn:
+                name: dossier_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }
