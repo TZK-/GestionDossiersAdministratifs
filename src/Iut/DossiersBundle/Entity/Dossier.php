@@ -2,71 +2,77 @@
 
 namespace Iut\DossiersBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Dossier
  */
-class Dossier
-{
+class Dossier {
     /**
      * @var int
      */
     private $id;
 
+    /**
+     * @var Etat
+     */
+    private $etat;
+
+    /**
+     * @var Vacataire
+     */
+    private $vacataire;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $pieces;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $formation;
+
+    /**
+     * @var \DateTime
+     */
+    private $date;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->date = new \DateTime();
+        $this->pieces = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
-    }
-    /**
-     * @var \Iut\DossiersBundle\Entity\Etat
-     */
-    private $etat;
-
-
-    /**
-     * Set etat
-     *
-     * @param \Iut\DossiersBundle\Entity\Etat $etat
-     *
-     * @return Dossier
-     */
-    public function setEtat(\Iut\DossiersBundle\Entity\Etat $etat = null)
-    {
-        $this->etat = $etat;
-
-        return $this;
     }
 
     /**
      * Get etat
      *
-     * @return \Iut\DossiersBundle\Entity\Etat
+     * @return Etat
      */
-    public function getEtat()
-    {
+    public function getEtat() {
         return $this->etat;
     }
-    /**
-     * @var \Iut\DossiersBundle\Entity\Vacataire
-     */
-    private $vacataire;
-
 
     /**
-     * Set vacataire
+     * Set etat
      *
-     * @param \Iut\DossiersBundle\Entity\Vacataire $vacataire
+     * @param Etat $etat
      *
      * @return Dossier
      */
-    public function setVacataire(\Iut\DossiersBundle\Entity\Vacataire $vacataire = null)
-    {
-        $this->vacataire = $vacataire;
+    public function setEtat(Etat $etat = null) {
+        $this->etat = $etat;
 
         return $this;
     }
@@ -74,34 +80,33 @@ class Dossier
     /**
      * Get vacataire
      *
-     * @return \Iut\DossiersBundle\Entity\Vacataire
+     * @return Vacataire
      */
-    public function getVacataire()
-    {
+    public function getVacataire() {
         return $this->vacataire;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $pieces;
 
     /**
-     * Constructor
+     * Set vacataire
+     *
+     * @param Vacataire $vacataire
+     *
+     * @return Dossier
      */
-    public function __construct()
-    {
-        $this->pieces = new \Doctrine\Common\Collections\ArrayCollection();
+    public function setVacataire(Vacataire $vacataire = null) {
+        $this->vacataire = $vacataire;
+
+        return $this;
     }
 
     /**
      * Add piece
      *
-     * @param \Iut\DossiersBundle\Entity\Piece $piece
+     * @param Piece $piece
      *
      * @return Dossier
      */
-    public function addPiece(\Iut\DossiersBundle\Entity\Piece $piece)
-    {
+    public function addPiece(Piece $piece) {
         $this->pieces[] = $piece;
 
         return $this;
@@ -110,10 +115,9 @@ class Dossier
     /**
      * Remove piece
      *
-     * @param \Iut\DossiersBundle\Entity\Piece $piece
+     * @param Piece $piece
      */
-    public function removePiece(\Iut\DossiersBundle\Entity\Piece $piece)
-    {
+    public function removePiece(Piece $piece) {
         $this->pieces->removeElement($piece);
     }
 
@@ -122,35 +126,51 @@ class Dossier
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPieces()
-    {
+    public function getPieces() {
         return $this->pieces;
     }
-    
-   private $formation;
 
+    /**
+     * Get formation
+     *
+     * @return Formation
+     */
+    public function getFormation() {
+        return $this->formation;
+    }
 
     /**
      * Set formation
      *
-     * @param \Iut\DossiersBundle\Entity\Formation $formation
+     * @param Formation $formation
      *
      * @return Dossier
      */
-    public function setFormation(\Iut\DossiersBundle\Entity\Formation $formation = null)
-    {
+    public function setFormation(Formation $formation = null) {
         $this->formation = $formation;
 
         return $this;
     }
 
     /**
-     * Get formation
+     * Get date
      *
-     * @return \Iut\DossiersBundle\Entity\Formation
+     * @return \DateTime
      */
-    public function getFormation()
-    {
-        return $this->formation;
+    public function getDate() {
+        return $this->date;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Dossier
+     */
+    public function setDate($date) {
+        $this->date = $date;
+
+        return $this;
     }
 }

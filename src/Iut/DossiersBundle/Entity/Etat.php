@@ -5,8 +5,7 @@ namespace Iut\DossiersBundle\Entity;
 /**
  * Etat
  */
-class Etat
-{
+class Etat {
     /**
      * @var int
      */
@@ -17,15 +16,34 @@ class Etat
      */
     private $libelle;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $dossiers;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->dossiers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle() {
+        return $this->libelle;
     }
 
     /**
@@ -35,33 +53,10 @@ class Etat
      *
      * @return Etat
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle($libelle) {
         $this->libelle = $libelle;
 
         return $this;
-    }
-
-    /**
-     * Get libelle
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $dossiers;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->dossiers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -71,8 +66,7 @@ class Etat
      *
      * @return Etat
      */
-    public function addDossier(\Iut\DossiersBundle\Entity\Dossier $dossier)
-    {
+    public function addDossier(\Iut\DossiersBundle\Entity\Dossier $dossier) {
         $this->dossiers[] = $dossier;
 
         return $this;
@@ -83,8 +77,7 @@ class Etat
      *
      * @param \Iut\DossiersBundle\Entity\Dossier $dossier
      */
-    public function removeDossier(\Iut\DossiersBundle\Entity\Dossier $dossier)
-    {
+    public function removeDossier(\Iut\DossiersBundle\Entity\Dossier $dossier) {
         $this->dossiers->removeElement($dossier);
     }
 
@@ -93,8 +86,7 @@ class Etat
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDossiers()
-    {
+    public function getDossiers() {
         return $this->dossiers;
     }
 }

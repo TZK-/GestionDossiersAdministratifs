@@ -29,6 +29,15 @@ class Formation
     }
 
     /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle() {
+        return $this->libelle;
+    }
+
+    /**
      * Set libelle
      *
      * @param string $libelle
@@ -40,15 +49,5 @@ class Formation
         $this->libelle = $libelle;
 
         return $this;
-    }
-
-    /**
-     * Get libelle
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
     }
 }

@@ -34,6 +34,15 @@ class ModeleMail
     }
 
     /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre() {
+        return $this->titre;
+    }
+
+    /**
      * Set titre
      *
      * @param string $titre
@@ -48,13 +57,13 @@ class ModeleMail
     }
 
     /**
-     * Get titre
+     * Get message
      *
      * @return string
      */
-    public function getTitre()
+    public function getMessage()
     {
-        return $this->titre;
+        return $this->message;
     }
 
     /**
@@ -69,15 +78,5 @@ class ModeleMail
         $this->message = $message;
 
         return $this;
-    }
-
-    /**
-     * Get message
-     *
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
     }
 }

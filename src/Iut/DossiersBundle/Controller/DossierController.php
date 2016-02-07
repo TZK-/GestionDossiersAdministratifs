@@ -2,10 +2,10 @@
 
 namespace Iut\DossiersBundle\Controller;
 
+use Iut\DossiersBundle\Entity\Dossier;
+use Iut\DossiersBundle\Form\DossierType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Iut\DossiersBundle\Form\DossierType;
-use Iut\DossiersBundle\Entity\Dossier;
 
 class DossierController extends Controller {
 
@@ -25,9 +25,15 @@ class DossierController extends Controller {
         }
 
         return $this->render('IutDossiersBundle:Dossier:dossier_ajouter.html.twig', [
-                    'form' => $form->createView(),
-                    'title' => "Créer un dossier"
+            'form' => $form->createView(),
+            'title' => "Créer un dossier"
         ]);
     }
 
+    public function listeDossierAction() {
+        $entityManager = $this->getDoctrine()->getManager();
+        return $this->render("IutDossiersBundle:Dossier:dossier_liste.html.twig", [
+            'dossiers' => $entityManager->getRepository(Dossier::class)->findAll()
+        ]);
+    }
 }

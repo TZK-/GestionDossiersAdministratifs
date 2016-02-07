@@ -1,6 +1,6 @@
 homepage:
     path: /dossiers
-    defaults: { _controller: IutDossiersBundle:Vacataire:afficherListeVacataires }
+    defaults: { _controller: IutDossiersBundle:Dossier:listeDossier }
 
  ###################
  #    Vacataire    #
@@ -87,7 +87,7 @@ dossier_relancer:
 dossier_ajouter:
     path: /dossiers/ajouter
     defaults: { _controller: IutDossiersBundle:Dossier:ajouterDossier }
-    
+
     
  #######################
  # FormationController #

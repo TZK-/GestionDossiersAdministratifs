@@ -42,6 +42,15 @@ class MailRelance
     }
 
     /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre() {
+        return $this->titre;
+    }
+
+    /**
      * Set titre
      *
      * @param string $titre
@@ -56,13 +65,13 @@ class MailRelance
     }
 
     /**
-     * Get titre
+     * Get message
      *
      * @return string
      */
-    public function getTitre()
+    public function getMessage()
     {
-        return $this->titre;
+        return $this->message;
     }
 
     /**
@@ -80,13 +89,13 @@ class MailRelance
     }
 
     /**
-     * Get message
+     * Get date
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getMessage()
+    public function getDate()
     {
-        return $this->message;
+        return $this->date;
     }
 
     /**
@@ -101,15 +110,5 @@ class MailRelance
         $this->date = $date;
 
         return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
     }
 }

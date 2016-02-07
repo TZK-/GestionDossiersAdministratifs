@@ -8,6 +8,9 @@ Iut\DossiersBundle\Entity\Dossier:
             id: true
             generator:
                 strategy: AUTO
+    fields:
+        date:
+            type: datetime
     manyToOne:
         etat:
             targetEntity: Etat
