@@ -24,6 +24,8 @@ Iut\DossiersBundle\Entity\Dossier:
             joinColumn:
                 name: vacataire_id
                 referencedColumnName: id
+            cascade:
+                - persist
     manyToMany:
         pieces:
             targetEntity: Piece

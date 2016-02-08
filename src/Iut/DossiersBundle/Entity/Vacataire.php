@@ -134,6 +134,7 @@ class Vacataire
      */
     public function addFormation(\Iut\DossiersBundle\Entity\Formation $formation)
     {
+        // TODO useful?
         if(!$this->formations->contains($formation))
             $this->formations[] = $formation;
         return $this;

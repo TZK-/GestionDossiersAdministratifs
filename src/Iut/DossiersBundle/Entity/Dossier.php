@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Dossier
  */
 class Dossier {
+
     /**
      * @var int
      */

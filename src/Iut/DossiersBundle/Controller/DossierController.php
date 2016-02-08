@@ -25,7 +25,16 @@ class DossierController extends Controller {
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $selectedFormation = $form->get('formation')->getData();
+            $vacataire = $form->get('vacataire')->getData();
+
             $entityManager = $this->getDoctrine()->getManager();
+
+            if (!$vacataire->getFormations()->contains($selectedFormation)) {
+                $vacataire->addFormation($selectedFormation);
+            }
+
             $entityManager->persist($dossier);
             $entityManager->flush();
 
