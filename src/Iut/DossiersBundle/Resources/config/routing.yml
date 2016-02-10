@@ -100,7 +100,13 @@ dossier_modifier:
 formation_ajouter:
     path: /dossiers/formation/ajouter
     defaults: { _controller: IutDossiersBundle:Formation:ajouterFormation}
-    
+
+formation_modifier:
+    path: /dossiers/formation/modifier/{id}
+    defaults: { _controller: IutDossiersBundle:Formation:ajouterFormation, id: -1}
+    requirements:
+        id: \d+
+
 formation_supprimer:
     path: /dossiers/formation/supprimer/{id}
     defaults: { _controller: IutDossiersBundle:Formation:supprimerFormation }

@@ -36,6 +36,7 @@ class DossierController extends Controller {
             }
 
             $entityManager->persist($dossier);
+
             $entityManager->flush();
 
             $this->addFlash('info', "Le dossier a bien été crée !");
