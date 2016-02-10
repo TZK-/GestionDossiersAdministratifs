@@ -78,7 +78,7 @@ class MailController extends Controller {
         $form = $this->createForm(ModeleMailType::class, $mail);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST')) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->persist($mail);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Le modèle de mail a bien été ajouté');
@@ -86,7 +86,6 @@ class MailController extends Controller {
         }
 
         return $this->render('IutDossiersBundle:Mail/Modele:modele_ajouter.html.twig', [
-            'title' => "Ajouter un modèle de mail",
             'form' => $form->createView()
         ]);
     }

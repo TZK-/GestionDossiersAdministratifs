@@ -69,8 +69,8 @@ modele-mail_ajouter:
     defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail, id: -1 }
 
 modele-mail_modifier:
-    path: /dossiers/modeles-mails/modifier/{id}
-    defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail }
+    path: /dossiers/modeles-mail/modifier/{id}
+    defaults: { _controller: IutDossiersBundle:Mail:ajouterModeleMail, id: -1 }
     requirements:
         id: \d+
 
