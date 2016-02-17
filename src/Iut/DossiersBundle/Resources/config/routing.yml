@@ -16,7 +16,7 @@ vacataire_ajouter:
 
 vacataire_modifier:
     path: /dossiers/vacataire/modifier/{id}
-    defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire }
+    defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire, id: -1}
     requirements:
         id: \d+
 

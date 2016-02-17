@@ -1,4 +1,4 @@
-{% extends 'IutDossiersBundle::base.html.twig' %}
+    {% extends 'IutDossiersBundle::base.html.twig' %}
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
@@ -23,7 +23,11 @@
                         <tbody>
                             {% for vacataire in vacataires %}
                                 <tr>
-                                    <td>{{ vacataire.nom }}</td>
+                                    <td>
+                                        <a href="{{ path('vacataire_modifier', {'id': vacataire.id}) }}" class="rowlink">
+                                            {{ vacataire.nom }}
+                                        </a>
+                                    </td>
                                     <td>{{ vacataire.prenom }}</td>
                                     <td>{{ vacataire.mail }}</td>
                                     <td>
