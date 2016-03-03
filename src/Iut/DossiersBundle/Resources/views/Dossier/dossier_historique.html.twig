@@ -1,0 +1,52 @@
+{% extends 'IutDossiersBundle::base.html.twig' %}
+
+{% set title = "Liste des dossiers" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Date</th>
+                            <th>Vacataire</th>
+                            <th>Pièces manquantes</th>
+                            <th>Dernière relance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for dossier in dossiers %}
+                            {% set etat = dossier.etat.libelle %}
+                            <tr class="
+                                {% if etat == "Complet" %}
+                                    success
+                                {% elseif etat == "Incomplet" %}
+                                   warning
+                                {% endif %}
+                            ">
+                                <td>
+                                   {{ dossier.id }}
+                                </td>
+                                <td>{{ dossier.date | date("d-m-y") }}</td>
+                                <td>{{ dossier.vacataire.nom }} {{ dossier.vacataire.prenom }}</td>
+                                <td>
+                                    {% for piece in dossier.pieces %}
+                                        {{ piece.libelle }}
+                                        {% if loop.index < loop.length %} - {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

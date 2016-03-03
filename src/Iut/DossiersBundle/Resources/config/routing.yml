@@ -12,7 +12,7 @@ vacataire_liste:
 
 vacataire_ajouter:
     path: /dossiers/vacataire/ajouter
-    defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire, id:-1 }
+    defaults: { _controller: IutDossiersBundle:Vacataire:ajouterVacataire, id: -1 }
 
 vacataire_modifier:
     path: /dossiers/vacataire/modifier/{id}
@@ -89,6 +89,10 @@ dossier_relancer:
  #####################
  # DossierController #
  #####################
+
+dossier_historique:
+    path: /dossiers/historique
+    defaults: { _controller: IutDossiersBundle:Dossier:historiqueDossier }
 
 dossier_ajouter:
     path: /dossiers/ajouter
