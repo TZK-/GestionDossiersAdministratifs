@@ -50,10 +50,19 @@ class DossierController extends Controller {
         ]);
     }
 
-    public function listeDossierAction() {
+    public function listeDossierAction(Request $request) {
         $entityManager = $this->getDoctrine()->getManager();
+        $query = $entityManager->getRepository(Dossier::class)->findAll();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10 // limit
+        );
+
         return $this->render("IutDossiersBundle:Dossier:dossier_liste.html.twig", [
-            'dossiers' => $entityManager->getRepository(Dossier::class)->findAll()
+            'pagination' => $pagination
         ]);
     }
 

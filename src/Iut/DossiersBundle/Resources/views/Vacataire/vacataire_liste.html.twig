@@ -1,4 +1,4 @@
-    {% extends 'IutDossiersBundle::base.html.twig' %}
+{% extends 'IutDossiersBundle::base.html.twig' %}
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for vacataire in vacataires %}
+                            {% for vacataire in pagination %}
                                 <tr>
                                     <td>
                                         <a href="{{ path('vacataire_modifier', {'id': vacataire.id}) }}" class="rowlink">
@@ -39,17 +39,8 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <script type="text/javascript" charset="utf8" src=" //code.jquery.com/jquery-1.12.0.min.js"></script>
-                    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-                    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script> 
-                    
-                    <script>
-                        $("#listeVacataire").dataTable({
-                            bJQueryUI: true,
-                            sPaginationType: "full_numbers",
-                            "language": { "url": "//cdn.datatables.net/plug-ins/1.10.10/i18n/French.json" }
-                        });
-                    </script> 
+
+                    <nav>{{ knp_pagination_render(pagination) }}</nav>
 
                 </div>
             </div>

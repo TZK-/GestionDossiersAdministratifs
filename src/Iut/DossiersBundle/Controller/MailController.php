@@ -2,7 +2,6 @@
 
 namespace Iut\DossiersBundle\Controller;
 
-use Iut\DossiersBundle\Entity\Dossier;
 use Iut\DossiersBundle\Entity\MailRelance;
 use Iut\DossiersBundle\Entity\ModeleMail;
 use Iut\DossiersBundle\Form\MailRelanceType;
@@ -128,14 +127,10 @@ class MailController extends Controller {
     /**
      * Parse le mail de relance afin d'ajouter les elements dynamiques tel que le Nom/Prénom et les pièces manquantes
      * @param MailRelance $mail
-     * @param type $dossierId
      */
-    private function parseMailRelance(MailRelance $mail, $dossierId) {
-        $dossier = $this->getDoctrine()->getManager()->getRepository(Dossier::class)->find($dossierId);
-        $args = [
-            'pieces' => $dossier->getPieces()->toArray(),
-            'vacataire' => $dossier->getVacataire()
-        ];
+    private function parseMailRelance(MailRelance $mail) {
+        $message = $mail->getMessage();
+
     }
 
 }
