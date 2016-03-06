@@ -30,4 +30,12 @@ class DossierRepository extends EntityRepository {
             ->getSingleResult();
     }
 
+    public function findClosedDossier(){
+        return $this->createQueryBuilder("d")
+            ->leftJoin("d.etat", "etats")
+            ->addSelect("dossier")
+            ->where('d.etat = "Complet"')
+            ->getQuery()->getResult();
+    }
+
 }

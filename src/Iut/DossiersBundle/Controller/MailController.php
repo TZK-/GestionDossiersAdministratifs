@@ -124,13 +124,4 @@ class MailController extends Controller {
         return $this->redirectToRoute('modele-mail_liste');
     }
 
-    /**
-     * Parse le mail de relance afin d'ajouter les elements dynamiques tel que le Nom/Prénom et les pièces manquantes
-     * @param MailRelance $mail
-     */
-    private function parseMailRelance(MailRelance $mail) {
-        $message = $mail->getMessage();
-
-    }
-
 }

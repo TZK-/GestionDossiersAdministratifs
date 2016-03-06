@@ -69,7 +69,7 @@ class DossierController extends Controller {
     public function historiqueDossierAction() {
         $entityManager = $this->getDoctrine()->getManager();
         return $this->render("IutDossiersBundle:Dossier:dossier_historique.html.twig", [
-            'dossiers' => $entityManager->getRepository(Dossier::class)->findAll()
+            'dossiers' => $entityManager->getRepository(Dossier::class)->findClosedDossier()
         ]);
     }
 }
