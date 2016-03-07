@@ -68,8 +68,13 @@ class DossierController extends Controller {
 
     public function historiqueDossierAction() {
         $entityManager = $this->getDoctrine()->getManager();
+        $query = $entityManager->getRepository(Dossier::class)->findClosedDossier();
+
+        $paginator = $this->get('paginator');
+        $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 10);
+
         return $this->render("IutDossiersBundle:Dossier:dossier_historique.html.twig", [
-            'dossiers' => $entityManager->getRepository(Dossier::class)->findClosedDossier()
+            'pagination' => $pagination
         ]);
     }
 }

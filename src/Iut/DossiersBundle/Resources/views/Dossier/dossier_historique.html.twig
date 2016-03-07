@@ -18,7 +18,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for dossier in dossiers %}
+                        {% for dossier in pagination %}
                             {% set etat = dossier.etat.libelle %}
                             <tr class="
                                 {% if etat == "Complet" %}
@@ -43,6 +43,9 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                    <nav>
+                        {{ knp_pagination_render(pagination) }}
+                    </nav>
                 </div>
             </div>
         </div>
