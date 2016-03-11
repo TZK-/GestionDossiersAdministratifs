@@ -5,8 +5,8 @@ namespace Iut\DossiersBundle\Entity;
 /**
  * Piece
  */
-class Piece
-{
+class Piece {
+
     /**
      * @var int
      */
@@ -23,8 +23,7 @@ class Piece
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -44,8 +43,7 @@ class Piece
      *
      * @return Piece
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle($libelle) {
         $this->libelle = $libelle;
 
         return $this;

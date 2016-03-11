@@ -5,8 +5,8 @@ namespace Iut\DossiersBundle\Entity;
 /**
  * ModeleMail
  */
-class ModeleMail {
-
+class ModeleMail
+{
     /**
      * @var int
      */
@@ -28,7 +28,8 @@ class ModeleMail {
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -48,7 +49,8 @@ class ModeleMail {
      *
      * @return ModeleMail
      */
-    public function setTitre($titre) {
+    public function setTitre($titre)
+    {
         $this->titre = $titre;
 
         return $this;
@@ -59,7 +61,8 @@ class ModeleMail {
      *
      * @return string
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
 
@@ -70,7 +73,8 @@ class ModeleMail {
      *
      * @return ModeleMail
      */
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->message = $message;
 
         return $this;

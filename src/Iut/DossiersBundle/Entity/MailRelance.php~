@@ -5,8 +5,8 @@ namespace Iut\DossiersBundle\Entity;
 /**
  * MailRelance
  */
-class MailRelance {
-
+class MailRelance
+{
     /**
      * @var int
      */
@@ -36,12 +36,13 @@ class MailRelance {
         $this->date = new \DateTime();
     }
 
-    /**
+        /**
      * Get id
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -61,7 +62,8 @@ class MailRelance {
      *
      * @return MailRelance
      */
-    public function setTitre($titre) {
+    public function setTitre($titre)
+    {
         $this->titre = $titre;
 
         return $this;
@@ -72,7 +74,8 @@ class MailRelance {
      *
      * @return string
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
 
@@ -83,7 +86,8 @@ class MailRelance {
      *
      * @return MailRelance
      */
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->message = $message;
 
         return $this;
@@ -94,7 +98,8 @@ class MailRelance {
      *
      * @return \DateTime
      */
-    public function getDate() {
+    public function getDate()
+    {
         return $this->date;
     }
 
@@ -105,7 +110,8 @@ class MailRelance {
      *
      * @return MailRelance
      */
-    public function setDate($date) {
+    public function setDate($date)
+    {
         $this->date = $date;
 
         return $this;

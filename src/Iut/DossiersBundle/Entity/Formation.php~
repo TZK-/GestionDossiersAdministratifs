@@ -5,8 +5,8 @@ namespace Iut\DossiersBundle\Entity;
 /**
  * Formation
  */
-class Formation {
-
+class Formation
+{
     /**
      * @var int
      */
@@ -23,7 +23,8 @@ class Formation {
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -43,7 +44,8 @@ class Formation {
      *
      * @return Formation
      */
-    public function setLibelle($libelle) {
+    public function setLibelle($libelle)
+    {
         $this->libelle = $libelle;
 
         return $this;

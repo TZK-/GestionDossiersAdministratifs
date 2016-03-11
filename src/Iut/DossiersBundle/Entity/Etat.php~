@@ -6,7 +6,6 @@ namespace Iut\DossiersBundle\Entity;
  * Etat
  */
 class Etat {
-
     /**
      * @var int
      */
