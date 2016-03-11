@@ -5,8 +5,8 @@ namespace Iut\DossiersBundle\Entity;
 /**
  * Vacataire
  */
-class Vacataire
-{
+class Vacataire {
+
     /**
      * @var int
      */
@@ -26,20 +26,26 @@ class Vacataire
      * @var string
      */
     private $mail;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $formations;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $dossiers;
 
     /**
+     * @var string
+     */
+    private $civilite;
+
+    /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -48,8 +54,7 @@ class Vacataire
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -58,8 +63,7 @@ class Vacataire
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
@@ -70,8 +74,7 @@ class Vacataire
      *
      * @return Vacataire
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -82,8 +85,7 @@ class Vacataire
      *
      * @return string
      */
-    public function getPrenom()
-    {
+    public function getPrenom() {
         return $this->prenom;
     }
 
@@ -94,8 +96,7 @@ class Vacataire
      *
      * @return Vacataire
      */
-    public function setPrenom($prenom)
-    {
+    public function setPrenom($prenom) {
         $this->prenom = $prenom;
 
         return $this;
@@ -106,8 +107,7 @@ class Vacataire
      *
      * @return string
      */
-    public function getMail()
-    {
+    public function getMail() {
         return $this->mail;
     }
 
@@ -118,8 +118,7 @@ class Vacataire
      *
      * @return Vacataire
      */
-    public function setMail($mail)
-    {
+    public function setMail($mail) {
         $this->mail = $mail;
 
         return $this;
@@ -132,10 +131,8 @@ class Vacataire
      *
      * @return Vacataire
      */
-    public function addFormation(\Iut\DossiersBundle\Entity\Formation $formation)
-    {
-        // TODO useful?
-        if(!$this->formations->contains($formation))
+    public function addFormation(\Iut\DossiersBundle\Entity\Formation $formation) {
+        if (!$this->formations->contains($formation))
             $this->formations[] = $formation;
         return $this;
     }
@@ -145,8 +142,7 @@ class Vacataire
      *
      * @param \Iut\DossiersBundle\Entity\Formation $formation
      */
-    public function removeFormation(\Iut\DossiersBundle\Entity\Formation $formation)
-    {
+    public function removeFormation(\Iut\DossiersBundle\Entity\Formation $formation) {
         $this->formations->removeElement($formation);
     }
 
@@ -155,8 +151,7 @@ class Vacataire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getFormations()
-    {
+    public function getFormations() {
         return $this->formations;
     }
 
@@ -167,8 +162,7 @@ class Vacataire
      *
      * @return Vacataire
      */
-    public function addDossier(\Iut\DossiersBundle\Entity\Dossier $dossier)
-    {
+    public function addDossier(\Iut\DossiersBundle\Entity\Dossier $dossier) {
         $this->dossiers[] = $dossier;
 
         return $this;
@@ -179,8 +173,7 @@ class Vacataire
      *
      * @param \Iut\DossiersBundle\Entity\Dossier $dossier
      */
-    public function removeDossier(\Iut\DossiersBundle\Entity\Dossier $dossier)
-    {
+    public function removeDossier(\Iut\DossiersBundle\Entity\Dossier $dossier) {
         $this->dossiers->removeElement($dossier);
     }
 
@@ -189,8 +182,7 @@ class Vacataire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDossiers()
-    {
+    public function getDossiers() {
         return $this->dossiers;
     }
 
@@ -198,4 +190,25 @@ class Vacataire
         return "$this->prenom $this->nom";
     }
 
+    /**
+     * Get civilite
+     *
+     * @return string
+     */
+    public function getCivilite() {
+        return $this->civilite;
+    }
+
+    /**
+     * Set civilite
+     *
+     * @param string $civilite
+     *
+     * @return Vacataire
+     */
+    public function setCivilite($civilite) {
+        $this->civilite = $civilite;
+
+        return $this;
+    }
 }

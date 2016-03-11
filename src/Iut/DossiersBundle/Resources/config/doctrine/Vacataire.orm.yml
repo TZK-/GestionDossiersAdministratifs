@@ -19,6 +19,10 @@ Iut\DossiersBundle\Entity\Vacataire:
             type: string
             length: '255'
             unique: true
+        civilite:
+            type: string
+            lenght: '30'
+            unique: false
     manyToMany:
         formations:
             targetEntity: Formation
