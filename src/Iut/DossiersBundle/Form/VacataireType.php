@@ -3,6 +3,7 @@
 namespace Iut\DossiersBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use \Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -15,11 +16,17 @@ class VacataireType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('nom')
-                ->add('prenom')
-                ->add('mail')
-                ->add('submit', SubmitType::class, ['label' => "Créer"])
-        ;
+            ->add('civilite', ChoiceType::class, [
+                'choices' => [
+                    'Monsieur' => 'Monsieur',
+                    'Madame' => 'Madame'
+                ],
+                'choices_as_values' => true
+            ])
+            ->add('nom')
+            ->add('prenom')
+            ->add('mail')
+            ->add('submit', SubmitType::class, ['label' => "Créer"]);
     }
 
     /**
