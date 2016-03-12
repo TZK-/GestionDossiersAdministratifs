@@ -69,8 +69,7 @@ class MailController extends Controller {
             $mail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class)->find($id);
 
             if (!$mail) {
-                $this->addFlash('warning', "Le modèle de mail n'existe pas.");
-                return $this->redirectToRoute('modele-mail_liste');
+                throw $this->createNotFoundException("Le modèle de mail numéro $id n'existe pas.");
             }
         }
 
@@ -101,8 +100,7 @@ class MailController extends Controller {
         $mail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class)->find($id);
 
         if (!$mail) {
-            $this->addFlash('warning', "Le modèle de mail n'existe pas !");
-            return $this->redirectToRoute('modele-mail_liste');
+            throw $this->createNotFoundException("Le modèle de mail numéro $id n'existe pas.");
         }
 
         return $this->render('IutDossiersBundle:Mail/Modele:modele_afficher.html.twig', [
@@ -114,7 +112,7 @@ class MailController extends Controller {
         $mail = $this->getDoctrine()->getManager()->getRepository(ModeleMail::class)->find($id);
 
         if (!$mail) {
-            $this->addFlash('warning', "Le modèle de mail n'existe pas !");
+            throw $this->createNotFoundException("Le modèle de mail numéro $id n'existe pas.");
         } else {
             $this->getDoctrine()->getManager()->remove($mail);
             $this->getDoctrine()->getManager()->flush();

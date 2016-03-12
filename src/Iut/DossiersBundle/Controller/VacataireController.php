@@ -34,8 +34,7 @@ class VacataireController extends Controller {
             $vacataire = $entityManager->getRepository(Vacataire::class)->find($id);
 
             if (!$vacataire) {
-                $this->addFlash('warning', "Le vacataire numero $id n'existe pas.");
-                return $this->redirectToRoute('homepage');
+                throw $this->createNotFoundException("Le vacataire numéro $id n'existe pas.");
             }
         }
 
@@ -64,7 +63,7 @@ class VacataireController extends Controller {
         $vacataire = $entityManager->getRepository(Vacataire::class)->find($id);
 
         if (!$vacataire) {
-            $this->addFlash('danger', "Le Vacataire numéro " . $id . " n'existe pas !");
+            throw $this->createNotFoundException("Le vacataire numéro $id n'existe pas.");
         } else {
             $entityManager->remove($vacataire);
             $entityManager->flush();

@@ -17,8 +17,7 @@ class FormationController extends Controller {
         else{
             $formation = $entityManager->getRepository(Formation::class)->find($id);
             if(!$formation){
-                $this->addFlash('warning', "La formation $id n'existe pas !");
-                $this->redirect('formation_liste');
+                throw $this->createNotFoundException("La formation numéro $id n'existe pas.");
             }
         }
 
@@ -43,17 +42,12 @@ class FormationController extends Controller {
         ]);
     }
 
-    /**
-     * Supprime une formation (ne doit normalement pas arriver, sinon violation de contrainte d'intérité)
-     * @param type $id
-     * @return type void
-     */
     public function supprimerFormationAction($id) {
         $entityManager = $this->getDoctrine()->getManager();
         $formation = $entityManager->getRepository(Formation::class)->find($id);
 
         if (!$formation) {
-            $this->addFlash('warning', "La formation numéro " . $id . " n'existe pas !");
+            throw $this->createNotFoundException("La formation numéro $id n'existe pas.");
         } else {
             $entityManager->remove($formation);
             $entityManager->flush();

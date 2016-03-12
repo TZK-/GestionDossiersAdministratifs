@@ -16,8 +16,7 @@ class DossierController extends Controller {
         else {
             $dossier = $this->getDoctrine()->getManager()->getRepository(Dossier::class)->find($id);
             if (!$dossier) {
-                $this->addFlash('warning', "Le dossier numéro $id n'existe pas");
-                return $this->redirectToRoute('homepage');
+                throw $this->createNotFoundException("Le dossier numéro $id n'existe pas.");
             }
         }
 

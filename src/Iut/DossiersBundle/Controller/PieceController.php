@@ -16,8 +16,7 @@ class PieceController extends Controller {
         else {
             $piece = $entityManager->getRepository(Piece::class)->find($id);
             if (!$piece) {
-                $this->addFlash("warning", "La piece $id n'existe pas !");
-                $this->redirect("piece_liste");
+                throw $this->createNotFoundException("Le pièce numéro $id n'existe pas.");
             }
         }
 
@@ -48,7 +47,7 @@ class PieceController extends Controller {
         $piece = $entityManager->getRepository(Piece::class)->find($id);
 
         if (!$piece) {
-            $this->addFlash('warning', "La pièce $id n'existe pas !");
+            throw $this->createNotFoundException("Le pièce numéro $id n'existe pas.");
         } else {
             $entityManager->remove($piece);
             $entityManager->flush();
