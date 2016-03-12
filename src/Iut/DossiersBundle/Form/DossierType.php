@@ -40,6 +40,7 @@ class DossierType extends AbstractType {
                     'class' => Piece::class,
                     'choice_label' => "libelle",
                     'multiple' => true,
+                    'required' => false,
                     'query_builder' => function (PieceRepository $r) {
                         return $r->createQueryBuilder('p')
                             ->orderBy('p.libelle', 'ASC');

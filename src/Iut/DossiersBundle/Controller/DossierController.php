@@ -28,11 +28,17 @@ class DossierController extends Controller {
 
             $selectedFormation = $form->get('formation')->getData();
             $vacataire = $form->get('vacataire')->getData();
+            $etat = $form->get('etat')->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
 
             if (!$vacataire->getFormations()->contains($selectedFormation)) {
                 $vacataire->addFormation($selectedFormation);
+            }
+
+            // Si l'état == 'complet', on supprime toutes les pièces manquantes pour ce dossier
+            if ($etat->getLibelle() == "Complet") {
+                $dossier->removeAllPieces();
             }
 
             $entityManager->persist($dossier);

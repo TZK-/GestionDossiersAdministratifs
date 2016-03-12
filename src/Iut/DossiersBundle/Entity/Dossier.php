@@ -119,6 +119,15 @@ class Dossier {
     }
 
     /**
+     * Remove all the pieces
+     */
+    public function removeAllPieces() {
+        foreach ($this->pieces as $p) {
+            $this->removePiece($p);
+        }
+    }
+
+    /**
      * Remove piece
      *
      * @param Piece $piece
