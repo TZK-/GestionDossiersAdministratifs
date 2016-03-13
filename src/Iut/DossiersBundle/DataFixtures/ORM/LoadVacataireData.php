@@ -41,6 +41,7 @@ class LoadVacataireData implements FixtureInterface {
 
         for ($i = 0; $i < count($noms); $i++) {
             $vacataires[] = [
+                'civilite' => (rand(0, 1)) == 0 ? "Monsieur" : "Madame",
                 'nom' => $noms[$i],
                 'prenom' => $prenoms[$i],
                 'mail' => "$prenoms[$i].$noms[$i]@gmail.com",
