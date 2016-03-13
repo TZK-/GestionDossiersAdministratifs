@@ -31,7 +31,6 @@ class DossierRepository extends EntityRepository {
     }
 
     public function findClosedDossier(){
-        // @TODO Optimize request
         return $this->createQueryBuilder("d")
             ->leftJoin("d.etat", "e")
             ->where("e.libelle = 'Complet'")
