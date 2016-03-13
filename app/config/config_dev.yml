@@ -9,7 +9,7 @@ framework:
 
 web_profiler:
     toolbar: true
-    intercept_redirects: false
+    intercept_redirects: false # If True, allows to watch the sent mail
 
 monolog:
     handlers:
@@ -31,5 +31,5 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    delivery_address: your.email@provider.com # Mails are sent to this adress in dev
