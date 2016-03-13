@@ -2,6 +2,7 @@
 
 namespace Iut\DossiersBundle\Controller;
 
+use Iut\DossiersBundle\Entity\Dossier;
 use Iut\DossiersBundle\Entity\MailRelance;
 use Iut\DossiersBundle\Entity\ModeleMail;
 use Iut\DossiersBundle\Form\MailRelanceType;
@@ -24,10 +25,14 @@ class MailController extends Controller {
         $formModeleMail->handleRequest($request);
         $formMailRelance->handleRequest($request);
 
+        $dossier = $this->getDoctrine()->getRepository(Dossier::class)->find($dossierId);
+
         if ($formModeleMail->isSubmitted() && $formModeleMail->isValid()) {
 
             $mailRelance->setTitre($modeleMail->getTitre()->getTitre());
             $mailRelance->setMessage($modeleMail->getTitre()->getMessage());
+
+            $mailRelance = $this->parseMail($mailRelance, $dossier);
 
             $formMailRelance = $this->createForm(MailRelanceType::class, $mailRelance);
 
@@ -42,8 +47,8 @@ class MailController extends Controller {
             /* Envoi du mail */
             $message = \Swift_Message::newInstance()
                 ->setSubject($mailRelance->getTitre())
-                ->setFrom('sender@mail.com')
-                ->setTo('receiver@mail.com')
+                ->setFrom('marion.berthoz@iut-valence.fr')
+                ->setTo($dossier->getVacataire()->getMail())
                 ->setBody(
                     $this->renderView(
                         'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $mailRelance->getMessage()]
@@ -120,6 +125,30 @@ class MailController extends Controller {
         }
 
         return $this->redirectToRoute('modele-mail_liste');
+    }
+
+    /**
+     * Parse a given mail to add dynamic data.
+     * @param MailRelance $mail the mail to parse.
+     * @param Dossier $dossier the dossier to get data.
+     * @return MailRelance the parsed mail.
+     */
+    private function parseMail(MailRelance $mail, Dossier $dossier) {
+        $data = [
+            'civilite' => $dossier->getVacataire()->getCivilite(),
+            'vacataire' => $dossier->getVacataire()->getNom(),
+            'pieces'   => $dossier->getPieces()->toArray()
+        ];
+
+        $message = $mail->getMessage();
+        foreach($data as $k => $d){
+            if($k == "pieces") continue; //@TODO fix
+            $message = str_replace("{{ ".$k." }}", $d, $message);
+        }
+
+        $mail->setMessage($message);
+        return $mail;
+
     }
 
 }
