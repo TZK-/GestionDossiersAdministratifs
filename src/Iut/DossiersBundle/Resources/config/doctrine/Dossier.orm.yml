@@ -43,4 +43,6 @@ Iut\DossiersBundle\Entity\Dossier:
         mails:
            targetEntity: MailRelance
            mappedBy: dossier
+           cascade:
+              - persist
     lifecycleCallbacks: {  }

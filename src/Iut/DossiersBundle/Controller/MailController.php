@@ -26,6 +26,7 @@ class MailController extends Controller {
         $formMailRelance->handleRequest($request);
 
         $dossier = $this->getDoctrine()->getRepository(Dossier::class)->find($dossierId);
+        $vacataire = $dossier->getVacataire();
 
         if ($formModeleMail->isSubmitted() && $formModeleMail->isValid()) {
 
@@ -48,7 +49,7 @@ class MailController extends Controller {
             $message = \Swift_Message::newInstance()
                 ->setSubject($mailRelance->getTitre())
                 ->setFrom('marion.berthoz@iut-valence.fr')
-                ->setTo($dossier->getVacataire()->getMail())
+                ->setTo($vacataire->getMail())
                 ->setBody(
                     $this->renderView(
                         'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $mailRelance->getMessage()]
@@ -57,6 +58,17 @@ class MailController extends Controller {
 
             $this->get('mailer')->send($message);
 
+            $mailRelance->setDossier($dossier);
+
+            // Insert the Mail into the DB
+            $dossier->addMail($mailRelance);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($dossier);
+            $entityManager->flush();
+
+
+            $this->addFlash('info', "La relance a bien été envoyée à " . $vacataire->getCivilite() . " " . $vacataire->getNom());
             return $this->redirectToRoute('homepage');
         }
 
