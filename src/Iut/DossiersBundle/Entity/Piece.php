@@ -48,4 +48,10 @@ class Piece {
 
         return $this;
     }
+
+    function __toString() {
+        return (string) $this->getLibelle();
+    }
+
+
 }
