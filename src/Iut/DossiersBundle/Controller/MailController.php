@@ -74,21 +74,28 @@ class MailController extends Controller {
      * @return MailRelance the parsed mail.
      */
     private function parseMail(MailRelance $mail, Dossier $dossier) {
-        $data = [
+        $args = [
             'civilite' => $dossier->getVacataire()->getCivilite(),
             'vacataire' => $dossier->getVacataire()->getNom(),
-            'pieces' => $dossier->getPieces()->toArray()
+            'pieces' => $dossier->getPieces()
         ];
 
         $message = $mail->getMessage();
-        foreach ($data as $k => $d) {
-            if ($k == "pieces") continue; //@TODO fix
-            $message = str_replace("{{ " . $k . " }}", $d, $message);
+        $pieces = "";
+
+        foreach ($args as $key => $data) {
+            if ($key === "pieces")
+                foreach ($data as $piece)
+                    $pieces .= "$piece, "; // @TODO fix virgules
+            else
+                $message = str_replace("{{ " . $key . " }}", $data, $message);
+
         }
+
+        $message = str_replace("{{ pieces }}", $pieces, $message);
 
         $mail->setMessage($message);
         return $mail;
-
     }
 
     /**
