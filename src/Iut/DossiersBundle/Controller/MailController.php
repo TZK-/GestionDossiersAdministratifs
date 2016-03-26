@@ -45,18 +45,7 @@ class MailController extends Controller {
 
         if ($formMailRelance->isSubmitted() && $formMailRelance->isValid()) {
 
-            /* Envoi du mail */
-            $message = \Swift_Message::newInstance()
-                ->setSubject($mailRelance->getTitre())
-                ->setFrom('marion.berthoz@iut-valence.fr')
-                ->setTo($vacataire->getMail())
-                ->setBody(
-                    $this->renderView(
-                        'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $mailRelance->getMessage()]
-                    ), 'text/html'
-                );
-
-            $this->get('mailer')->send($message);
+            $this->sendMail($mailRelance->getTitre(), $mailRelance->getMessage(), $vacataire->getMail());
 
             $mailRelance->setDossier($dossier);
 
@@ -76,6 +65,52 @@ class MailController extends Controller {
             'title' => "Relancer le dossier",
             'form' => $formModeleMail->createView(),
         ]);
+    }
+
+    /**
+     * Parse a given mail to add dynamic data.
+     * @param MailRelance $mail the mail to parse.
+     * @param Dossier $dossier the dossier to get data.
+     * @return MailRelance the parsed mail.
+     */
+    private function parseMail(MailRelance $mail, Dossier $dossier) {
+        $data = [
+            'civilite' => $dossier->getVacataire()->getCivilite(),
+            'vacataire' => $dossier->getVacataire()->getNom(),
+            'pieces' => $dossier->getPieces()->toArray()
+        ];
+
+        $message = $mail->getMessage();
+        foreach ($data as $k => $d) {
+            if ($k == "pieces") continue; //@TODO fix
+            $message = str_replace("{{ " . $k . " }}", $d, $message);
+        }
+
+        $mail->setMessage($message);
+        return $mail;
+
+    }
+
+    /**
+     * Envoie un E-Mail paramétrable
+     * @param $subject string Le sujet du mail
+     * @param $message string Le contenu du mail
+     * @param $to string L'adresse du destinataire
+     * @param $from string l'adresse d'expédition. Si $from est null, alors récupère l'adresse définie dans config.yml
+     */
+    private function sendMail($subject, $message, $to, $from = null) {
+        /* Envoi du mail */
+        $mail = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setTo($to)
+            ->setFrom(($from == null) ? $this->getParameter('swiftmailer.sender_address') : $from)
+            ->setBody(
+                $this->renderView(
+                    'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $message]
+                ), 'text/html'
+            );
+
+        $this->get('mailer')->send($mail);
     }
 
     public function ajouterModeleMailAction(Request $request, $id) {
@@ -137,30 +172,6 @@ class MailController extends Controller {
         }
 
         return $this->redirectToRoute('modele-mail_liste');
-    }
-
-    /**
-     * Parse a given mail to add dynamic data.
-     * @param MailRelance $mail the mail to parse.
-     * @param Dossier $dossier the dossier to get data.
-     * @return MailRelance the parsed mail.
-     */
-    private function parseMail(MailRelance $mail, Dossier $dossier) {
-        $data = [
-            'civilite' => $dossier->getVacataire()->getCivilite(),
-            'vacataire' => $dossier->getVacataire()->getNom(),
-            'pieces'   => $dossier->getPieces()->toArray()
-        ];
-
-        $message = $mail->getMessage();
-        foreach($data as $k => $d){
-            if($k == "pieces") continue; //@TODO fix
-            $message = str_replace("{{ ".$k." }}", $d, $message);
-        }
-
-        $mail->setMessage($message);
-        return $mail;
-
     }
 
 }
