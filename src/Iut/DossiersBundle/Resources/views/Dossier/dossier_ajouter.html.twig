@@ -83,8 +83,7 @@
             var mailId = $(this).find(".mail-id").text();
             if(mailId >= 0){
                 $.ajax({
-                    url: "http://127.0.0.1:8080/GestionDossiersAdministratifs/web/app_dev.php/dossiers/relance/"+mailId,
-                    /* TODO fix url */
+                    url: Routing.generate('mail-relance_afficher', { id: mailId }),
                     data: {id: mailId},
                     success: function(data){
                         $('.modal-title').append(data.date);

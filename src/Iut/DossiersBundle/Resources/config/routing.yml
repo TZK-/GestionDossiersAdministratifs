@@ -85,6 +85,8 @@ mail-relance_afficher:
     defaults: { _controller: IutDossiersBundle:Mail:afficherRelance }
     requirements:
         id: \d+
+    options:
+        expose: true
 
 dossier_relancer:
     path: /dossiers/relancer/{dossierId}
