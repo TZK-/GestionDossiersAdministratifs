@@ -80,6 +80,12 @@ modele-mail_supprimer:
     requirements:
         id: \d+
 
+mail-relance_afficher:
+    path: /dossiers/relance/{id}
+    defaults: { _controller: IutDossiersBundle:Mail:afficherRelance }
+    requirements:
+        id: \d+
+
 dossier_relancer:
     path: /dossiers/relancer/{dossierId}
     defaults: { _controller: IutDossiersBundle:Mail:envoyerRelance, dossierId: 1}

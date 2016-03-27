@@ -9,6 +9,7 @@ use Iut\DossiersBundle\Form\MailRelanceType;
 use Iut\DossiersBundle\Form\ModeleMailListeType;
 use Iut\DossiersBundle\Form\ModeleMailType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends Controller {
@@ -173,6 +174,19 @@ class MailController extends Controller {
         return $this->render('IutDossiersBundle:Mail/Modele:modele_afficher.html.twig', [
             'mail' => $mail
         ]);
+    }
+
+    public function afficherRelanceAction($id) {
+        $mail = $this->getDoctrine()->getManager()->getRepository(MailRelance::class)->find($id);
+        $response = new JsonResponse();
+        if(!$mail)
+            $response->setData(null);
+        else
+            $response->setData([
+                'message' => $mail->getMessage(),
+                'date' => $mail->getDate()->format("d/m/y")
+            ]);
+        return $response;
     }
 
     public function supprimerModeleMailAction($id) {
