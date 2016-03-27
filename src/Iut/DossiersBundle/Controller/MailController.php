@@ -15,6 +15,10 @@ class MailController extends Controller {
 
     public function envoyerRelanceAction(Request $request, $dossierId) {
 
+        $dossier = $this->getDoctrine()->getRepository(Dossier::class)->find($dossierId);
+        if(!$dossier)
+            throw $this->createNotFoundException("Le dossier numéro $dossierId n'existe pas.");
+
         $modeleMail = new ModeleMail();
         $mailRelance = new MailRelance();
 
@@ -25,12 +29,10 @@ class MailController extends Controller {
         $formModeleMail->handleRequest($request);
         $formMailRelance->handleRequest($request);
 
-        $dossier = $this->getDoctrine()->getRepository(Dossier::class)->find($dossierId);
         $vacataire = $dossier->getVacataire();
 
         if ($formModeleMail->isSubmitted() && $formModeleMail->isValid()) {
-
-            $mailRelance->setTitre($modeleMail->getTitre()->getTitre());
+            $mailRelance->setTitre($modeleMail->getTitre()->getTitre()); // @TODO Wtf ?
             $mailRelance->setMessage($modeleMail->getTitre()->getMessage());
 
             $mailRelance = $this->parseMail($mailRelance, $dossier);

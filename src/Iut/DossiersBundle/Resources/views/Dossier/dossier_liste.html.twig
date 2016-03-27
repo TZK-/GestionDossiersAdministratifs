@@ -18,7 +18,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for dossier in pagination %}
+                        {% for dossier in dossiers %}
                             {% set etat = dossier.etat.libelle %}
                             <tr class="
                                 {% if etat == "Complet" %}
@@ -40,14 +40,14 @@
                                         {% if loop.index < loop.length %} - {% endif %}
                                     {% endfor %}
                                 </td>
-                                <td></td>
+                                <td>{{ dossier.lastMail.date|date("d/m/y") }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
                     <nav>
-                        {{ knp_pagination_render(pagination) }}
+                        {{ knp_pagination_render(dossiers) }}
                     </nav>
 
                 </div>
