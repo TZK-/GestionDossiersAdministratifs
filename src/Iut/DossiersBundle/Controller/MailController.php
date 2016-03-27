@@ -85,12 +85,18 @@ class MailController extends Controller {
         $message = $mail->getMessage();
         $pieces = "";
 
+        $pieceNumber = 0;
         foreach ($args as $key => $data) {
-            if ($key === "pieces")
-                foreach ($data as $piece)
-                    $pieces .= "$piece, "; // @TODO fix virgules
-            else
+            if ($key === "pieces") {
+                foreach ($data as $piece) {
+                    $pieceNumber++;
+                    // If it is the last piece to display, relace the comma by a point
+                    $pieces .= (count($data) != $pieceNumber) ? "$piece, " : "et $piece.";
+                }
+            }
+            else {
                 $message = str_replace("{{ " . $key . " }}", $data, $message);
+            }
 
         }
 
