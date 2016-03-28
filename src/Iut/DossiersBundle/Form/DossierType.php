@@ -6,6 +6,7 @@ use Iut\DossiersBundle\Entity\Etat;
 use Iut\DossiersBundle\Entity\Formation;
 use Iut\DossiersBundle\Entity\Piece;
 use Iut\DossiersBundle\Entity\Vacataire;
+use Iut\DossiersBundle\Repository\EtatRepository;
 use Iut\DossiersBundle\Repository\FormationRepository;
 use Iut\DossiersBundle\Repository\PieceRepository;
 use Iut\DossiersBundle\Repository\VacataireRepository;
@@ -26,7 +27,11 @@ class DossierType extends AbstractType {
                 ->add('etat', EntityType::class, [
                     'class' => Etat::class,
                     'choice_label' => "libelle",
-                    'multiple' => false])
+                    'multiple' => false,
+                    'query_builder' => function (EtatRepository $r) {
+                        return $r->createQueryBuilder('e')
+                            ->orderBy('e.libelle', 'DESC');
+                    }])
                 ->add('vacataire', EntityType::class, [
                     'class'         => Vacataire::class, 'choice_label' => function ($vacataire) {
                         return $vacataire;
@@ -53,7 +58,7 @@ class DossierType extends AbstractType {
                         return $r->createQueryBuilder('f')
                             ->orderBy('f.libelle', 'ASC');
                     }])
-                ->add('submit', SubmitType::class, ['label' => 'Créer'])
+                ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }
 
