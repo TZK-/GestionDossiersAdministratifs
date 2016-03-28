@@ -123,7 +123,12 @@ class MailController extends Controller {
             ->setBody(
                 $this->renderView(
                     'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $message]
-                ), 'text/html'
+                ), 'text/html')
+            ->addPart(
+                $this->renderView(
+                    'IutDossiersBundle:Mail/Envoi:base.relance.txt.twig', ['message' => strip_tags($message)]
+                ),
+                'text/plain'
             );
 
         $this->get('mailer')->send($mail);

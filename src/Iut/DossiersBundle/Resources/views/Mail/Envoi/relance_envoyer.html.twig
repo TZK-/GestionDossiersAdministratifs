@@ -1,5 +1,5 @@
 {% extends 'IutDossiersBundle::base.html.twig' %}
-{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block title %}
     {{ title }}
@@ -19,4 +19,24 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@IutDossiersBundle/Resources/public/dist/js/bootstrap-wysihtml/*'
+        '@IutDossiersBundle/Resources/public/dist/js/bootstrap-wysihtml/locales/*'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $('#mail_relance_message').wysihtml5({
+            toolbar: {
+                "fa": true,
+                "image": false
+            },
+            locale: "fr-FR"
+        });
+    </script>
 {% endblock %}
