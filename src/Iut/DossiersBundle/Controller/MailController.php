@@ -176,7 +176,10 @@ class MailController extends Controller {
         ]);
     }
 
-    public function afficherRelanceAction($id) {
+    public function afficherRelanceAction(Request $request, $id) {
+        // If the request is not from AJAX, redirect.
+        if(!$request->isXmlHttpRequest())
+            return $this->redirectToRoute("homepage");
         $mail = $this->getDoctrine()->getManager()->getRepository(MailRelance::class)->find($id);
         $response = new JsonResponse();
         if(!$mail)
