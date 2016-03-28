@@ -1,0 +1,106 @@
+{% extends 'IutDossiersBundle::base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% set title = "Gestion des dossiers" %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-body">
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-body">
+                    <div class="box-header with-border">
+                        <div class="box-title"><i class="fa fa-envelope"></i> Historique des relances</div>
+                        <a href="{{ path('dossier_relancer', {'dossierId': dossier.id}) }}" class="btn btn-primary">
+                            Relancer
+                        </a>
+                    </div>
+                    <table id="mailTable" class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th style="display: none">ID</th>
+                            <th>Date</th>
+                            <th>E-Mail</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for mail in dossier.mails %}
+                                <tr id="mail-{{ mail.id }}">
+                                    <td class="mail-id" style="display: none">{{ mail.id }}</td>
+                                    <td>
+                                        <a href="#" class="rowlink"
+                                           data-toggle="modal"
+                                           data-target=".modal">
+                                            {{ mail.date | date("d/m/y") }}
+                                        </a>
+                                    </td>
+                                    <td>{{ mail.titre }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal dialog used to display e-mail body -->
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Mail de relance du <time></time></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="loading" class="hide">
+                        {% image '@IutDossiersBundle/Resources/public/dist/img/loader.gif' %}
+                        <img id="loading-image" src="{{ asset_url }}" alt="Chargement..." />
+                        {% endimage %}
+                    </div>
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $("#mailTable").find("tbody tr").on("click", function(){
+            var mailId = $(this).find(".mail-id").text();
+            if(mailId >= 0){
+                $.ajax({
+                    url: Routing.generate('mail-relance_afficher', { id: mailId }),
+                    data: {id: mailId},
+                    beforeSend: function(){
+                        $("#loading").removeClass('hide');
+                    },
+                    success: function(data){
+                        $('.modal-title time').html(data.date);
+                        $(".modal-body p").html(data.message);
+                    },
+                    complete: function(){
+                        $("#loading").addClass('hide');
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

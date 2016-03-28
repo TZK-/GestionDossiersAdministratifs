@@ -49,9 +49,9 @@ class DossierController extends Controller {
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('IutDossiersBundle:Dossier:dossier_ajouter.html.twig', [
+        return $this->render(($id == -1) ? 'IutDossiersBundle:Dossier:dossier_ajouter.html.twig' :
+            'IutDossiersBundle:Dossier:dossier_modifier.html.twig', [
             'form' => $form->createView(),
-            'title' => "Créer un dossier",
             'dossier' => $dossier
         ]);
     }
