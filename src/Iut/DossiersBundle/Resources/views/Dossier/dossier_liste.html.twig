@@ -18,31 +18,25 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for dossier in dossiers %}
-                            {% set etat = dossier.etat.libelle %}
-                            <tr class="
-                                {% if etat == "Complet" %}
-                                    success
-                                {% elseif etat == "Incomplet" %}
-                                   warning
-                                {% endif %}
-                            ">
-                                <td>
-                                    <a href="{{ path('dossier_modifier', {'id': dossier.id}) }}" class="rowlink">
-                                        {{ dossier.id }}
-                                    </a>
-                                </td>
-                                <td>{{ dossier.date | date("d-m-y") }}</td>
-                                <td>{{ dossier.vacataire.nom }} {{ dossier.vacataire.prenom }}</td>
-                                <td>
-                                    {% for piece in dossier.pieces %}
-                                        {{ piece.libelle }}
-                                        {% if loop.index < loop.length %} - {% endif %}
-                                    {% endfor %}
-                                </td>
-                                <td>{{ dossier.lastMail ? dossier.lastMail.date | date("d/m/y") : "Aucune"}}</td>
-                            </tr>
-                        {% endfor %}
+                            {% for dossier in dossiers %}
+                                {% set etat = dossier.etat.libelle %}
+                                <tr class="{{ etat == "Complet" ? "success" : "warning" }}">
+                                    <td>
+                                        <a href="{{ path('dossier_modifier', {'id': dossier.id}) }}" class="rowlink">
+                                            {{ dossier.id }}
+                                        </a>
+                                    </td>
+                                    <td>{{ dossier.date | date("d-m-y") }}</td>
+                                    <td>{{ dossier.vacataire.nom }} {{ dossier.vacataire.prenom }}</td>
+                                    <td>
+                                        {% for piece in dossier.pieces %}
+                                            {{ piece.libelle }}
+                                            {% if loop.index < loop.length %} - {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ dossier.lastMail ? dossier.lastMail.date | date("d/m/y") : "Aucune" }}</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
 
