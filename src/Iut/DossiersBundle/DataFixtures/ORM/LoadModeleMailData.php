@@ -14,6 +14,7 @@ class LoadModeleMailData implements FixtureInterface {
         $this->manager = $manager;
 
         $modeleMail = [
+            ['titre' => "E-Mail vierge", 'message' => ""],
             [
                 'titre' => "Prise de contact",
                 'message' =>
