@@ -10,6 +10,10 @@
             <div class="box">
                 <div class="box-body">
                     {{ form_start(form) }}
+                        <div class="form-group">
+                            <label class="control-label" for="dossier_vacataire">Vacataire</label>
+                            {{ form_widget(form.vacataire, { 'disabled': 'disabled'}) }}
+                        </div>
                         {{ form_widget(form) }}
                     {{ form_end(form) }}
                 </div>
