@@ -10,10 +10,6 @@
             <div class="box">
                 <div class="box-body">
                     {{ form_start(form) }}
-                        <div class="form-group">
-                            <label class="control-label" for="dossier_vacataire">Vacataire</label>
-                            {{ form_widget(form.vacataire, { 'disabled': 'disabled'}) }}
-                        </div>
                         {{ form_widget(form) }}
                     {{ form_end(form) }}
                 </div>
@@ -87,6 +83,13 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
+        /* Litlle hack to get the select input disabled but be still accessible when submitting form */
+        $("#dossier_vacataire").prop('disabled', true);
+        $('form[name="dossier"]').on("submit", function(){
+            $("#dossier_vacataire").prop('disabled', false);
+        });
+
+        /* AJAX request to load the e-mail body into the modal dialog */
         $("#mailTable").find("tbody tr").on("click", function(){
             var mailId = $(this).find(".mail-id").text();
             if(mailId >= 0){
