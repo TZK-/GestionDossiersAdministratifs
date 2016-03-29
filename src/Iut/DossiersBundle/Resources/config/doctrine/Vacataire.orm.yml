@@ -18,7 +18,8 @@ Iut\DossiersBundle\Entity\Vacataire:
         mail:
             type: string
             length: '255'
-            unique: true
+            unique: false
+            nullable: true
         civilite:
             type: string
             lenght: '30'
