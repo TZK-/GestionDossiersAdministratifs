@@ -26,7 +26,7 @@ class VacataireType extends AbstractType {
             ->add('nom')
             ->add('prenom')
             ->add('mail')
-            ->add('submit', SubmitType::class, ['label' => "Créer"]);
+            ->add('submit', SubmitType::class, ['label' => "Valider nouveau vacataire"]);
     }
 
     /**

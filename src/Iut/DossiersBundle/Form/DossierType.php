@@ -58,7 +58,7 @@ class DossierType extends AbstractType {
                         return $r->createQueryBuilder('f')
                             ->orderBy('f.libelle', 'ASC');
                     }])
-                ->add('submit', SubmitType::class, ['label' => 'Valider'])
+                ->add('submit', SubmitType::class, ['label' => 'Valider nouveau dossier'])
         ;
     }
 

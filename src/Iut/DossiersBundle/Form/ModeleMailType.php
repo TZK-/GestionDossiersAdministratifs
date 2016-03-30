@@ -20,7 +20,7 @@ class ModeleMailType extends AbstractType
         $builder
             ->add('titre')
             ->add('message')
-           ->add('submit', SubmitType::class, ['label' => "Valider"])
+           ->add('submit', SubmitType::class, ['label' => "Valider nouveau mail"])
         ;
     }
     

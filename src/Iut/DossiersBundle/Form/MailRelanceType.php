@@ -18,7 +18,7 @@ class MailRelanceType extends AbstractType
         $builder
             ->add('titre')
             ->add('message')
-            ->add('submit', SubmitType::class, ['label' => "Créer"])
+            ->add('submit', SubmitType::class, ['label' => "Relancer"])
         ;
     }
     

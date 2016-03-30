@@ -16,7 +16,7 @@ class PieceType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('libelle')
-                ->add('submit', SubmitType::class, ['label' => "Créer"])
+                ->add('submit', SubmitType::class, ['label' => "Valider nouvelle pièce"])
         ;
     }
 

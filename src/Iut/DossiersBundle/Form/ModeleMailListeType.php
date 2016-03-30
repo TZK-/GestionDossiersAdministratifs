@@ -21,7 +21,7 @@ class ModeleMailListeType extends AbstractType {
                     'class' => ModeleMail::class,
                     'choice_label' => "titre",
                     'multiple' => false])
-                ->add('submit', SubmitType::class)
+                ->add('submit', SubmitType::class, ['label' => "Choisir ce modèle"])
         ;
     }
 

@@ -32,7 +32,7 @@ vacataire_supprimer:
 
 piece_ajouter:
     path: /dossiers/piece/ajouter
-    defaults: { _controller: IutDossiersBundle:Piece:ajouterPiece}
+    defaults: { _controller: IutDossiersBundle:Piece:ajouterPiece, id: -1 }
 
 piece_modifier:
     path: /dossiers/piece/modifier/{id}
@@ -117,7 +117,7 @@ dossier_modifier:
  #######################
 formation_ajouter:
     path: /dossiers/formation/ajouter
-    defaults: { _controller: IutDossiersBundle:Formation:ajouterFormation}
+    defaults: { _controller: IutDossiersBundle:Formation:ajouterFormation, id: -1 }
 
 formation_modifier:
     path: /dossiers/formation/modifier/{id}
