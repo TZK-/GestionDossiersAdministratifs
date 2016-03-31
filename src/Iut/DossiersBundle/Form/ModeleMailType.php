@@ -2,10 +2,11 @@
 
 namespace Iut\DossiersBundle\Form;
 
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Iut\DossiersBundle\Entity\ModeleMail;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -19,8 +20,8 @@ class ModeleMailType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('message')
-           ->add('submit', SubmitType::class, ['label' => "Valider nouveau mail"])
+            ->add('message', TextareaType::class, ['required' => false])
+            ->add('submit', SubmitType::class, ['label' => "Valider nouveau mail"])
         ;
     }
     
