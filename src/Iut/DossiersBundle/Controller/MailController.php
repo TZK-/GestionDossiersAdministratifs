@@ -33,8 +33,10 @@ class MailController extends Controller {
         $vacataire = $dossier->getVacataire();
 
         if ($formModeleMail->isSubmitted() && $formModeleMail->isValid()) {
-            $mailRelance->setTitre($modeleMail->getTitre()->getTitre()); // @TODO Wtf ?
-            $mailRelance->setMessage($modeleMail->getTitre()->getMessage());
+            $mailRelance->setTitre($modeleMail->getTitre()->getTitre());
+
+            // Replace newline tags (\n) by a <br/> tag
+            $mailRelance->setMessage(nl2br(htmlentities($modeleMail->getTitre()->getMessage())));
 
             $mailRelance = $this->parseMail($mailRelance, $dossier);
 

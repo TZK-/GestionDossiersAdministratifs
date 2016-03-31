@@ -23,16 +23,3 @@ Iut\DossiersBundle\Entity\Vacataire:
                 message: L'adresse "{{ value }}" n'est pas valide.
                 checkMX: true
             - NotBlank: ~
-
-Iut\DossiersBundle\Entity\ModeleMail:
-    properties:
-        titre:
-            - NotBlank: ~
-            - Length:
-                min: 2
-                max: 50
-                minMessage: Le nom doit être formé d'au moins {{ limit }} caractères
-                maxMessage: Le nom ne peut pas dépasser {{ limit }} caractères
-        message:
-            - Type:
-                type: alpha
