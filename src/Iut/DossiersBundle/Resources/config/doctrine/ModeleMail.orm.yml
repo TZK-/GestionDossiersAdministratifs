@@ -14,4 +14,5 @@ Iut\DossiersBundle\Entity\ModeleMail:
             length: '255'
         message:
             type: text
+            nullable: true
     lifecycleCallbacks: {  }

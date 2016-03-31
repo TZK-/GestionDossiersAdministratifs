@@ -27,8 +27,6 @@ Iut\DossiersBundle\Entity\Vacataire:
 Iut\DossiersBundle\Entity\ModeleMail:
     properties:
         titre:
-            - Type:
-                type: alpha
             - NotBlank: ~
             - Length:
                 min: 2
