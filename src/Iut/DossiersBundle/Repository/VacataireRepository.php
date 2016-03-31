@@ -12,12 +12,12 @@ class VacataireRepository extends \Doctrine\ORM\EntityRepository {
 
     public function findAllDossiersAndFormations() {
         return $this->createQueryBuilder('v')
-                    ->leftJoin('v.formations', 'formations')
-                    ->leftJoin('v.dossiers', 'dossiers')
-                    ->addSelect("formations")
-                    ->addSelect('dossiers')
-                    ->getQuery()
-                    ->getResult();
+            ->leftJoin('v.formations', 'formations')
+            ->leftJoin('v.dossiers', 'dossiers')
+            ->addSelect("formations")
+            ->addSelect('dossiers')
+            ->getQuery()
+            ->getResult();
     }
 
 }

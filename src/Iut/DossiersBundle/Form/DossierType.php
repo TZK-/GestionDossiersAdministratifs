@@ -24,42 +24,41 @@ class DossierType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('etat', EntityType::class, [
-                    'class' => Etat::class,
-                    'choice_label' => "libelle",
-                    'multiple' => false,
-                    'query_builder' => function (EtatRepository $r) {
-                        return $r->createQueryBuilder('e')
-                            ->orderBy('e.libelle', 'DESC');
-                    }])
-                ->add('vacataire', EntityType::class, [
-                    'class'         => Vacataire::class, 'choice_label' => function ($vacataire) {
-                        return $vacataire;
-                    },
-                    'multiple'      => false,
-                    'query_builder' => function (VacataireRepository $r) {
-                        return $r->createQueryBuilder('v')
-                            ->orderBy('v.nom', 'ASC');
-                    }])
-                ->add('pieces', EntityType::class, [
-                    'class' => Piece::class,
-                    'choice_label' => "libelle",
-                    'multiple' => true,
-                    'required' => false,
-                    'query_builder' => function (PieceRepository $r) {
-                        return $r->createQueryBuilder('p')
-                            ->orderBy('p.libelle', 'ASC');
-                    }])
-                ->add('formation', EntityType::class, [
-                    'class' => Formation::class,
-                    'choice_label' => "libelle",
-                    'multiple' => false,
-                    'query_builder' => function (FormationRepository $r) {
-                        return $r->createQueryBuilder('f')
-                            ->orderBy('f.libelle', 'ASC');
-                    }])
-                ->add('submit', SubmitType::class, ['label' => 'Valider nouveau dossier'])
-        ;
+            ->add('etat', EntityType::class, [
+                'class' => Etat::class,
+                'choice_label' => "libelle",
+                'multiple' => false,
+                'query_builder' => function (EtatRepository $r) {
+                    return $r->createQueryBuilder('e')
+                        ->orderBy('e.libelle', 'DESC');
+                }])
+            ->add('vacataire', EntityType::class, [
+                'class' => Vacataire::class, 'choice_label' => function ($vacataire) {
+                    return strtoupper($vacataire->getNom()) . ' ' . ucfirst($vacataire->getPrenom());
+                },
+                'multiple' => false,
+                'query_builder' => function (VacataireRepository $r) {
+                    return $r->createQueryBuilder('v')
+                        ->orderBy('v.nom', 'ASC');
+                }])
+            ->add('pieces', EntityType::class, [
+                'class' => Piece::class,
+                'choice_label' => "libelle",
+                'multiple' => true,
+                'required' => false,
+                'query_builder' => function (PieceRepository $r) {
+                    return $r->createQueryBuilder('p')
+                        ->orderBy('p.libelle', 'ASC');
+                }])
+            ->add('formation', EntityType::class, [
+                'class' => Formation::class,
+                'choice_label' => "libelle",
+                'multiple' => false,
+                'query_builder' => function (FormationRepository $r) {
+                    return $r->createQueryBuilder('f')
+                        ->orderBy('f.libelle', 'ASC');
+                }])
+            ->add('submit', SubmitType::class, ['label' => 'Valider nouveau dossier']);
     }
 
     /**

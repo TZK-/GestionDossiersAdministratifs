@@ -18,14 +18,16 @@
     background-color: #fff;
     z-index: 99;
     text-align: center;
-    left:0; right:0;
-    top:0; bottom:0;
-    margin:auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 
     /*this to solve "the content will not be cut when the window is smaller than the content": */
-    max-width:100%;
-    max-height:100%;
-    overflow:auto;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
 }
 
 #loading-image {
@@ -37,6 +39,6 @@
     width: 54px;
 }
 
-.hide{
+.hide {
     display: none;
 }

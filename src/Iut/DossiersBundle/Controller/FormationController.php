@@ -11,12 +11,12 @@ class FormationController extends Controller {
 
     public function ajouterFormationAction(Request $request, $id) {
         $entityManager = $this->getDoctrine()->getManager();
-        if($id == -1)
+        if ($id == -1)
             $formation = new Formation();
 
-        else{
+        else {
             $formation = $entityManager->getRepository(Formation::class)->find($id);
-            if(!$formation){
+            if (!$formation) {
                 throw $this->createNotFoundException("La formation numéro $id n'existe pas.");
             }
         }
@@ -27,7 +27,7 @@ class FormationController extends Controller {
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            if($id == -1)
+            if ($id == -1)
                 $message = "La formation a bien été ajoutée";
             else
                 $message = "La formation a bien été modifiée";

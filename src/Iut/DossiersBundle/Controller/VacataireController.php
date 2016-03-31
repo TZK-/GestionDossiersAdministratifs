@@ -21,7 +21,7 @@ class VacataireController extends Controller {
         );
 
         return $this->render("IutDossiersBundle:Vacataire:vacataire_liste.html.twig", [
-                    'pagination' => $pagination
+            'vacataires' => $pagination
         ]);
     }
 
@@ -53,8 +53,8 @@ class VacataireController extends Controller {
         }
 
         return $this->render('IutDossiersBundle:Vacataire:vacataire_ajouter.html.twig', [
-                    'title' => "Ajouter un vacataire",
-                    'form' => $form->createView()
+            'title' => "Ajouter un vacataire",
+            'form' => $form->createView()
         ]);
     }
 

@@ -25,6 +25,7 @@ class DossierController extends Controller {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // Récupére les données du formulaire (sous forme d'objets)
             $selectedFormation = $form->get('formation')->getData();
             $vacataire = $form->get('vacataire')->getData();
             $etat = $form->get('etat')->getData();
@@ -82,7 +83,7 @@ class DossierController extends Controller {
         $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 10);
 
         return $this->render("IutDossiersBundle:Dossier:dossier_historique.html.twig", [
-            'pagination' => $pagination
+            'dossiers' => $pagination
         ]);
     }
 }

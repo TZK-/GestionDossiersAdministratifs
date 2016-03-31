@@ -1,6 +1,7 @@
 <?php
 
 namespace Iut\DossiersBundle\Repository;
+
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -22,7 +23,7 @@ class DossierRepository extends EntityRepository {
             ->getQuery()->getResult();
     }
 
-    public function findClosedDossier(){
+    public function findClosedDossier() {
         return $this->createQueryBuilder("d")
             ->leftJoin("d.etat", "e")
             ->where("e.libelle = 'Complet'")

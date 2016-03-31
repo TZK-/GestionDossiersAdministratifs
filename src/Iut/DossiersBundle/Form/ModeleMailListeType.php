@@ -2,12 +2,12 @@
 
 namespace Iut\DossiersBundle\Form;
 
+use Iut\DossiersBundle\Entity\ModeleMail;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Iut\DossiersBundle\Entity\ModeleMail;
 
 class ModeleMailListeType extends AbstractType {
 
@@ -17,12 +17,11 @@ class ModeleMailListeType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('titre', EntityType::class, [
-                    'class' => ModeleMail::class,
-                    'choice_label' => "titre",
-                    'multiple' => false])
-                ->add('submit', SubmitType::class, ['label' => "Choisir ce modèle"])
-        ;
+            ->add('titre', EntityType::class, [
+                'class' => ModeleMail::class,
+                'choice_label' => "titre",
+                'multiple' => false])
+            ->add('submit', SubmitType::class, ['label' => "Choisir ce modèle"]);
     }
 
     /**

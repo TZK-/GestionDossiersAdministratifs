@@ -61,12 +61,14 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Mail de relance du <time></time></h4>
+                    <h4 class="modal-title">Mail de relance du
+                        <time></time>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <div id="loading" class="hide">
                         {% image '@IutDossiersBundle/Resources/public/dist/img/loader.gif' %}
-                        <img id="loading-image" src="{{ asset_url }}" alt="Chargement..." />
+                            <img id="loading-image" src="{{ asset_url }}" alt="Chargement..."/>
                         {% endimage %}
                     </div>
                     <p></p>
@@ -85,25 +87,25 @@
     <script type="text/javascript">
         /* Litlle hack to get the select input disabled but be still accessible when submitting form */
         $("#dossier_vacataire").prop('disabled', true);
-        $('form[name="dossier"]').on("submit", function(){
+        $('form[name="dossier"]').on("submit", function () {
             $("#dossier_vacataire").prop('disabled', false);
         });
 
         /* AJAX request to load the e-mail body into the modal dialog */
-        $("#mailTable").find("tbody tr").on("click", function(){
+        $("#mailTable").find("tbody tr").on("click", function () {
             var mailId = $(this).find(".mail-id").text();
-            if(mailId >= 0){
+            if (mailId >= 0) {
                 $.ajax({
-                    url: Routing.generate('mail-relance_afficher', { id: mailId }),
+                    url: Routing.generate('mail-relance_afficher', {id: mailId}),
                     data: {id: mailId},
-                    beforeSend: function(){
+                    beforeSend: function () {
                         $("#loading").removeClass('hide');
                     },
-                    success: function(data){
+                    success: function (data) {
                         $('.modal-title time').html(data.date);
                         $(".modal-body p").html(data.message);
                     },
-                    complete: function(){
+                    complete: function () {
                         $("#loading").addClass('hide');
                     }
                 });

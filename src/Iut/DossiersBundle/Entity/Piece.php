@@ -27,6 +27,10 @@ class Piece {
         return $this->id;
     }
 
+    function __toString() {
+        return (string)$this->getLibelle();
+    }
+
     /**
      * Get libelle
      *
@@ -47,10 +51,6 @@ class Piece {
         $this->libelle = $libelle;
 
         return $this;
-    }
-
-    function __toString() {
-        return (string) $this->getLibelle();
     }
 
 

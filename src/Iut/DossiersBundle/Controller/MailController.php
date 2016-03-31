@@ -17,7 +17,7 @@ class MailController extends Controller {
     public function envoyerRelanceAction(Request $request, $dossierId) {
 
         $dossier = $this->getDoctrine()->getRepository(Dossier::class)->find($dossierId);
-        if(!$dossier)
+        if (!$dossier)
             throw $this->createNotFoundException("Le dossier numéro $dossierId n'existe pas.");
 
         $modeleMail = new ModeleMail();
@@ -93,11 +93,10 @@ class MailController extends Controller {
             if ($key === "pieces") {
                 foreach ($data as $piece) {
                     $pieceNumber++;
-                    // If it is the last piece to display, relace the comma by a point
+                    // Si dernière pièce à afficher, remplace virgule par point
                     $pieces .= (count($data) != $pieceNumber) ? "$piece, " : "et $piece.";
                 }
-            }
-            else {
+            } else {
                 $message = str_replace("{{ " . $key . " }}", $data, $message);
             }
 
@@ -121,11 +120,14 @@ class MailController extends Controller {
         $mail = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setTo($to)
+            // Récupère l'attribut sender_adress dans le config.yml, si défini
             ->setFrom(($from == null) ? $this->getParameter('swiftmailer.sender_address') : $from)
+            // La vue a charger pour afficher le mail
             ->setBody(
                 $this->renderView(
                     'IutDossiersBundle:Mail/Envoi:base.relance.html.twig', ['message' => $message]
                 ), 'text/html')
+            // Vue par défaut qui ne prend pas en compte HTML
             ->addPart(
                 $this->renderView(
                     'IutDossiersBundle:Mail/Envoi:base.relance.txt.twig', ['message' => strip_tags($message)]
@@ -185,11 +187,11 @@ class MailController extends Controller {
 
     public function afficherRelanceAction(Request $request, $id) {
         // If the request is not from AJAX, redirect.
-        if(!$request->isXmlHttpRequest())
+        if (!$request->isXmlHttpRequest())
             return $this->redirectToRoute("homepage");
         $mail = $this->getDoctrine()->getManager()->getRepository(MailRelance::class)->find($id);
         $response = new JsonResponse();
-        if(!$mail)
+        if (!$mail)
             $response->setData(null);
         else
             $response->setData([

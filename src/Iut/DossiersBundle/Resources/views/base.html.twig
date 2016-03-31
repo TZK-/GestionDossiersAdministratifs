@@ -1,113 +1,109 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="shortcut icon" href="{{ asset("dossiers/favicon.ico") }}" type="image/x-icon" />
-        <title>{% if title is defined %} {{ title }} - {% endif %} Gestion Dossiers</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="shortcut icon" href="{{ asset("dossiers/favicon.ico") }}" type="image/x-icon"/>
+    <title>{% if title is defined %} {{ title }} - {% endif %} Gestion Dossiers</title>
 
-        {% block stylesheets %}
-            {% stylesheets
-                'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
-                '@IutDossiersBundle/Resources/public/bootstrap/css/*'
-                '@IutDossiersBundle/Resources/public/dist/css/skins/skin-blue.min.css'
+    {% block stylesheets %}
+        {% stylesheets
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
+            '@IutDossiersBundle/Resources/public/bootstrap/css/*'
+            '@IutDossiersBundle/Resources/public/dist/css/skins/skin-blue.min.css'
             '@IutDossiersBundle/Resources/public/dist/css/*'
-                filter='cssrewrite'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" />
-            {% endstylesheets %}
-        {% endblock %}
+            filter='cssrewrite'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
 
-    <body class="hold-transition skin-blue sidebar-mini">
-        <div class="wrapper">
-            <header class="main-header">
-                <a href="{{ path('homepage') }}" class="logo">
-                    <span class="logo-mini"><b>G</b>DA</span>
-                    <span class="logo-lg"><b>Gestion</b>DossiersAdmin</span>
-                </a>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="{{ path('homepage') }}" class="logo">
+            <span class="logo-mini"><b>G</b>DA</span>
+            <span class="logo-lg"><b>Gestion</b>DossiersAdmin</span>
+        </a>
 
-                <nav class="navbar navbar-static-top" role="navigation">
-                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
-                    </a>
-                </nav>
-            </header>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+        </nav>
+    </header>
 
-            <aside class="main-sidebar">
-                <section class="sidebar">
-                    {% block menu %}{{ include('IutDossiersBundle:Menu:menu.html.twig') }}{% endblock menu %}
-                </section>
-            </aside>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            {% block menu %}
+                {{ include('IutDossiersBundle:Menu:menu.html.twig') }}
+            {% endblock menu %}
+        </section>
+    </aside>
 
-            <div class="content-wrapper">
-                <section class="flashbag">
-                    {% if app.session.started %}
-                        {% for type, flashes in app.session.flashbag.all %}
-                            {% for message in flashes %}
-                                {% if type in ['info', 'warning', 'success', 'danger']%}
-                                    <div class="alert alert-{{ type }} alert-dismissible" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert">
-                                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                                        </button>
-                                        {{ message }}
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                    {% endif %}
-                </section>
-
-                <section class="content-header">
-                    <h1>
-                        {% if title is defined %}
-                            {{title}}
+    <div class="content-wrapper">
+        <section class="flashbag">
+            {% if app.session.started %}
+                {% for type, flashes in app.session.flashbag.all %}
+                    {% for message in flashes %}
+                        {% if type in ['info', 'warning', 'success', 'danger'] %}
+                            <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span>
+                                </button>
+                                {{ message }}
+                            </div>
                         {% endif %}
-                        
-                    </h1>
-                </section>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </section>
 
-                <!-- Main content -->
-                <section class="content">
-                    {% block body %} {% endblock %}
-                </section>
-            </div>
-        </div>
+        <section class="content-header">
+            <h1>{{ title ? title }}</h1>
+        </section>
 
-        {% block javascripts %}
-            <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
-            {% javascripts
-                '@IutDossiersBundle/Resources/public/bootstrap/js/*'
-                '@IutDossiersBundle/Resources/public/dist/js/*'
-            %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+        <!-- Main content -->
+        <section class="content">
+            {% block body %} {% endblock %}
+        </section>
+    </div>
+</div>
 
-            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+{% block javascripts %}
+    <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+    {% javascripts
+        '@IutDossiersBundle/Resources/public/bootstrap/js/*'
+        '@IutDossiersBundle/Resources/public/dist/js/*'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 
-            <script>
-                // Set the link which match with the current route to "active"
-                var path = "{{path(app.request.attributes.get('_route'))}}";
-                var link = $('a[href="' + path + '"]');
-                link.closest('li').addClass('active');
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
-                // Set treeview active if it contains an active link
-                $("li .active").each(function () {
-                    var _parent = $(this).parent();
-                    if (_parent.hasClass("treeview-menu")) {
-                        _parent.parent().addClass('active');
-                    }
-                });
-            </script>
+    <script>
+        // Set the link which match with the current route to "active"
+        var path = "{{ path(app.request.attributes.get('_route')) }}";
+        var link = $('a[href="' + path + '"]');
+        link.closest('li').addClass('active');
 
-        {% endblock %}
-    </body>
+        // Set treeview active if it contains an active link
+        $("li .active").each(function () {
+            var _parent = $(this).parent();
+            if (_parent.hasClass("treeview-menu")) {
+                _parent.parent().addClass('active');
+            }
+        });
+    </script>
+{% endblock %}
+</body>
 </html>

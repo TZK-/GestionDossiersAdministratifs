@@ -4,8 +4,8 @@ namespace Iut\DossiersBundle\Controller;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Iut\DossiersBundle\Entity\Vacataire;
 use Iut\DossiersBundle\Entity\Formation;
+use Iut\DossiersBundle\Entity\Vacataire;
 
 class LoadVacataireData implements FixtureInterface {
 
@@ -64,18 +64,18 @@ class LoadVacataireData implements FixtureInterface {
             else {
                 switch ($k) {
                     case "formation": {
-                            foreach ($d as $f) {
-                                $formation = $this->manager->getRepository(Formation::class)->findOneBy(['libelle' => $f]);
-                                if (!$formation) {
-                                    $formation = new Formation();
-                                    $formation->setLibelle($f);
-                                    $this->manager->persist($formation);
-                                    $this->manager->flush();
-                                    $vacataire->addFormation($formation);
-                                }
+                        foreach ($d as $f) {
+                            $formation = $this->manager->getRepository(Formation::class)->findOneBy(['libelle' => $f]);
+                            if (!$formation) {
+                                $formation = new Formation();
+                                $formation->setLibelle($f);
+                                $this->manager->persist($formation);
+                                $this->manager->flush();
                                 $vacataire->addFormation($formation);
                             }
+                            $vacataire->addFormation($formation);
                         }
+                    }
                 }
             }
         }

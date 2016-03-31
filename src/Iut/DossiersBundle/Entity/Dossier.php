@@ -211,6 +211,10 @@ class Dossier {
         $this->mails->removeElement($mail);
     }
 
+    public function getLastMail() {
+        return $this->getMails()->last();
+    }
+
     /**
      * Get mails
      *
@@ -218,9 +222,5 @@ class Dossier {
      */
     public function getMails() {
         return $this->mails;
-    }
-
-    public function getLastMail(){
-        return $this->getMails()->last();
     }
 }

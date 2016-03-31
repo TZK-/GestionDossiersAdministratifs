@@ -15,16 +15,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for formation in formations %}
-                            <tr>
-                                <td>{{ formation.libelle }}</td>
-                                <td>
-                                    <a href="{{ path('formation_modifier', {'id': formation.id}) }}" class="btn btn-primary">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                            {% for formation in formations %}
+                                <tr>
+                                    <td>{{ formation.libelle }}</td>
+                                    <td>
+                                        <a href="{{ path('formation_modifier', {'id': formation.id}) }}" class="btn btn-primary">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

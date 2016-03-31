@@ -18,7 +18,7 @@ class LoadModeleMailData implements FixtureInterface {
             [
                 'titre' => "Prise de contact",
                 'message' =>
-                    "Monsieur {{ vacataire }},\n
+                    "{{ civilite }} {{ vacataire }},\n
                     Par la présente, je vous demande s'il serait
                     possible de me faire parvenir une photocopie des
                     documents administratifs suivants : {{ pieces }}\n

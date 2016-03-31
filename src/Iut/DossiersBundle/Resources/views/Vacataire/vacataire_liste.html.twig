@@ -1,7 +1,8 @@
 {% extends 'IutDossiersBundle::base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+          href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
 {% endblock %}  
 {% set title = "Liste des vacataires" %}
 
@@ -11,17 +12,17 @@
             <div class="box">
 
                 <div class="box-body">
-                    <table  id="listeVacataire" class="table table-bordered table-hover table-striped rowlink">
+                    <table id="listeVacataire" class="table table-bordered table-hover table-striped rowlink">
                         <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Prenom</th>
-                                <th>E-mail</th>
-                                <th>Formations</th>
-                            </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>E-mail</th>
+                            <th>Formations</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {% for vacataire in pagination %}
+                            {% for vacataire in vacataires %}
                                 <tr>
                                     <td>
                                         <a href="{{ path('vacataire_modifier', {'id': vacataire.id}) }}" class="rowlink">
@@ -40,7 +41,7 @@
                         </tbody>
                     </table>
 
-                    <nav>{{ knp_pagination_render(pagination) }}</nav>
+                    <nav>{{ knp_pagination_render(vacataires) }}</nav>
 
                 </div>
             </div>
